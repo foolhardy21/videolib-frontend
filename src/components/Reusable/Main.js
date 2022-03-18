@@ -1,12 +1,10 @@
 
-const Main = (props) => {
+const Main = ({ classes, children }) => {
 
     return (
 
-        <main className={props.classes}>
-
-            {props.children}
-
+        <main className={classes}>
+            {children}
         </main>
     )
 }
