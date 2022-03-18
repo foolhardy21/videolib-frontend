@@ -1,12 +1,11 @@
 import { SignupHeader, SignupCard } from '../components/Signup'
 import { getBgColor } from '../utils'
-// import { Icon, Main, Text } from '../components/Reusable'
-// import { getBgColor } from '../utils'
-import { useTheme } from '../contexts'
+import { Icon, Main, Text } from '../components/Reusable'
+import { useNotification, useTheme } from '../contexts'
 
 const Signup = () => {
     const { theme } = useTheme()
-    // const { notification } = useNotification()
+    const { notification } = useNotification()
 
     return (
 
@@ -18,8 +17,7 @@ const Signup = () => {
 
             <SignupHeader />
 
-            {/* <div className='flx flx-center'>
-
+            <div className='flx flx-center'>
                 {
                     notification === 'signed up successfully.' &&
                     <div className='flx flx-maj-start flx-min-center txt-md txt-primary bg-success alert-size-s pd-xs'>
@@ -45,7 +43,7 @@ const Signup = () => {
 
                 <SignupCard />
 
-            </Main> */}
+            </Main>
 
         </div>
     )
