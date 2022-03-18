@@ -1,3 +1,5 @@
+import { v4 as uuid } from 'uuid'
+import video from './assets/sneaker_stock.mp4'
 /**
  * Videos Database can be added here.
  * You can add videos of your wish with different attributes
@@ -5,17 +7,38 @@
 
 export const videos = [
   {
-    _id: "Wo5dMEP_BbI",
-    title: "Awesome Video about Coding",
-    description:
-      "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.",
-    creator: "Soham Shah",
+    _id: uuid(),
+    videoTitle: 'air jordan 36',
+    videoDescription: 'complex reviews the latest air jordans. click to watch the whole review.',
+    video: video,
+    category: 'nike',
   },
   {
-    _id: "F_Riqjdh2oM",
-    title: "Neural Networks from Scratch - P.1 Intro and Neuron Code",
-    creator: "Sentdex",
-    description:
-      "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.",
+    _id: uuid(),
+    videoTitle: 'yeezy 350',
+    videoDescription: 'complex reviews the most famous yeezy. click to watch the whole review.',
+    video: video,
+    category: 'adidas',
+  },
+  {
+    _id: uuid(),
+    videoTitle: 'nike blades',
+    videoDescription: 'complex reviews the most famous yeezy. click to watch the whole review.',
+    video: video,
+    category: 'nike',
+  },
+  {
+    _id: uuid(),
+    videoTitle: 'adidas 700',
+    videoDescription: 'complex reviews the most famous yeezy. click to watch the whole review.',
+    video: video,
+    category: 'adidas',
+  },
+  {
+    _id: uuid(),
+    videoTitle: 'reebok 230',
+    videoDescription: 'complex reviews the most famous yeezy. click to watch the whole review.',
+    video: video,
+    category: 'reebok',
   },
 ];
