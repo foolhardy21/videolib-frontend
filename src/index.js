@@ -1,15 +1,20 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
 import App from "./App";
 import { makeServer } from "./server";
+import { NotificationProvider, ThemeProvider } from './contexts'
+import './stylesheet/style.css'
 
 // Call make Server
 makeServer();
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <ThemeProvider>
+      <NotificationProvider>
+        <App />
+      </NotificationProvider>
+    </ThemeProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );
