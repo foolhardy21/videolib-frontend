@@ -1,5 +1,1 @@
-export {
-    SignupHeader,
-    SignupCard,
-    SignupForm
-}
+export { default as SignupHeader } from './SignupHeader'
