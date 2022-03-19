@@ -11,11 +11,15 @@ export const VideosProvider = ({ children }) => {
 
             case 'INIT_VIDEOS': return [...action.payload]
 
-            case 'FILTER_VIDEOS': return action.payload.videos.filter(video => video.category !== action.payload.category)
+            case 'FILTER_VIDEOS': return filterVideos(action.payload.videos, action.payload.filterState)
 
             default: return state
 
         }
+    }
+
+    function filterVideos(videos, filterArr) {
+        return filterArr.length > 0 ? videos.filter(video => filterArr.find(category => category === video.category)) : videos
     }
 
     return (
