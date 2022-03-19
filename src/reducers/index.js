@@ -1,0 +1,5 @@
+export { signupFormReducer } from './signup.reducer.js'
+export { loginFormReducer } from './login.reducer.js'
+export { videosReducer } from './videos.reducer.js'
+export { filterReducer } from './filters.reducer.js'
+export { historyReducer } from './history.reducer.js'
