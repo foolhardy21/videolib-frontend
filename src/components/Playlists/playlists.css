@@ -1,0 +1,12 @@
+#grid-likes {
+    gap: 1rem;
+    border-bottom: solid thin var(--clr-off-primary);
+}
+
+#container-video:hover {
+    cursor: pointer
+}
+
+#card-video {
+    width: 20rem;
+}
