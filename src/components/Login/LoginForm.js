@@ -1,116 +1,55 @@
-import { useState } from "react"
-import axios from "axios"
+import { useNavigate, useLocation } from "react-router-dom"
 import { Form, Text, Button, Input, Label } from "../Reusable"
-import { emailIsInvalid, passIsInvalid, getSolidBtnBgColor, getSolidBtnTextColor } from "../../utils"
-import { useNotification, useTheme } from '../../contexts'
+import { getSolidBtnBgColor, getSolidBtnTextColor } from "../../utils"
+import { useLogin, useTheme, useAuth } from '../../contexts'
 
 const LoginForm = () => {
-    const [enteredInfo, setEnteredInfo] = useState({
-        email: '',
-        password: '',
-    })
-    const [inputError, setInputError] = useState({
-        email: false,
-        password: false,
-    })
-    const [passType, setPassType] = useState('password')
+    const navigate = useNavigate()
+    const location = useLocation()
     const { theme } = useTheme()
-    const { setNotification } = useNotification()
+    const { loginFormState, isFormInvalid, loginFormDispatch, showLoginAlert } = useLogin()
+    const { loginUser } = useAuth()
+    const from = location.state?.from?.pathname || '/videos'
 
-    function togglePassType() {
-        passType === 'password' ? setPassType('text') : setPassType('password')
-    }
-
-    function updateEmail(e) {
-        setEnteredInfo(i => ({ ...i, email: e.target.value }))
-    }
-    function updatePassword(e) {
-        setEnteredInfo(i => ({ ...i, password: e.target.value }))
-    }
-
-    function validateEnteredInfo() {
-        let validationError = false
-
-        if (emailIsInvalid(enteredInfo.email)) {
-            validationError = true
-            setInputError((e) => ({ ...e, email: true }))
-            setTimeout(() => {
-                setInputError((e) => ({ ...e, email: false }))
-            }, 3000)
-        }
-
-        if (passIsInvalid(enteredInfo.password)) {
-            validationError = true
-            setInputError((e) => ({ ...e, password: true }))
-            setTimeout(() => {
-                setInputError((e) => ({ ...e, password: false }))
-            }, 3000)
-        }
-
-        return validationError
-    }
-
-    async function logInUser() {
-        try {
-            const response = await axios.post('/api/auth/login', {
-                email: enteredInfo.email,
-                password: enteredInfo.password,
-            })
-            window.localStorage.setItem('userToken', response.data.encodedToken)
-            setNotification('logged in successfully.')
-            setTimeout(() => setNotification(''), 3000)
-            // route to products page in above timeout function
-        } catch (e) {
-            setNotification('email is not registered.')
-            setTimeout(() => setNotification(''), 3000)
-            console.log(e)
-        }
-    }
-
-    function handleLoginSubmit(e) {
-
+    async function handleLoginSubmit(e) {
         e.preventDefault()
 
-        if (!validateEnteredInfo()) {
-            //send api reuqest
-            logInUser()
-        } else {
-
-            console.log('not fine')
+        if (!isFormInvalid()) {
+            const loginUserResponse = await loginUser(loginFormState.email.value, loginFormState.password.value)
+            if (loginUserResponse === 404) {
+                showLoginAlert('account not found', 'error')
+            } else if (loginUserResponse === 200) {
+                showLoginAlert('logged in', 'success')
+                setTimeout(() => navigate(from, { replace: true }), 1600)
+            }
         }
-
     }
 
     return (
         <Form>
 
-            <Input type='email' placeholder='enter email here' value={enteredInfo.email} onChange={(e) => updateEmail(e)}
-                classes={`${inputError.email && 'input-err'} input-lg txt-md pd-xs mg-top-s`} />
+            <Input type='email' placeholder='enter email here' value={loginFormState.email.value} onChange={(e) => loginFormDispatch({ type: 'UPDATE_EMAIL', payload: e.target.value })}
+                classes={`${loginFormState.email.error && 'input-err'} input-lg txt-md pd-xs mg-top-s`} />
             {
-                inputError.email &&
+                loginFormState.email.error &&
                 <Text classes='txt-md txt-err txt-cap mg-left-xs mg-top-xs'>
                     entered email is not valid.
                 </Text>
             }
 
-            <Input type={passType} placeholder='enter password here' value={enteredInfo.password} onChange={(e) => updatePassword(e)}
-                classes={`${inputError.password && 'input-err'} input-lg txt-md pd-xs mg-top-s`} />
+            <Input type={loginFormState.passwordInputType} placeholder='enter password here' value={loginFormState.password.value} onChange={(e) => loginFormDispatch({ type: 'UPDATE_PASSWORD', payload: e.target.value })}
+                classes={`${loginFormState.password.error && 'input-err'} input-lg txt-md pd-xs mg-top-s`} />
             {
-                inputError.password &&
+                loginFormState.password.error &&
                 <Text classes='txt-md txt-err txt-cap mg-left-xs mg-top-xs' >entered password is not valid.</Text>
             }
 
             <div className='flx flx-maj-end flx-min-center mg-top-s mg-btm-s'>
 
-                <div className='flx flx-min-center'>
-
-                    <Input type='checkbox' id='toggle-pass' />
-
-                    <Label for='toggle-pass' onClick={togglePassType} classes='txt-cap txt-md mg-left-xs'>
-                        show password
-                    </Label>
-
-                </div>
+                <Label htmlFor='toggle-pass' classes='txt-cap txt-md flx flx-min-center'>
+                    <Input type='checkbox' id='toggle-pass' onChange={() => loginFormDispatch({ type: 'TOGGLE_PASSWORD_TYPE' })} classes='mg-right-xs' />
+                    show password
+                </Label>
 
             </div>
 
@@ -120,6 +59,7 @@ const LoginForm = () => {
 
         </Form>
     )
+
 }
 
 export default LoginForm

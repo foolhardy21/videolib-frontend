@@ -1,20 +1,38 @@
+import axios from "axios";
 import { createContext, useContext, useReducer } from "react";
+import { videosReducer } from "../reducers";
 
 const VideosContext = createContext()
 
 export const VideosProvider = ({ children }) => {
-    const [videosState, videosDispatch] = useReducer(videosReducer, [])
+    const [videosState, videosDispatch] = useReducer(videosReducer, {
+        videos: [],
+        alert: {
+            message: '',
+            type: ''
+        },
+        loading: false
+    })
 
-    function videosReducer(state, action) {
+    function showVideosAlert(message, type) {
+        videosDispatch({
+            type: 'SET_ALERT', payload: {
+                message,
+                type
+            }
+        })
+        setTimeout(() => videosDispatch({ type: 'REMOVE_ALERT' }), 1500)
+    }
 
-        switch (action.type) {
-
-            case 'INIT_VIDEOS': return [...action.payload]
-
-            case 'FILTER_VIDEOS': return filterVideos(action.payload.videos, action.payload.filterState)
-
-            default: return state
-
+    async function getVideos() {
+        videosDispatch({ type: 'SET_LOADING' })
+        try {
+            const response = await axios.get('/api/videos')
+            return response.data.videos
+        } catch (e) {
+            return e.response.status
+        } finally {
+            videosDispatch({ type: 'REMOVE_LOADING' })
         }
     }
 
@@ -26,7 +44,9 @@ export const VideosProvider = ({ children }) => {
         <VideosContext.Provider
             value={{
                 videosState,
-                videosDispatch
+                videosDispatch,
+                getVideos,
+                showVideosAlert
             }}
         >
             {children}

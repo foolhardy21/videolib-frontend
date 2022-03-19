@@ -1,27 +1,33 @@
+import axios from "axios";
 import { createContext, useContext, useReducer } from "react";
+import { filterReducer } from "../reducers";
 
 const FilterContext = createContext()
 
 export const FilterProvider = ({ children }) => {
     const [filterState, filterDispatch] = useReducer(filterReducer, [])
 
-    function filterReducer(state, action) {
-
-        switch (action.type) {
-
-            case 'ADD_CATEGORY': return state.concat(action.payload)
-
-            case 'REMOVE_CATEGORY': return state.filter(category => category !== action.payload)
-
-            default: return state
+    async function getCategories() {
+        try {
+            const response = await axios.get('/api/categories')
+            return response.data.categories
+        } catch (e) {
+            return e.response.status
         }
     }
+
+    function isCategoryIncludedInFilter(value) {
+        return !filterState.find(category => category === value) ? false : true
+    }
+
 
     return (
         <FilterContext.Provider
             value={{
                 filterState,
-                filterDispatch
+                filterDispatch,
+                getCategories,
+                isCategoryIncludedInFilter,
             }}
         >
             {children}

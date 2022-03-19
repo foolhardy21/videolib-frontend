@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { useTheme } from '../../contexts'
 
 const Card = ({ id, classes, children, onClick }) => {
@@ -11,3 +12,19 @@ const Card = ({ id, classes, children, onClick }) => {
 }
 
 export default Card
+||||||| parent of 77cceea (feat - login page)
+=======
+import { useTheme } from '../../contexts'
+
+const Card = ({ id, classes, children, onClick }) => {
+    const { theme } = useTheme()
+
+    return (
+        <article id={id} onClick={onClick} className={`card-dim card-shadow-xs ${theme === 'dark' && 'b-solid b-secondary'} ${classes}`}>
+            {children}
+        </article>
+    )
+}
+
+export default Card
+>>>>>>> 77cceea (feat - login page)
