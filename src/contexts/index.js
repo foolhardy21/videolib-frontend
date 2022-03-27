@@ -1,2 +1,3 @@
 export { ThemeProvider, useTheme } from './theme.context.js'
-export { NotificationProvider, useNotification } from './notification.context.js'
+export { SignupProvider, useSignup } from './signup.context.js'
+export { useAuth, AuthProvider } from './auth.context.js'

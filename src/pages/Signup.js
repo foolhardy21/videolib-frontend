@@ -1,11 +1,11 @@
 import { SignupHeader, SignupCard } from '../components/Signup'
+import { Main, Alert } from '../components/Reusable'
+import { useTheme, useSignup } from '../contexts'
 import { getBgColor } from '../utils'
-import { Icon, Main, Text } from '../components/Reusable'
-import { useNotification, useTheme } from '../contexts'
 
 const Signup = () => {
     const { theme } = useTheme()
-    const { notification } = useNotification()
+    const { signupAlert } = useSignup()
 
     return (
 
@@ -19,23 +19,10 @@ const Signup = () => {
 
             <div className='flx flx-center'>
                 {
-                    notification === 'signed up successfully.' &&
-                    <div className='flx flx-maj-start flx-min-center txt-md txt-primary bg-success alert-size-s pd-xs'>
-                        <Icon classes='icon-primary mg-right-s'>
-                            check_circle
-                        </Icon>
-                        <Text classes='txt-md txt-cap'>{notification}</Text>
-                    </div>
-                }
-
-                {
-                    notification === 'user already exist. proceed to login.' &&
-                    <div className='flx flx-maj-start flx-min-center txt-md txt-primary bg-err alert-size-s pd-xs'>
-                        <Icon classes='icon-primary mg-right-s'>
-                            error
-                        </Icon>
-                        <Text classes='txt-md txt-cap'>{notification}</Text>
-                    </div>
+                    signupAlert.type === 'success'
+                        ? <Alert classes='bg-success'>{signupAlert.message}</Alert>
+                        : signupAlert.type === 'error' ? <Alert classes='bg-err'>{signupAlert.message}</Alert>
+                            : ''
                 }
             </div>
 
