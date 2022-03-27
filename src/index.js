@@ -14,7 +14,9 @@ ReactDOM.render(
       <AuthProvider>
         <VideosProvider>
           <FilterProvider>
-            <App />
+            <HistoryProvider>
+              <App />
+            </HistoryProvider>
           </FilterProvider>
         </VideosProvider>
       </AuthProvider>

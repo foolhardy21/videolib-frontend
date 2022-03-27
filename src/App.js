@@ -17,6 +17,7 @@ const App = () => {
             <Login />
           </LoginProvider>} />
         <Route path='/videos' element={<Videos />} />
+        <Route path='/history' element={<History />} />
       </Routes>
     </BrowserRouter>
   );
