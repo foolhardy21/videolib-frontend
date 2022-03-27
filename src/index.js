@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
 import { makeServer } from "./server";
-import { ThemeProvider, SignupProvider, AuthProvider } from './contexts'
+import { ThemeProvider, SignupProvider, AuthProvider, LoginProvider } from './contexts'
 import './stylesheet/style.css'
 
 // Call make Server
@@ -13,9 +13,12 @@ ReactDOM.render(
     <ThemeProvider>
       <AuthProvider>
         <SignupProvider>
+          <LoginProvider>
 
-          <App />
 
+            <App />
+
+          </LoginProvider>
         </SignupProvider>
       </AuthProvider>
     </ThemeProvider>
