@@ -1,5 +1,5 @@
 import { Button, Card, Text } from "../Reusable"
-import { getSolidBtnBgColor, getSolidBtnTextColor, getTextColor } from '../../utils'
+import { getTextColor } from '../../utils'
 import { useTheme } from "../../contexts"
 
 const VideoCard = ({ video: {
@@ -12,7 +12,7 @@ const VideoCard = ({ video: {
     return (
         <Card id='container-video' classes='pd-xs pos-relative'>
 
-            <Button classes={`btn-solid ${getSolidBtnBgColor(theme)} ${getSolidBtnTextColor(theme)} txt-md txt-lcase pd-xs pos-absolute tr-1`}>watch later</Button>
+            {/* <Button classes={`btn-solid ${getSolidBtnBgColor(theme)} ${getSolidBtnTextColor(theme)} txt-md txt-lcase pd-xs pos-absolute tr-1`}>watch later</Button> */}
 
             <video id='card-video' controls>
                 <source src={video}></source>
