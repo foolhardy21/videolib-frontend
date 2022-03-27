@@ -4,6 +4,7 @@ import App from "./App";
 import { makeServer } from "./server";
 import { ThemeProvider, SignupProvider, AuthProvider, LoginProvider } from './contexts'
 import './stylesheet/style.css'
+import { FilterProvider } from "./contexts/filer.context";
 
 // Call make Server
 makeServer();
