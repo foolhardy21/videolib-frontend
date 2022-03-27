@@ -1,22 +1,84 @@
+import axios from "axios";
 import { createContext, useContext, useReducer } from "react";
+import { historyReducer } from "../reducers/history.reducer";
+import { useAuth } from "./auth.context";
 
 const HistoryContext = createContext()
 
 export const HistoryProvider = ({ children }) => {
-    const [historyState, historyDispatch] = useReducer(historyReducer, [])
+    const [historyState, historyDispatch] = useReducer(historyReducer, {
+        history: [],
+        alert: {
+            message: '',
+            type: ''
+        },
+        loading: false
+    })
+    const { getUserToken } = useAuth()
 
-    function historyReducer(state, action) {
+    function showHistoryAlert(message, type) {
+        historyDispatch({
+            type: 'SET_ALERT', payload: {
+                message,
+                type
+            }
+        })
+        setTimeout(() => historyDispatch({ type: 'REMOVE_ALERT' }), 1500)
+    }
 
-        switch (action.type) {
+    async function getHistory() {
+        historyDispatch({ type: 'SET_LOADING' })
+        try {
+            const response = await axios.get('/api/user/history', {
+                headers: {
+                    authorization: getUserToken()
+                }
+            })
+            return response.data.history
+        } catch (e) {
+            return e.response.status
+        } finally {
+            historyDispatch({ type: 'REMOVE_LOADING' })
+        }
+    }
 
-            case 'INIT_HISTORY': return [...action.payload]
+    async function removeHistory() {
+        try {
+            const response = await axios.delete('/api/user/history/all', {
+                headers: {
+                    authorization: getUserToken()
+                }
+            })
+            return response.data.history
+        } catch (e) {
+            return e.response.status
+        }
+    }
 
-            case 'REMOVE_FROM_HISTORY': return state.filter(video => video._id !== action.payload)
+    async function addVideoToHistory(video) {
+        try {
+            await axios.post('/api/user/history', {
+                video
+            }, {
+                headers: {
+                    authorization: getUserToken()
+                }
+            })
+        } catch (e) {
+            return e.response.status
+        }
+    }
 
-            case 'REMOVE_HISTORY': return []
-
-            default: return state
-
+    async function removeVideoFromHistory(_id) {
+        try {
+            const response = await axios.delete(`/api/user/history/${_id}`, {
+                headers: {
+                    authorization: getUserToken()
+                }
+            })
+            return response.data.history
+        } catch (e) {
+            return response.status
         }
     }
 
@@ -24,7 +86,12 @@ export const HistoryProvider = ({ children }) => {
         <HistoryContext.Provider
             value={{
                 historyState,
-                historyDispatch
+                historyDispatch,
+                getHistory,
+                removeHistory,
+                showHistoryAlert,
+                addVideoToHistory,
+                removeVideoFromHistory,
             }}
         >
             {children}

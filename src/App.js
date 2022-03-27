@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Signup, Login, Videos } from "./pages";
+import { Signup, Login, Videos, History } from "./pages";
 import { SignupProvider, LoginProvider } from './contexts'
 
 const App = () => {
