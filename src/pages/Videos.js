@@ -1,4 +1,3 @@
-import axios from 'axios'
 import { useEffect } from 'react'
 import { VideosFilter, VideosHeader, VideosSection } from '../components/Videos'
 import { Alert, Main, Text } from '../components/Reusable'
@@ -25,8 +24,7 @@ const Videos = () => {
                 videosDispatch({ type: 'INIT_VIDEOS', payload: videos })
             }
         })()
-    }, [videosDispatch])
-
+    }, [])
 
     return (
         <div

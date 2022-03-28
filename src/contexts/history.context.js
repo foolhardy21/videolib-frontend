@@ -1,7 +1,7 @@
 import axios from "axios";
 import { createContext, useContext, useReducer } from "react";
-import { historyReducer } from "../reducers/history.reducer";
-import { useAuth } from "./auth.context";
+import { historyReducer } from "../reducers";
+import { useAuth } from "./";
 
 const HistoryContext = createContext()
 
