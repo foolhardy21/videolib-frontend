@@ -27,7 +27,7 @@ export const videos = [
     url: reviewsVideo,
     views: 0,
     uploadedOn: new Date('Dec 30 2020'),
-    category: 'reviews',
+    category: 'podcast',
   },
   {
     _id: uuid(),
@@ -36,7 +36,7 @@ export const videos = [
     url: podcastVideo,
     views: 0,
     uploadedOn: new Date('Jan 31 2022'),
-    category: 'reviews',
+    category: 'review',
   },
   {
     _id: uuid(),
@@ -73,7 +73,7 @@ export const videos = [
     url: reviewsVideo,
     views: 0,
     uploadedOn: new Date('Dec 30 2020'),
-    category: 'reviews',
+    category: 'podcast',
   },
   {
     _id: uuid(),
@@ -82,7 +82,7 @@ export const videos = [
     url: podcastVideo,
     views: 0,
     uploadedOn: new Date('Jan 31 2022'),
-    category: 'reviews',
+    category: 'review',
   },
   {
     _id: uuid(),
@@ -119,7 +119,7 @@ export const videos = [
     url: reviewsVideo,
     views: 0,
     uploadedOn: new Date('Dec 30 2020'),
-    category: 'reviews',
+    category: 'podcast',
   },
   {
     _id: uuid(),
@@ -128,7 +128,7 @@ export const videos = [
     url: podcastVideo,
     views: 0,
     uploadedOn: new Date('Jan 31 2022'),
-    category: 'reviews',
+    category: 'review',
   },
   {
     _id: uuid(),
