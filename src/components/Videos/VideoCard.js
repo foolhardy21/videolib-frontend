@@ -1,13 +1,14 @@
 import axios from "axios"
 import { useState } from "react"
 import { Button, Card, Text } from "../Reusable"
-import { getSolidBtnBgColor, getSolidBtnTextColor, getTextColor } from '../../utils'
-import { useTheme } from "../../contexts"
+import { getTextColor } from '../../utils'
+import { useHistory, useTheme } from "../../contexts"
+import axios from "axios"
 
-const VideoCard = ({ video: {
+const VideoCard = ({ video, video: {
     _id,
     id,
-    video,
+    url,
     videoTitle,
     videoDescription
 } }) => {
@@ -63,13 +64,12 @@ const VideoCard = ({ video: {
         setIsVideoLiked(false)
     }
 
+
     return (
         <Card id='container-video' classes='pd-xs pos-relative'>
 
-            <Button classes={`btn-solid ${getSolidBtnBgColor(theme)} ${getSolidBtnTextColor(theme)} txt-md txt-lcase pd-xs pos-absolute tr-1`}>watch later</Button>
-
-            <video onPlay={handleVideoPlay} id='card-video' controls>
-                <source src={video}></source>
+            <video onPlay={() => addVideoToHistory(video)} id='card-video' controls>
+                <source src={url}></source>
             </video>
 
             <Text classes={`txt-md txt-cap txt-500 ${getTextColor(theme)} mg-btm-xs`}>{videoTitle}</Text>

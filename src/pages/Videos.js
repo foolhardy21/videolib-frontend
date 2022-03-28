@@ -1,27 +1,29 @@
 import axios from 'axios'
 import { useEffect } from 'react'
 import { VideosFilter, VideosHeader, VideosSection } from '../components/Videos'
-import { Main, Text } from '../components/Reusable'
+import { Alert, Main, Text } from '../components/Reusable'
 import { useTheme, useVideos } from '../contexts'
 import { getBgColor, getTextColor } from '../utils'
 import '../components/Videos/videos.css'
 
 const Videos = () => {
     const { theme } = useTheme()
-    const { videosDispatch } = useVideos()
+    const { videosState: {
+        alert: {
+            message,
+            type
+        },
+        loading
+    }, videosDispatch, getVideos, showVideosAlert } = useVideos()
 
     useEffect(() => {
-        async function getVideos() {
-            try {
-                const response = await axios.get('/api/videos')
-                return response.data.videos
-            } catch (e) {
-                console.log(e)
-            }
-        }
         (async () => {
             const videos = await getVideos()
-            videosDispatch({ type: 'INIT_VIDEOS', payload: videos })
+            if (videos === 404 || videos === 500) {
+                showVideosAlert('could not fetch the videos', 'error')
+            } else {
+                videosDispatch({ type: 'INIT_VIDEOS', payload: videos })
+            }
         })()
     }, [videosDispatch])
 
@@ -41,7 +43,18 @@ const Videos = () => {
 
                 <VideosFilter />
 
-                <VideosSection />
+                {
+                    type === 'error'
+                        ? <Alert classes='bg-err'>{message}</Alert>
+                        : type === 'success' ? <Alert classes='bg-success'>{message}</Alert>
+                            : ''
+                }
+
+                {
+                    loading
+                        ? <Text classes={`${getTextColor(theme)} txt-xlg txt-500 txt-cap mg-top-md`}>loading...</Text>
+                        : <VideosSection />
+                }
 
             </Main>
 

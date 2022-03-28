@@ -3,8 +3,8 @@ export {
 } from './theme.util'
 
 export {
-    emailIsInvalid,
-    passIsInvalid,
-    nameIsInvalid,
-    passAndConfPassAreDiff
+    isEmailInvalid,
+    isPasswordInvalid,
+    isNameInvalid,
+    arePasswordAndConfirmedPasswordDiff
 } from './inputValidation.util'

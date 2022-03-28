@@ -5,38 +5,27 @@ import axios from 'axios'
 
 const HistoryVideoCard = ({ video: {
     _id,
-    video,
+    url,
     videoTitle,
     videoDescription,
 } }) => {
     const { theme } = useTheme()
-    const { historyDispatch } = useHistory()
+    const { historyDispatch, removeVideoFromHistory, showHistoryAlert } = useHistory()
 
     async function handleRemoveFromHistory() {
-        const userToken = window.localStorage.getItem('userToken')
-        try {
-            await axios.delete(`/api/user/history/${_id}`, {
-                headers: {
-                    authorization: userToken
-                }
-            })
-
+        const removeFromHistoryResponse = await removeVideoFromHistory(_id)
+        if (removeFromHistoryResponse === 404 || removeFromHistoryResponse === 500) {
+            showHistoryAlert('could not remove the video', 'error')
+        } else {
             historyDispatch({ type: 'REMOVE_FROM_HISTORY', payload: _id })
-
-        } catch (e) {
-            console.log(e)
         }
-
-
     }
 
     return (
         <Card id='container-video' classes='pd-xs pos-relative'>
 
-
-
             <video id='card-video' controls>
-                <source src={video}></source>
+                <source src={url}></source>
             </video>
 
             <Text classes={`txt-md txt-cap txt-500 ${getTextColor(theme)} mg-btm-xs`}>{videoTitle}</Text>
