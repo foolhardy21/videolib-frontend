@@ -19,7 +19,7 @@ const VideoCard = ({ video, video: {
     const { showVideosAlert } = useVideos()
 
     async function handleVideoLike() {
-        const addToLikesResponse = addVideoToLikes(video)
+        const addToLikesResponse = await addVideoToLikes(video)
         if (addToLikesResponse === 409 || addToLikesResponse === 404) {
             showVideosAlert('could not like the video', 'error')
         } else {
@@ -29,7 +29,7 @@ const VideoCard = ({ video, video: {
     }
 
     async function handleVideoUnlike() {
-        const removeFromLikes = removeVideoFromLikes(_id)
+        const removeFromLikes = await removeVideoFromLikes(_id)
         if (removeFromLikes === 404 || removeFromLikes === 500) {
             showVideosAlert('could not dislike the video', 'error')
         } else {
