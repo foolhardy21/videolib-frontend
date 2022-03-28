@@ -1,6 +1,5 @@
-import { Signup, Login, Videos, History, PlayLists } from "./pages";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Signup, Login, Videos, History } from "./pages";
+import { Signup, Login, Videos, History, Playlists } from "./pages";
 import { SignupProvider, LoginProvider } from './contexts'
 
 const App = () => {
@@ -19,7 +18,7 @@ const App = () => {
           </LoginProvider>} />
         <Route path='/videos' element={<Videos />} />
         <Route path='/history' element={<History />} />
-        <Route path='/playlists' element={<PlayLists />} />
+        <Route path='/playlists' element={<Playlists />} />
       </Routes>
     </BrowserRouter>
   );
