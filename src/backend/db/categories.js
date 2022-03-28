@@ -8,7 +8,7 @@ import { v4 as uuid } from "uuid";
 export const categories = [
   {
     _id: uuid(),
-    name: "reviews",
+    name: "review",
   },
   {
     _id: uuid(),
@@ -20,7 +20,7 @@ export const categories = [
   },
   {
     _id: uuid(),
-    name: "podcasts",
+    name: "podcast",
   },
   {
     _id: uuid(),
