@@ -36,10 +36,6 @@ export const VideosProvider = ({ children }) => {
         }
     }
 
-    function filterVideos(videos, filterArr) {
-        return filterArr.length > 0 ? videos.filter(video => filterArr.find(category => category === video.category)) : videos
-    }
-
     return (
         <VideosContext.Provider
             value={{

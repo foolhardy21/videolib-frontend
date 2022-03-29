@@ -24,7 +24,7 @@ const LikesSection = () => {
                 }
             </div>
 
-            <Section id='grid-likes' classes='grid grid-maxcols-4 pd-btm-s'>
+            <Section id='grid-playlist' classes='grid grid-maxcols-4 pd-btm-s'>
 
                 {
                     likedVideos?.map(video => <PlaylistVideoCard key={video._id} video={video} />)

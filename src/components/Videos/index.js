@@ -1,5 +1,4 @@
 export { default as VideosHeader } from './VideosHeader'
-export { default as PlaylistsModal } from './PlaylistsModal'
 export { default as VideosFilter } from './VideosFilter'
 export { default as VideosSection } from './VideosSection'
 export { default as VideoCard } from './VideoCard'

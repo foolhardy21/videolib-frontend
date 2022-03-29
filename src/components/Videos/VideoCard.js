@@ -2,7 +2,7 @@ import axios from "axios"
 import { useState } from "react"
 import { Button, Card, Text } from "../Reusable"
 import { getTextColor } from '../../utils'
-import { useHistory, useLikes, useTheme, useVideos } from "../../contexts"
+import { useHistory, useLikes, usePlaylists, useTheme, useVideos } from "../../contexts"
 
 const VideoCard = ({ video, video: {
     _id,
@@ -17,6 +17,7 @@ const VideoCard = ({ video, video: {
     const { addVideoToHistory } = useHistory()
     const { isVideoLiked, addVideoToLikes, removeVideoFromLikes, likesDispatch } = useLikes()
     const { showVideosAlert } = useVideos()
+    const { showPlaylistModal } = usePlaylists()
 
     async function handleVideoLike() {
         const addToLikesResponse = await addVideoToLikes(video)
@@ -35,56 +36,6 @@ const VideoCard = ({ video, video: {
         } else {
             likesDispatch({ type: 'REMOVE_FROM_LIKES', payload: _id })
         }
-    }
-
-
-    async function handleVideoPlay() {
-        const userToken = window.localStorage.getItem('userToken')
-        try {
-            await axios.post('/api/user/history', {
-                video: {
-                    _id,
-                    id,
-                    video,
-                    videoTitle,
-                    videoDescription
-                }
-            }, {
-                headers: {
-                    authorization: userToken
-                }
-            })
-        } catch (e) {
-            console.log(e)
-        }
-    }
-
-    async function handleVideoLike() {
-        const userToken = window.localStorage.getItem('userToken')
-        await axios.post('/api/user/likes', {
-            video: {
-                _id,
-                id,
-                video,
-                videoTitle,
-                videoDescription
-            }
-        }, {
-            headers: {
-                authorization: userToken
-            }
-        })
-        setIsVideoLiked(true)
-    }
-
-    async function handleVideoUnlike() {
-        const userToken = window.localStorage.getItem('userToken')
-        await axios.delete(`/api/user/likes/${_id}`, {
-            headers: {
-                authorization: userToken
-            }
-        })
-        setIsVideoLiked(false)
     }
 
 

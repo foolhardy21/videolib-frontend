@@ -1,13 +1,14 @@
 import { useEffect } from 'react'
 import { Text, Main } from "../components/Reusable"
 import { PlaylistHeader, PlaylistsSection, LikesSection, PlaylistForm } from "../components/Playlists"
-import { useTheme } from "../contexts"
+import { useTheme, useLikes, usePlaylists } from "../contexts"
 import { getBgColor, getTextColor } from "../utils"
 import '../components/Playlists/playlists.css'
 
 const Playlists = () => {
     const { theme } = useTheme()
-    const { likesDispatch, getLikedVideos, showLikesAlert } = useLikes()
+    const { likesState, likesDispatch, getLikedVideos, showLikesAlert } = useLikes()
+    const { playlistsState } = usePlaylists()
 
     useEffect(() => {
         (async () => {
@@ -19,7 +20,7 @@ const Playlists = () => {
             }
         })()
     }, [])
-
+    console.log(playlistsState.loading)
     return (
         <div
             style={{
@@ -35,9 +36,17 @@ const Playlists = () => {
 
                 <PlaylistForm />
 
-                <LikesSection />
+                {
+                    likesState.loading
+                        ? <Text classes={`${getTextColor(theme)} txt-xlg txt-500 txt-cap`}>loading...</Text>
+                        : <LikesSection />
+                }
 
-                <PlaylistsSection />
+                {
+                    playlistsState.loading
+                        ? <Text classes={`${getTextColor(theme)} txt-xlg txt-500 txt-cap`}>loading...</Text>
+                        : <PlaylistsSection />
+                }
 
             </Main>
 

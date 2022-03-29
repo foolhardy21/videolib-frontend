@@ -1,14 +1,12 @@
 import axios from "axios"
 import { useEffect } from "react"
 import { Label, Section, Text, Card, Button } from "../Reusable"
-import { usePlayListModal, usePlaylists, useTheme } from "../../contexts"
+import { usePlaylists, useTheme } from "../../contexts"
 import { getBgColor, getSolidBtnBgColor, getSolidBtnTextColor, getTextColor } from "../../utils"
 
 const PlaylistModal = () => {
     const { theme } = useTheme()
-    const { playlistsState, playlistsDispatch } = usePlaylists()
-    const { hidePlaylistModal } = usePlayListModal()
-
+    const { playlistsState, playlistsDispatch, hidePlaylistModal } = usePlaylists()
 
     useEffect(() => {
         async function getPlaylists() {
