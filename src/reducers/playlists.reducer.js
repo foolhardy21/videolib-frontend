@@ -2,11 +2,7 @@ export function playlistsReducer(state, action) {
 
     switch (action.type) {
 
-        case 'INIT_PLAYLISTS': console.log('init'); return { ...state, playlists: action.payload }
-
-        case 'SET_LOADING': return { ...state, loading: true }
-
-        case 'REMOVE_LOADING': return { ...state, loading: false }
+        case 'INIT_PLAYLISTS': return { ...state, playlists: action.payload }
 
         case 'SET_ALERT': return {
             ...state, alert: {
@@ -21,6 +17,10 @@ export function playlistsReducer(state, action) {
                 type: ''
             }
         }
+
+        case 'SET_LOADING': return { ...state, loading: true }
+
+        case 'REMOVE_LOADING': return { ...state, loading: false }
 
         case 'ADD_NEW_PLAYLIST': return { ...state, playlists: state.playlists.concat({ ...action.payload }).reverse() }
 

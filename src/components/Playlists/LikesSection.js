@@ -7,22 +7,12 @@ import { useLikes, useTheme } from '../../contexts'
 
 const LikesSection = () => {
     const { theme } = useTheme()
-    const { likesState: { likedVideos, alert: { message, type } } } = useLikes()
+    const { likesState: { likedVideos } } = useLikes()
 
     return (
         <div className='flx flx-column mg-left-md mg-btm-md'>
 
             <Text classes={`txt-lg txt-cap ${getTextColor(theme)} mg-btm-md`}>liked videos</Text>
-
-            <div className='flx flx-center'>
-
-                {
-                    type === 'error'
-                        ? <Alert classes='bg-err'>{message}</Alert>
-                        : type === 'success' ? <Alert classes='bg-success'>{message}</Alert>
-                            : ''
-                }
-            </div>
 
             <Section id='grid-playlist' classes='grid grid-maxcols-4 pd-btm-s'>
 

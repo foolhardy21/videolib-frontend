@@ -8,11 +8,11 @@ const PlaylistsContext = createContext()
 export const PlaylistsProvider = ({ children }) => {
     const [playlistsState, playlistsDispatch] = useReducer(playlistsReducer, {
         playlists: [],
-        loading: false,
         alert: {
             message: '',
             type: ''
-        }
+        },
+        loading: false,
     })
     const [isPlaylistModalVisible, setIsPlaylistModalVisible] = useState(false)
     const { getUserToken } = useAuth()
@@ -36,8 +36,6 @@ export const PlaylistsProvider = ({ children }) => {
     }
 
     async function getPlaylists() {
-        console.log('getting')
-        // playlistsDispatch({ type: 'SET_LOADING' })
         try {
             const response = await axios.get('/api/user/playlists', {
                 headers: {
@@ -47,15 +45,30 @@ export const PlaylistsProvider = ({ children }) => {
             return response.data.playlists
         } catch (e) {
             return e.response.status
-        } finally {
-            // playlistsDispatch({ type: 'REMOVE_LOADING' })
-            console.log('finally')
         }
     }
 
     async function removePlaylist(_id) {
         try {
             const response = await axios.delete(`/api/user/playlists/${_id}`, {
+                headers: {
+                    authorization: getUserToken()
+                }
+            })
+            return response.data.playlists
+        } catch (e) {
+            return e.response.status
+        }
+    }
+
+    async function addNewPlaylist(name, description) {
+        try {
+            const response = await axios.post('/api/user/playlists', {
+                playlist: {
+                    name,
+                    description,
+                }
+            }, {
                 headers: {
                     authorization: getUserToken()
                 }
@@ -73,6 +86,7 @@ export const PlaylistsProvider = ({ children }) => {
                 playlistsDispatch,
                 getPlaylists,
                 removePlaylist,
+                addNewPlaylist,
                 showPlaylistsAlert,
                 isPlaylistModalVisible,
                 hidePlaylistModal,

@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { Text, Main } from "../components/Reusable"
+import { Text, Main, Alert } from "../components/Reusable"
 import { PlaylistHeader, PlaylistsSection, LikesSection, PlaylistForm } from "../components/Playlists"
 import { useTheme, useLikes, usePlaylists } from "../contexts"
 import { getBgColor, getTextColor } from "../utils"
@@ -20,7 +20,10 @@ const Playlists = () => {
             }
         })()
     }, [])
-    console.log(playlistsState.loading)
+
+
+    console.log('renderd')
+
     return (
         <div
             style={{
@@ -33,6 +36,25 @@ const Playlists = () => {
             <Main classes='flx flx-column'>
 
                 <Text classes={`txt-lg txt-cap ${getTextColor(theme)} flx flx-center mg-top-md mg-btm-md`}>all playlists</Text>
+
+                <div className='flx flx-center'>
+                    {
+                        playlistsState.alert.type === 'error'
+                            ? <Alert classes='bg-err'>{playlistsState.alert.message}</Alert>
+                            : playlistsState.alert.type === 'success'
+                                ? <Alert classes='bg-success'>{playlistsState.alert.message}</Alert>
+                                : ''
+                    }
+                </div>
+
+                <div className='flx flx-center'>
+                    {
+                        likesState.alert.type === 'error'
+                            ? <Alert classes='bg-err'>{likesState.alert.message}</Alert>
+                            : likesState.alert.type === 'success' ? <Alert classes='bg-success'>{likesState.alert.message}</Alert>
+                                : ''
+                    }
+                </div>
 
                 <PlaylistForm />
 

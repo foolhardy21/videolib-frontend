@@ -10,7 +10,7 @@ const PlaylistForm = () => {
         description: ''
     })
     const { theme } = useTheme()
-    const { playlistsDispatch } = usePlaylists()
+    const { playlistsDispatch, addNewPlaylist, showPlaylistsAlert } = usePlaylists()
 
     function handleNameChange(e) {
         setNewPlaylistInfo(i => ({ ...i, name: e.target.value }))
@@ -24,31 +24,18 @@ const PlaylistForm = () => {
         e.preventDefault()
 
         if (newPlaylistInfo.name.length > 0 && newPlaylistInfo.description.length > 0) {
-
-            const userToken = window.localStorage.getItem('userToken')
-            try {
-                const response = await axios.post('/api/user/playlists', {
-                    playlist: {
-                        name: newPlaylistInfo.name,
-                        description: newPlaylistInfo.description,
-                    }
-                }, {
-                    headers: {
-                        authorization: userToken
-                    }
-                })
-                const playlists = response.data.playlists
-                playlistsDispatch({ type: 'ADD_NEW_PLAYLIST', payload: playlists[playlists.length - 1] })
-                setNewPlaylistInfo({
-                    name: '',
-                    description: ''
-                })
-            } catch (e) {
-                console.log(e)
+            const newPlaylistResponse = await addNewPlaylist(newPlaylistInfo.name, newPlaylistInfo.description)
+            if (newPlaylistResponse === 404 || newPlaylistResponse === 500) {
+                showPlaylistsAlert('could not create the playlist', 'error')
+            } else {
+                showPlaylistsAlert('playlist created', 'success')
+                playlistsDispatch({ type: 'ADD_NEW_PLAYLIST', payload: newPlaylistResponse[newPlaylistResponse.length - 1] })
             }
-
+            setNewPlaylistInfo({
+                name: '',
+                description: ''
+            })
         }
-
     }
 
     return (

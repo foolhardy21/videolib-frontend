@@ -1,11 +1,12 @@
 import { useEffect } from 'react'
-import { Alert, Section, Text } from "../Reusable"
-import { getTextColor } from '../../utils'
+import { Section, Text, Button, Icon } from "../Reusable"
+import { getTextColor, getBgColor, getIconColor } from '../../utils'
 import { useTheme, usePlaylists } from "../../contexts"
 
 const PlaylistsSection = () => {
-    const { playlistsState: { playlists, alert }, playlistsDispatch, getPlaylists, removePlaylist, showPlaylistsAlert } = usePlaylists()
+    const { playlistsState: { playlists }, playlistsDispatch, getPlaylists, removePlaylist, showPlaylistsAlert } = usePlaylists()
     const { theme } = useTheme()
+
 
     async function handleDeletePlaylist(_id) {
         const removePlaylistResponse = await removePlaylist(_id)
@@ -18,7 +19,6 @@ const PlaylistsSection = () => {
 
     useEffect(() => {
         (async () => {
-            console.log('ran')
             const getPlaylistsResponse = await getPlaylists()
             if (getPlaylistsResponse === 404 || getPlaylistsResponse === 500) {
                 showPlaylistsAlert('could not get playlists', 'error')
@@ -30,16 +30,6 @@ const PlaylistsSection = () => {
 
     return (
         <Section classes='flx flx-column mg-left-md'>
-
-            <div className='flx flx-center'>
-                {
-                    alert.type === 'error'
-                        ? <Alert classes='bg-err'>{alert.message}</Alert>
-                        : alert.type === 'success'
-                            ? <Alert classes='bg-success'>{alert.message}</Alert>
-                            : ''
-                }
-            </div>
 
             {
                 playlists?.map(playlist =>
@@ -65,7 +55,7 @@ const PlaylistsSection = () => {
                         </div>
 
                         {
-                            playlist.videos.map(video => <PlaylistVideoCard key={video._id} video={video} />)
+                            playlist.videos?.map(video => <PlaylistVideoCard key={video._id} video={video} />)
                         }
 
                     </Section>
