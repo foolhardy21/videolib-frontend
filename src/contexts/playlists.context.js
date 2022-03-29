@@ -1,22 +1,110 @@
-import { createContext, useContext, useReducer } from "react";
+import axios from "axios";
+import { createContext, useContext, useReducer, useState } from "react";
+import { playlistsReducer } from '../reducers'
+import { useAuth } from "./";
 
 const PlaylistsContext = createContext()
 
 export const PlaylistsProvider = ({ children }) => {
-    const [playlistsState, playlistsDispatch] = useReducer(playlistsReducer, [])
+    const [playlistsState, playlistsDispatch] = useReducer(playlistsReducer, {
+        playlists: [],
+        alert: {
+            message: '',
+            type: ''
+        },
+        loading: false,
+    })
+    const [isPlaylistModalVisible, setIsPlaylistModalVisible] = useState(false)
+    const { getUserToken } = useAuth()
 
-    function playlistsReducer(state, action) {
+    function hidePlaylistModal() {
+        setIsPlaylistModalVisible(false)
+    }
 
-        switch (action.type) {
+    function showPlaylistModal() {
+        setIsPlaylistModalVisible(true)
+    }
 
-            case 'INIT_PLAYLISTS': return [...action.payload]
+    function showPlaylistsAlert(message, type) {
+        playlistsDispatch({
+            type: 'SET_ALERT', payload: {
+                message,
+                type
+            }
+        })
+        setTimeout(() => playlistsDispatch({ type: 'REMOVE_ALERT' }), 1500)
+    }
 
-            case 'ADD_NEW_PLAYLIST': return state.concat({ ...action.payload }).reverse()
+    async function getPlaylists() {
+        playlistsDispatch({ type: 'SET_LOADING' })
+        try {
+            const response = await axios.get('/api/user/playlists', {
+                headers: {
+                    authorization: getUserToken()
+                }
+            })
+            return response.data.playlists
+        } catch (e) {
+            return e.response.status
+        } finally {
+            playlistsDispatch({ type: 'REMOVE_LOADING' })
+        }
+    }
 
-            case 'REMOVE_PLAYLIST': return state.filter(playlist => playlist._id !== action.payload)
+    async function removePlaylist(_id) {
+        try {
+            const response = await axios.delete(`/api/user/playlists/${_id}`, {
+                headers: {
+                    authorization: getUserToken()
+                }
+            })
+            return response.data.playlists
+        } catch (e) {
+            return e.response.status
+        }
+    }
 
-            default: return state
+    async function addNewPlaylist(name, description) {
+        try {
+            const response = await axios.post('/api/user/playlists', {
+                playlist: {
+                    name,
+                    description,
+                }
+            }, {
+                headers: {
+                    authorization: getUserToken()
+                }
+            })
+            return response.data.playlists
+        } catch (e) {
+            return e.response.status
+        }
+    }
 
+    async function addVideoToPlaylist(video, playlistId) {
+        try {
+            await axios.post(`/api/user/playlists/${playlistId}`, {
+                video
+            }, {
+                headers: {
+                    authorization: getUserToken()
+                }
+            })
+        } catch (e) {
+            return e.response.status
+        }
+    }
+
+    async function removeVideoFromPlaylist(videoId, playlistId) {
+        try {
+            await axios.delete(`/api/user/playlists/${playlistId}/${videoId}`, {
+                headers: {
+                    authorization: getUserToken()
+                }
+            })
+        } catch (e) {
+            return e.response.status
         }
     }
 
@@ -24,7 +112,16 @@ export const PlaylistsProvider = ({ children }) => {
         <PlaylistsContext.Provider
             value={{
                 playlistsState,
-                playlistsDispatch
+                playlistsDispatch,
+                getPlaylists,
+                removePlaylist,
+                addNewPlaylist,
+                addVideoToPlaylist,
+                removeVideoFromPlaylist,
+                showPlaylistsAlert,
+                isPlaylistModalVisible,
+                hidePlaylistModal,
+                showPlaylistModal,
             }}
         >
             {children}

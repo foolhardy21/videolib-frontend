@@ -1,8 +1,7 @@
-import axios from "axios"
 import { useState } from "react"
 import { Button, Card, Text } from "../Reusable"
 import { getTextColor } from '../../utils'
-import { useHistory, useLikes, useTheme, useVideos } from "../../contexts"
+import { useHistory, useLikes, usePlaylists, useTheme, useVideos } from "../../contexts"
 
 const VideoCard = ({ video, video: {
     _id,
@@ -16,11 +15,12 @@ const VideoCard = ({ video, video: {
     const { theme } = useTheme()
     const { addVideoToHistory } = useHistory()
     const { isVideoLiked, addVideoToLikes, removeVideoFromLikes, likesDispatch } = useLikes()
-    const { showVideosAlert } = useVideos()
+    const { showVideosAlert, updateSelectedVideo } = useVideos()
+    const { showPlaylistModal } = usePlaylists()
 
     async function handleVideoLike() {
         const addToLikesResponse = await addVideoToLikes(video)
-        if (addToLikesResponse === 409 || addToLikesResponse === 404) {
+        if (addToLikesResponse === 409 || addToLikesResponse === 404 || addToLikesResponse === 500) {
             showVideosAlert('could not like the video', 'error')
         } else {
             likesDispatch({ type: 'ADD_TO_LIKES', payload: video })
@@ -37,54 +37,9 @@ const VideoCard = ({ video, video: {
         }
     }
 
-
-    async function handleVideoPlay() {
-        const userToken = window.localStorage.getItem('userToken')
-        try {
-            await axios.post('/api/user/history', {
-                video: {
-                    _id,
-                    id,
-                    video,
-                    videoTitle,
-                    videoDescription
-                }
-            }, {
-                headers: {
-                    authorization: userToken
-                }
-            })
-        } catch (e) {
-            console.log(e)
-        }
-    }
-
-    async function handleVideoLike() {
-        const userToken = window.localStorage.getItem('userToken')
-        await axios.post('/api/user/likes', {
-            video: {
-                _id,
-                id,
-                video,
-                videoTitle,
-                videoDescription
-            }
-        }, {
-            headers: {
-                authorization: userToken
-            }
-        })
-        setIsVideoLiked(true)
-    }
-
-    async function handleVideoUnlike() {
-        const userToken = window.localStorage.getItem('userToken')
-        await axios.delete(`/api/user/likes/${_id}`, {
-            headers: {
-                authorization: userToken
-            }
-        })
-        setIsVideoLiked(false)
+    function handleAddToPlaylist() {
+        updateSelectedVideo(video)
+        showPlaylistModal()
     }
 
 
@@ -118,7 +73,7 @@ const VideoCard = ({ video, video: {
                         <Button onClick={handleVideoLike} classes={`btn-txt txt-md ${getTextColor(theme)} mg-right-s`}>like</Button>
                 }
 
-                <Button onClick={showPlaylistModal} classes={`btn-txt txt-md ${getTextColor(theme)}`}>add to playlist</Button>
+                <Button onClick={handleAddToPlaylist} classes={`btn-txt txt-md ${getTextColor(theme)}`}>add to playlist</Button>
 
             </div>
 

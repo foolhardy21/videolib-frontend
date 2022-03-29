@@ -1,5 +1,5 @@
 import axios from "axios";
-import { createContext, useContext, useReducer } from "react";
+import { createContext, useContext, useReducer, useState } from "react";
 import { videosReducer } from "../reducers";
 
 const VideosContext = createContext()
@@ -13,6 +13,11 @@ export const VideosProvider = ({ children }) => {
         },
         loading: false
     })
+    const [selectedVideo, setSelectedVideo] = useState({})
+
+    function updateSelectedVideo(video) {
+        setSelectedVideo(video)
+    }
 
     function showVideosAlert(message, type) {
         videosDispatch({
@@ -36,17 +41,15 @@ export const VideosProvider = ({ children }) => {
         }
     }
 
-    function filterVideos(videos, filterArr) {
-        return filterArr.length > 0 ? videos.filter(video => filterArr.find(category => category === video.category)) : videos
-    }
-
     return (
         <VideosContext.Provider
             value={{
                 videosState,
                 videosDispatch,
                 getVideos,
-                showVideosAlert
+                showVideosAlert,
+                selectedVideo,
+                updateSelectedVideo,
             }}
         >
             {children}

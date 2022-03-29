@@ -1,8 +1,7 @@
-import axios from 'axios'
 import { useEffect } from 'react'
-import { VideosFilter, VideosHeader, VideosSection } from '../components/Videos'
+import { VideosFilter, VideosHeader, VideosSection, PlaylistModal } from '../components/Videos'
 import { Alert, Main, Text } from '../components/Reusable'
-import { useTheme, useVideos } from '../contexts'
+import { usePlaylists, useTheme, useVideos } from '../contexts'
 import { getBgColor, getTextColor } from '../utils'
 import '../components/Videos/videos.css'
 
@@ -15,6 +14,7 @@ const Videos = () => {
         },
         loading
     }, videosDispatch, getVideos, showVideosAlert } = useVideos()
+    const { isPlaylistModalVisible } = usePlaylists()
 
     useEffect(() => {
         (async () => {
@@ -26,7 +26,6 @@ const Videos = () => {
             }
         })()
     }, [])
-
 
     return (
         <div
@@ -58,6 +57,7 @@ const Videos = () => {
 
             </Main>
 
+            {/* display modal only if user is logged in */}
             {
                 isPlaylistModalVisible && <PlaylistModal />
             }
