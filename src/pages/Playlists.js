@@ -8,7 +8,7 @@ import '../components/Playlists/playlists.css'
 const Playlists = () => {
     const { theme } = useTheme()
     const { likesState, likesDispatch, getLikedVideos, showLikesAlert } = useLikes()
-    const { playlistsState } = usePlaylists()
+    const { playlistsState, getPlaylists, showPlaylistsAlert } = usePlaylists()
 
     useEffect(() => {
         (async () => {
@@ -18,11 +18,14 @@ const Playlists = () => {
             } else {
                 likesDispatch({ type: 'INIT_LIKES', payload: likedVideosResponse })
             }
+            const getPlaylistsResponse = await getPlaylists()
+            if (getPlaylistsResponse === 404 || getPlaylistsResponse === 500) {
+                showPlaylistsAlert('could not get playlists', 'error')
+            } else {
+                playlistsDispatch({ type: 'INIT_PLAYLISTS', payload: getPlaylistsResponse })
+            }
         })()
     }, [])
-
-
-    console.log('renderd')
 
     return (
         <div
@@ -39,19 +42,19 @@ const Playlists = () => {
 
                 <div className='flx flx-center'>
                     {
-                        playlistsState.alert.type === 'error'
-                            ? <Alert classes='bg-err'>{playlistsState.alert.message}</Alert>
-                            : playlistsState.alert.type === 'success'
-                                ? <Alert classes='bg-success'>{playlistsState.alert.message}</Alert>
+                        likesState.alert.type === 'error'
+                            ? <Alert classes='bg-err'>{likesState.alert.message}</Alert>
+                            : likesState.alert.type === 'success' ? <Alert classes='bg-success'>{likesState.alert.message}</Alert>
                                 : ''
                     }
                 </div>
 
                 <div className='flx flx-center'>
                     {
-                        likesState.alert.type === 'error'
-                            ? <Alert classes='bg-err'>{likesState.alert.message}</Alert>
-                            : likesState.alert.type === 'success' ? <Alert classes='bg-success'>{likesState.alert.message}</Alert>
+                        playlistsState.alert.type === 'error'
+                            ? <Alert classes='bg-err'>{playlistsState.alert.message}</Alert>
+                            : playlistsState.alert.type === 'success'
+                                ? <Alert classes='bg-success'>{playlistsState.alert.message}</Alert>
                                 : ''
                     }
                 </div>

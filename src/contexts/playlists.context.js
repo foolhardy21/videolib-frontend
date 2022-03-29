@@ -1,7 +1,7 @@
 import axios from "axios";
 import { createContext, useContext, useReducer, useState } from "react";
 import { playlistsReducer } from '../reducers'
-import { useAuth } from "./auth.context";
+import { useAuth } from "./";
 
 const PlaylistsContext = createContext()
 
@@ -36,6 +36,7 @@ export const PlaylistsProvider = ({ children }) => {
     }
 
     async function getPlaylists() {
+        playlistsDispatch({ type: 'SET_LOADING' })
         try {
             const response = await axios.get('/api/user/playlists', {
                 headers: {
@@ -45,6 +46,8 @@ export const PlaylistsProvider = ({ children }) => {
             return response.data.playlists
         } catch (e) {
             return e.response.status
+        } finally {
+            playlistsDispatch({ type: 'REMOVE_LOADING' })
         }
     }
 

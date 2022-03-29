@@ -4,9 +4,8 @@ import { getTextColor, getBgColor, getIconColor } from '../../utils'
 import { useTheme, usePlaylists } from "../../contexts"
 
 const PlaylistsSection = () => {
-    const { playlistsState: { playlists }, playlistsDispatch, getPlaylists, removePlaylist, showPlaylistsAlert } = usePlaylists()
+    const { playlistsState: { playlists }, playlistsDispatch, removePlaylist, showPlaylistsAlert } = usePlaylists()
     const { theme } = useTheme()
-
 
     async function handleDeletePlaylist(_id) {
         const removePlaylistResponse = await removePlaylist(_id)
@@ -16,17 +15,6 @@ const PlaylistsSection = () => {
             playlistsDispatch({ type: 'REMOVE_PLAYLIST', payload: _id })
         }
     }
-
-    useEffect(() => {
-        (async () => {
-            const getPlaylistsResponse = await getPlaylists()
-            if (getPlaylistsResponse === 404 || getPlaylistsResponse === 500) {
-                showPlaylistsAlert('could not get playlists', 'error')
-            } else {
-                playlistsDispatch({ type: 'INIT_PLAYLISTS', payload: getPlaylistsResponse })
-            }
-        })()
-    }, [])
 
     return (
         <Section classes='flx flx-column mg-left-md'>
