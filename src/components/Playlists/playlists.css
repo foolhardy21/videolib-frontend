@@ -1,5 +1,6 @@
-#grid-likes {
+#grid-playlist {
     gap: 1rem;
+    justify-content: start;
     border-bottom: solid thin var(--clr-off-primary);
 }
 
