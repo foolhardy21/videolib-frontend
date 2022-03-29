@@ -1,3 +1,5 @@
+import axios from 'axios'
+import { useEffect } from 'react'
 import { PlaylistVideoCard } from './'
 import { Section, Text, Alert } from '../Reusable'
 import { getTextColor } from '../../utils'
@@ -8,7 +10,7 @@ const LikesSection = () => {
     const { likesState: { likedVideos, alert: { message, type } } } = useLikes()
 
     return (
-        <div className='flx flx-column'>
+        <div className='flx flx-column mg-left-md mg-btm-md'>
 
             <Text classes={`txt-lg txt-cap ${getTextColor(theme)} mg-btm-md`}>liked videos</Text>
 

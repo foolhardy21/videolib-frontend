@@ -1,22 +1,35 @@
-// import { createContext, useContext } from "react";
+import { createContext, useContext, useReducer } from "react";
 
-// const PlaylistsContext = createContext()
+const PlaylistsContext = createContext()
 
-// export const PlaylistsProvider = ({ children }) => {
-//     const [playlistsState, playlistsDispatch] = useReducer(playlistsReducer, [])
+export const PlaylistsProvider = ({ children }) => {
+    const [playlistsState, playlistsDispatch] = useReducer(playlistsReducer, [])
 
-//     function playlistsReducer(state, action) {
+    function playlistsReducer(state, action) {
 
-//         switch(action.type) {
+        switch (action.type) {
 
-//         }
-//     }
+            case 'INIT_PLAYLISTS': return [...action.payload]
 
-//     return (
-//         <PlaylistsContext.Provider>
-//             {children}
-//         </PlaylistsContext.Provider>
-//     )
-// }
+            case 'ADD_NEW_PLAYLIST': return state.concat({ ...action.payload }).reverse()
 
-// export const usePlaylists = () => useContext(PlaylistsContext)
+            case 'REMOVE_PLAYLIST': return state.filter(playlist => playlist._id !== action.payload)
+
+            default: return state
+
+        }
+    }
+
+    return (
+        <PlaylistsContext.Provider
+            value={{
+                playlistsState,
+                playlistsDispatch
+            }}
+        >
+            {children}
+        </PlaylistsContext.Provider>
+    )
+}
+
+export const usePlaylists = () => useContext(PlaylistsContext)

@@ -1,3 +1,5 @@
+import axios from "axios"
+import { useState } from "react"
 import { Button, Card, Text } from "../Reusable"
 import { getTextColor } from '../../utils'
 import { useHistory, useLikes, useTheme, useVideos } from "../../contexts"
@@ -36,6 +38,56 @@ const VideoCard = ({ video, video: {
     }
 
 
+    async function handleVideoPlay() {
+        const userToken = window.localStorage.getItem('userToken')
+        try {
+            await axios.post('/api/user/history', {
+                video: {
+                    _id,
+                    id,
+                    video,
+                    videoTitle,
+                    videoDescription
+                }
+            }, {
+                headers: {
+                    authorization: userToken
+                }
+            })
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+    async function handleVideoLike() {
+        const userToken = window.localStorage.getItem('userToken')
+        await axios.post('/api/user/likes', {
+            video: {
+                _id,
+                id,
+                video,
+                videoTitle,
+                videoDescription
+            }
+        }, {
+            headers: {
+                authorization: userToken
+            }
+        })
+        setIsVideoLiked(true)
+    }
+
+    async function handleVideoUnlike() {
+        const userToken = window.localStorage.getItem('userToken')
+        await axios.delete(`/api/user/likes/${_id}`, {
+            headers: {
+                authorization: userToken
+            }
+        })
+        setIsVideoLiked(false)
+    }
+
+
     return (
         <Card id='container-video' classes='pd-xs pos-relative'>
 
@@ -66,7 +118,7 @@ const VideoCard = ({ video, video: {
                         <Button onClick={handleVideoLike} classes={`btn-txt txt-md ${getTextColor(theme)} mg-right-s`}>like</Button>
                 }
 
-                <Button classes={`btn-txt txt-md ${getTextColor(theme)}`}>add to playlist</Button>
+                <Button onClick={showPlaylistModal} classes={`btn-txt txt-md ${getTextColor(theme)}`}>add to playlist</Button>
 
             </div>
 

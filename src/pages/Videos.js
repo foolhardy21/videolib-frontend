@@ -1,3 +1,4 @@
+import axios from 'axios'
 import { useEffect } from 'react'
 import { VideosFilter, VideosHeader, VideosSection } from '../components/Videos'
 import { Alert, Main, Text } from '../components/Reusable'
@@ -25,6 +26,7 @@ const Videos = () => {
             }
         })()
     }, [])
+
 
     return (
         <div
@@ -55,6 +57,10 @@ const Videos = () => {
                 }
 
             </Main>
+
+            {
+                isPlaylistModalVisible && <PlaylistModal />
+            }
 
         </div>
     )

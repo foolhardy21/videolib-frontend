@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
-import { PlaylistHeader, PlaylistsSection } from "../components/Playlists"
 import { Text, Main } from "../components/Reusable"
-import { useLikes, useTheme } from "../contexts"
+import { PlaylistHeader, PlaylistsSection, LikesSection, PlaylistForm } from "../components/Playlists"
+import { useTheme } from "../contexts"
 import { getBgColor, getTextColor } from "../utils"
 import '../components/Playlists/playlists.css'
 
@@ -29,9 +29,13 @@ const Playlists = () => {
         >
             <PlaylistHeader />
 
-            <Main classes='flx flx-column flx-center'>
+            <Main classes='flx flx-column'>
 
-                <Text classes={`txt-lg txt-cap ${getTextColor(theme)} mg-top-md mg-btm-md`}>all playlists</Text>
+                <Text classes={`txt-lg txt-cap ${getTextColor(theme)} flx flx-center mg-top-md mg-btm-md`}>all playlists</Text>
+
+                <PlaylistForm />
+
+                <LikesSection />
 
                 <PlaylistsSection />
 
