@@ -5,7 +5,7 @@ import { useLikes, useTheme } from '../../contexts'
 
 const LikesSection = () => {
     const { theme } = useTheme()
-    const { likesState } = useLikes()
+    const { likesState: { likedVideos } } = useLikes()
 
     return (
         <div className='flx flx-column'>
@@ -15,7 +15,7 @@ const LikesSection = () => {
             <Section id='grid-likes' classes='grid grid-maxcols-4 pd-btm-s'>
 
                 {
-                    likesState.map(video => <PlaylistVideoCard key={video._id} video={video} />)
+                    likedVideos?.map(video => <PlaylistVideoCard key={video._id} video={video} />)
                 }
 
             </Section>

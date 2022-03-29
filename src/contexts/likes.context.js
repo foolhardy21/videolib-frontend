@@ -15,6 +15,16 @@ export const LikesProvider = ({ children }) => {
     })
     const { getUserToken } = useAuth()
 
+    function showLikesAlert(message, type) {
+        likesDispatch({
+            type: 'SET_ALERT', payload: {
+                message,
+                type
+            }
+        })
+        setTimeout(() => likesDispatch({ type: 'REMOVE_ALERT' }), 1500)
+    }
+
     async function addVideoToLikes(video) {
         try {
             const response = await axios.post('/api/user/likes', {
@@ -43,6 +53,22 @@ export const LikesProvider = ({ children }) => {
         }
     }
 
+    async function getLikedVideos() {
+        likesDispatch({ type: 'SET_LOADING' })
+        try {
+            const response = await axios.get('/api/user/likes', {
+                headers: {
+                    authorization: getUserToken()
+                }
+            })
+            return response.data.likes
+        } catch (e) {
+            return e.response.status
+        } finally {
+            likesDispatch({ type: 'REMOVE_LOADING' })
+        }
+    }
+
     const isVideoLiked = _id => likesState.likedVideos.some(likedVideo => likedVideo._id === _id)
 
     function likesReducer(state, action) {
@@ -50,6 +76,24 @@ export const LikesProvider = ({ children }) => {
         switch (action.type) {
 
             case 'INIT_LIKES': return { ...state, likedVideos: action.payload }
+
+            case 'SET_ALERT': return {
+                ...state, alert: {
+                    message: action.payload.message,
+                    type: action.payload.type
+                }
+            }
+
+            case 'REMOVE_ALERT': return {
+                ...state, alert: {
+                    message: '',
+                    type: ''
+                }
+            }
+
+            case 'SET_LOADING': return { ...state, loading: true }
+
+            case 'REMOVE_LOADING': return { ...state, loading: false }
 
             case 'ADD_TO_LIKES': return { ...state, likedVideos: state.likedVideos.concat({ ...action.payload }) }
 
@@ -67,7 +111,9 @@ export const LikesProvider = ({ children }) => {
                 likesDispatch,
                 isVideoLiked,
                 addVideoToLikes,
-                removeVideoFromLikes
+                removeVideoFromLikes,
+                getLikedVideos,
+                showLikesAlert,
             }}
         >
             {children}

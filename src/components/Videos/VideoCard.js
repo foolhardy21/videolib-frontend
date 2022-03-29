@@ -1,5 +1,3 @@
-import axios from "axios"
-import { useState, useEffect } from "react"
 import { Button, Card, Text } from "../Reusable"
 import { getTextColor } from '../../utils'
 import { useHistory, useLikes, useTheme, useVideos } from "../../contexts"
