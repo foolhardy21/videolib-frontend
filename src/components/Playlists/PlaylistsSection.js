@@ -22,7 +22,7 @@ const PlaylistsSection = () => {
             {
                 playlists?.map(playlist =>
 
-                    <Section key={playlist._id} id='grid-playlist' classes='grid grid-maxcols-4 pd-btm-s mg-btm-s'>
+                    <Section key={playlist._id} classes=''>
 
                         <div className="flx flx-column">
 
@@ -44,10 +44,10 @@ const PlaylistsSection = () => {
 
                             </div>
 
-                            <div className='flx'>
+                            <div id='grid-playlist' className='grid grid-maxcols-4 pd-btm-s mg-btm-s'>
 
                                 {
-                                    playlist.videos?.map(video => <PlaylistVideoCard key={video._id} video={video} />)
+                                    playlist.videos?.map(video => <PlaylistVideoCard key={video._id} video={video} playlistId={playlist._id} />)
                                 }
 
                             </div>

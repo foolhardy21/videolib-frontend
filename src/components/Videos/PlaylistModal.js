@@ -7,7 +7,7 @@ const PlaylistModal = () => {
     const [selectedPlaylist, setSelectedPlaylist] = useState({})
     const { theme } = useTheme()
     const { playlistsState: { playlists }, playlistsDispatch, getPlaylists, addVideoToPlaylist, hidePlaylistModal } = usePlaylists()
-    const { selectedVideo } = useVideos()
+    const { selectedVideo, showVideosAlert } = useVideos()
 
     useEffect(() => {
         (async () => {
@@ -28,16 +28,16 @@ const PlaylistModal = () => {
     }
 
     async function handlePlaylistModalAdd() {
-        if (Object.keys(selectedPlaylist).length > 0) {
-            const addVideoResponse = await addVideoToPlaylist(selectedVideo, selectedPlaylist._id)
-            if (!(addVideoResponse === 409 || addVideoResponse === 404 || addVideoResponse === 500)) {
-                playlistsDispatch({ type: 'ADD_VIDEO_TO_PLAYLIST', payload: { video: selectedVideo, playlistId: selectedPlaylist._id } })
-                setSelectedPlaylist({})
-                hidePlaylistModal()
-            }
-        } else {
-            // show error alert inside modal 
+        const addVideoResponse = await addVideoToPlaylist(selectedVideo, selectedPlaylist._id)
+        if (addVideoResponse === 409) {
+            showVideosAlert('video is already in the playlist', 'error')
         }
+        else if (!(addVideoResponse === 404 || addVideoResponse === 500)) {
+            playlistsDispatch({ type: 'ADD_VIDEO_TO_PLAYLIST', payload: { video: selectedVideo, playlistId: selectedPlaylist._id } })
+            setSelectedPlaylist({})
+            showVideosAlert('video added to playlist', 'success')
+        }
+        hidePlaylistModal()
     }
 
     return (

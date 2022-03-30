@@ -96,6 +96,18 @@ export const PlaylistsProvider = ({ children }) => {
         }
     }
 
+    async function removeVideoFromPlaylist(videoId, playlistId) {
+        try {
+            await axios.delete(`/api/user/playlists/${playlistId}/${videoId}`, {
+                headers: {
+                    authorization: getUserToken()
+                }
+            })
+        } catch (e) {
+            return e.response.status
+        }
+    }
+
     return (
         <PlaylistsContext.Provider
             value={{
@@ -105,6 +117,7 @@ export const PlaylistsProvider = ({ children }) => {
                 removePlaylist,
                 addNewPlaylist,
                 addVideoToPlaylist,
+                removeVideoFromPlaylist,
                 showPlaylistsAlert,
                 isPlaylistModalVisible,
                 hidePlaylistModal,
