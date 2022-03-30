@@ -18,7 +18,7 @@ const VideoCard = ({ video, video: {
 
     async function handleVideoLike() {
         const addToLikesResponse = await addVideoToLikes(video)
-        if (addToLikesResponse === 409 || addToLikesResponse === 404) {
+        if (addToLikesResponse === 409 || addToLikesResponse === 404 || addToLikesResponse === 500) {
             showVideosAlert('could not like the video', 'error')
         } else {
             likesDispatch({ type: 'ADD_TO_LIKES', payload: video })
