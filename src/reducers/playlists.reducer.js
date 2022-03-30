@@ -26,6 +26,8 @@ export function playlistsReducer(state, action) {
 
         case 'REMOVE_PLAYLIST': return { ...state, playlists: state.playlists.filter(playlist => playlist._id !== action.payload) }
 
+        case 'ADD_VIDEO_TO_PLAYLIST': return { ...state, playlists: state.playlists.map(playlist => playlist._id === action.payload.playlistId ? ({ ...playlist, videos: playlist.videos.concat(action.payload.video) }) : playlist) }
+
         default: return state
 
     }

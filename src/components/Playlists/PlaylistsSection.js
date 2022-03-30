@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { PlaylistVideoCard } from './'
 import { Section, Text, Button, Icon } from "../Reusable"
 import { getTextColor, getBgColor, getIconColor } from '../../utils'
 import { useTheme, usePlaylists } from "../../contexts"
@@ -24,11 +24,17 @@ const PlaylistsSection = () => {
 
                     <Section key={playlist._id} id='grid-playlist' classes='grid grid-maxcols-4 pd-btm-s mg-btm-s'>
 
-                        <div className="flx flx-column mg-btm-s">
+                        <div className="flx flx-column">
 
-                            <div className="flx flx-min-center">
+                            <div className="flx mg-btm-xs">
 
-                                <Text classes={`txt-lg txt-cap ${getTextColor(theme)} mg-btm-xs mg-right-xs`} >{playlist.name}</Text>
+                                <div className='flx flx-column mg-right-s'>
+
+                                    <Text classes={`txt-lg txt-cap ${getTextColor(theme)} mg-btm-xs mg-right-xs`} >{playlist.name}</Text>
+
+                                    <Text classes={`txt-md txt-cap ${getTextColor(theme)}`} >{playlist.description}</Text>
+
+                                </div>
 
                                 <Button onClick={() => handleDeletePlaylist(playlist._id)} classes={`btn-txt ${getTextColor(theme)} ${getBgColor(theme)}`}>
                                     <Icon classes={getIconColor(theme)}>
@@ -38,13 +44,15 @@ const PlaylistsSection = () => {
 
                             </div>
 
-                            <Text classes={`txt-md txt-cap ${getTextColor(theme)}`} >{playlist.description}</Text>
+                            <div className='flx'>
+
+                                {
+                                    playlist.videos?.map(video => <PlaylistVideoCard key={video._id} video={video} />)
+                                }
+
+                            </div>
 
                         </div>
-
-                        {
-                            playlist.videos?.map(video => <PlaylistVideoCard key={video._id} video={video} />)
-                        }
 
                     </Section>
                 )

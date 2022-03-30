@@ -82,6 +82,20 @@ export const PlaylistsProvider = ({ children }) => {
         }
     }
 
+    async function addVideoToPlaylist(video, playlistId) {
+        try {
+            await axios.post(`/api/user/playlists/${playlistId}`, {
+                video
+            }, {
+                headers: {
+                    authorization: getUserToken()
+                }
+            })
+        } catch (e) {
+            return e.response.status
+        }
+    }
+
     return (
         <PlaylistsContext.Provider
             value={{
@@ -90,6 +104,7 @@ export const PlaylistsProvider = ({ children }) => {
                 getPlaylists,
                 removePlaylist,
                 addNewPlaylist,
+                addVideoToPlaylist,
                 showPlaylistsAlert,
                 isPlaylistModalVisible,
                 hidePlaylistModal,

@@ -14,7 +14,7 @@ const PlaylistVideoCard = ({ video: {
     const { theme } = useTheme()
 
     return (
-        <Card id='container-video' classes='pd-xs pos-relative'>
+        <Card id='container-video' classes='pd-xs pos-relative mg-right-xs'>
 
             <video id='card-video' controls controlsList='nodownload nofullscreen'>
                 <source src={url}></source>

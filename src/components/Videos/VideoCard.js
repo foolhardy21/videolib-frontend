@@ -1,4 +1,3 @@
-import axios from "axios"
 import { useState } from "react"
 import { Button, Card, Text } from "../Reusable"
 import { getTextColor } from '../../utils'
@@ -16,7 +15,7 @@ const VideoCard = ({ video, video: {
     const { theme } = useTheme()
     const { addVideoToHistory } = useHistory()
     const { isVideoLiked, addVideoToLikes, removeVideoFromLikes, likesDispatch } = useLikes()
-    const { showVideosAlert } = useVideos()
+    const { showVideosAlert, updateSelectedVideo } = useVideos()
     const { showPlaylistModal } = usePlaylists()
 
     async function handleVideoLike() {
@@ -36,6 +35,11 @@ const VideoCard = ({ video, video: {
         } else {
             likesDispatch({ type: 'REMOVE_FROM_LIKES', payload: _id })
         }
+    }
+
+    function handleAddToPlaylist() {
+        updateSelectedVideo(video)
+        showPlaylistModal()
     }
 
 
@@ -69,7 +73,7 @@ const VideoCard = ({ video, video: {
                         <Button onClick={handleVideoLike} classes={`btn-txt txt-md ${getTextColor(theme)} mg-right-s`}>like</Button>
                 }
 
-                <Button onClick={showPlaylistModal} classes={`btn-txt txt-md ${getTextColor(theme)}`}>add to playlist</Button>
+                <Button onClick={handleAddToPlaylist} classes={`btn-txt txt-md ${getTextColor(theme)}`}>add to playlist</Button>
 
             </div>
 

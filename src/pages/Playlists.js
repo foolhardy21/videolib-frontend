@@ -8,7 +8,7 @@ import '../components/Playlists/playlists.css'
 const Playlists = () => {
     const { theme } = useTheme()
     const { likesState, likesDispatch, getLikedVideos, showLikesAlert } = useLikes()
-    const { playlistsState, getPlaylists, showPlaylistsAlert } = usePlaylists()
+    const { playlistsState, playlistsDispatch, getPlaylists, showPlaylistsAlert } = usePlaylists()
 
     useEffect(() => {
         (async () => {

@@ -27,7 +27,6 @@ const Videos = () => {
         })()
     }, [])
 
-
     return (
         <div
             style={{
@@ -58,6 +57,7 @@ const Videos = () => {
 
             </Main>
 
+            {/* display modal only if user is logged in */}
             {
                 isPlaylistModalVisible && <PlaylistModal />
             }
