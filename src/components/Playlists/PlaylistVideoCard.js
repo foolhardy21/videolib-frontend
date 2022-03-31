@@ -1,5 +1,5 @@
 import { Card, Text, Button, Icon } from '../Reusable'
-import { usePlaylists, useTheme } from '../../contexts'
+import { usePlaylists, useTheme, useWatchlater } from '../../contexts'
 import { getTextColor, getBgColor, getIconColor } from '../../utils'
 
 const PlaylistVideoCard = ({ video: {
@@ -14,9 +14,13 @@ const PlaylistVideoCard = ({ video: {
 }) => {
     const { theme } = useTheme()
     const { removeVideoFromPlaylist, showPlaylistsAlert, playlistsDispatch } = usePlaylists()
+    const { removeFromWatchlater, watchlaterDispatch } = useWatchlater()
 
     async function handleRemoveVideoFromWatchlater() {
-
+        const removeFromWatchlaterResponse = await removeFromWatchlater(_id)
+        if (!(removeFromWatchlaterResponse === 404 || removeFromWatchlaterResponse === 500)) {
+            watchlaterDispatch({ type: 'REMOVE_FROM_WATCHLATER', payload: _id })
+        }
     }
 
     async function handleRemoveVideoFromPlaylist() {

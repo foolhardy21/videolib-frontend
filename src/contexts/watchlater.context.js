@@ -41,7 +41,18 @@ export const WatchlaterProvider = ({ children }) => {
         } catch (e) {
             return e.response.status
         }
+    }
 
+    async function removeFromWatchlater(videoId) {
+        try {
+            await axios.delete(`/api/user/watchlater/${videoId}`, {
+                headers: {
+                    authorization: getUserToken()
+                }
+            })
+        } catch (e) {
+            return e.response.status
+        }
     }
 
     return (
@@ -51,6 +62,7 @@ export const WatchlaterProvider = ({ children }) => {
                 watchlaterDispatch,
                 getWatchlater,
                 addToWatchlater,
+                removeFromWatchlater,
             }}
         >
             {children}
