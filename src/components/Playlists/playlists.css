@@ -1,13 +1,12 @@
-#grid-playlist {
-    gap: 1rem;
-    justify-content: start;
-    border-bottom: solid thin var(--clr-off-primary);
+#slider-playlist {
+  overflow-x: auto;
+  border-bottom: solid thin var(--clr-off-primary);
 }
 
 #container-video:hover {
-    cursor: pointer
+  cursor: pointer;
 }
 
 #card-video {
-    width: 20rem;
+  width: 20rem;
 }

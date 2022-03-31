@@ -17,7 +17,7 @@ const PlaylistsSection = () => {
     }
 
     return (
-        <Section classes='flx flx-column mg-left-md'>
+        <Section classes='flx flx-column mg-left-md mg-btm-md'>
 
             {
                 playlists?.map(playlist =>
@@ -44,7 +44,7 @@ const PlaylistsSection = () => {
 
                             </div>
 
-                            <div id='grid-playlist' className='grid grid-maxcols-4 pd-btm-s mg-btm-s'>
+                            <div id='slider-playlist' className='flx flx-min-center pd-btm-xs'>
 
                                 {
                                     playlist.videos?.map(video => <PlaylistVideoCard key={video._id} video={video} playlistId={playlist._id} />)

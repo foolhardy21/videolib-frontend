@@ -1,5 +1,6 @@
 export { default as PlaylistHeader } from './PlaylistHeader'
 export { default as LikesSection } from './LikesSection'
 export { default as PlaylistsSection } from './PlaylistsSection'
+export { default as WatchlaterSection } from './WatchlaterSection'
 export { default as PlaylistVideoCard } from './PlaylistVideoCard'
 export { default as PlaylistForm } from './PlaylistForm'

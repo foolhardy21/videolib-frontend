@@ -8,23 +8,9 @@ const LikesContext = createContext()
 export const LikesProvider = ({ children }) => {
     const [likesState, likesDispatch] = useReducer(likesReducer, {
         likedVideos: [],
-        alert: {
-            message: '',
-            type: ''
-        },
         loading: false
     })
     const { getUserToken } = useAuth()
-
-    function showLikesAlert(message, type) {
-        likesDispatch({
-            type: 'SET_ALERT', payload: {
-                message,
-                type
-            }
-        })
-        setTimeout(() => likesDispatch({ type: 'REMOVE_ALERT' }), 1500)
-    }
 
     async function addVideoToLikes(video) {
         try {
@@ -81,7 +67,6 @@ export const LikesProvider = ({ children }) => {
                 addVideoToLikes,
                 removeVideoFromLikes,
                 getLikedVideos,
-                showLikesAlert,
             }}
         >
             {children}
