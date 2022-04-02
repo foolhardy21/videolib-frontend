@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { Label, Section, Text, Card, Button } from "../Reusable"
 import { usePlaylists, useTheme, useVideos } from "../../contexts"
 import { getBgColor, getSolidBtnBgColor, getSolidBtnTextColor, getTextColor } from "../../utils"
+import { ACTION_INIT_PLAYLISTS } from "../../utils/constants.util"
 
 const PlaylistModal = () => {
     const [selectedPlaylist, setSelectedPlaylist] = useState({})
@@ -13,7 +14,7 @@ const PlaylistModal = () => {
         (async () => {
             const getPlaylistsResponse = await getPlaylists()
             if (!(getPlaylistsResponse === 404 || getPlaylistsResponse === 500)) {
-                playlistsDispatch({ type: 'INIT_PLAYLISTS', payload: getPlaylistsResponse })
+                playlistsDispatch({ type: ACTION_INIT_PLAYLISTS, payload: getPlaylistsResponse })
             }
         })()
     }, [])

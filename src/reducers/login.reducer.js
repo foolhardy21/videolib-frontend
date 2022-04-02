@@ -1,6 +1,6 @@
 import { ACTION_INIT_FORM, ACTION_REMOVE_EMAIL_ERROR, ACTION_REMOVE_PASSWORD_ERROR, ACTION_SET_EMAIL_ERROR, ACTION_SET_PASSWORD_ERROR, ACTION_TOGGLE_PASSWORD_TYPE, ACTION_UPDATE_EMAIL, ACTION_UPDATE_PASSWORD } from "../utils/constants.util"
 
-export function loginFormReducer(state, { type, action }) {
+export function loginFormReducer(state, { type, payload }) {
 
     switch (type) {
 

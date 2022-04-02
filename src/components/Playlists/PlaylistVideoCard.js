@@ -2,6 +2,7 @@ import { Card, Text, Button, Icon } from '../Reusable'
 import { usePlaylists, useTheme, useWatchlater } from '../../contexts'
 import { getTextColor, getBgColor, getIconColor } from '../../utils'
 import styles from './playlists.module.css'
+import { ACTION_REMOVE_FROM_WATCHLATER, ACTION_REMOVE_VIDEO_FROM_PLAYLIST, ALERT_TYPE_ERROR, ALERT_TYPE_SUCCESS } from '../../utils/constants.util'
 
 const PlaylistVideoCard = ({ video: {
     _id,
@@ -20,17 +21,17 @@ const PlaylistVideoCard = ({ video: {
     async function handleRemoveVideoFromWatchlater() {
         const removeFromWatchlaterResponse = await removeFromWatchlater(_id)
         if (!(removeFromWatchlaterResponse === 404 || removeFromWatchlaterResponse === 500)) {
-            watchlaterDispatch({ type: 'REMOVE_FROM_WATCHLATER', payload: _id })
+            watchlaterDispatch({ type: ACTION_REMOVE_FROM_WATCHLATER, payload: _id })
         }
     }
 
     async function handleRemoveVideoFromPlaylist() {
         const removeVideoResponse = await removeVideoFromPlaylist(_id, playlistId)
         if (removeVideoResponse === 404 || removeVideoResponse === 409 || removeVideoResponse === 500) {
-            showPlaylistsAlert('could not remove the video', 'error')
+            showPlaylistsAlert('could not remove the video', ALERT_TYPE_ERROR)
         } else {
-            showPlaylistsAlert('video removed', 'success')
-            playlistsDispatch({ type: 'REMOVE_VIDEO_FROM_PLAYLIST', payload: { videoId: _id, playlistId } })
+            showPlaylistsAlert('video removed', ALERT_TYPE_SUCCESS)
+            playlistsDispatch({ type: ACTION_REMOVE_VIDEO_FROM_PLAYLIST, payload: { videoId: _id, playlistId } })
         }
     }
 

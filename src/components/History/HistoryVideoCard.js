@@ -2,6 +2,7 @@ import { Button, Card, Icon, Text } from '../Reusable'
 import { useHistory, useTheme } from '../../contexts'
 import { getIconColor, getTextColor } from '../../utils'
 import styles from './history.module.css'
+import { ACTION_REMOVE_FROM_HISTORY } from '../../utils/constants.util'
 
 const HistoryVideoCard = ({ video: {
     _id,
@@ -20,7 +21,7 @@ const HistoryVideoCard = ({ video: {
         if (removeFromHistoryResponse === 404 || removeFromHistoryResponse === 500) {
             showHistoryAlert('could not remove the video', ALERT_TYPE_ERROR)
         } else {
-            historyDispatch({ type: 'REMOVE_FROM_HISTORY', payload: _id })
+            historyDispatch({ type: ACTION_REMOVE_FROM_HISTORY, payload: _id })
         }
     }
 

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Label } from "../Reusable"
 import { useTheme, useFilter, useVideos } from '../../contexts'
 import { getTextColor } from '../../utils'
+import { ACTION_ADD_CATEGORY_TO_FILTER, ACTION_FILTER_VIDEOS, ACTION_REMOVE_CATEGORY_FROM_FILTER } from '../../utils/constants.util'
 
 const VideosFilter = () => {
     const [categories, setCategories] = useState([])
@@ -26,16 +27,16 @@ const VideosFilter = () => {
             if (videos === 404 || videos === 500) {
                 showVideosAlert('could not fetch the videos', ALERT_TYPE_ERROR)
             } else {
-                videosDispatch({ type: 'FILTER_VIDEOS', payload: { videos, filterState } })
+                videosDispatch({ type: ACTION_FILTER_VIDEOS, payload: { videos, filterState } })
             }
         })()
     }, [filterState])
 
     function handleFilterInputChange(e) {
         if (e.target.checked) {
-            filterDispatch({ type: 'ADD_CATEGORY', payload: e.target.value })
+            filterDispatch({ type: ACTION_ADD_CATEGORY_TO_FILTER, payload: e.target.value })
         } else {
-            filterDispatch({ type: 'REMOVE_CATEGORY', payload: e.target.value })
+            filterDispatch({ type: ACTION_REMOVE_CATEGORY_FROM_FILTER, payload: e.target.value })
         }
     }
 

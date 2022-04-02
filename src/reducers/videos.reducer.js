@@ -31,6 +31,13 @@ export function videosReducer(state, { type, payload }) {
     }
 }
 
+/*
+    * this function filters the videos according to categories present in the filter
+    * @params {Array.prototype} videos - array of all video objects
+    * @params {Array.prototype} filterArr - array of category strings
+    * @returns {Array.prototype} array of filtered videos objects.
+    *     
+*/
 function filterVideos(videos, filterArr) {
     return filterArr.length > 0 ? videos.filter(video => filterArr.find(category => category === video.category)) : videos
 }

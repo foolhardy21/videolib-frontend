@@ -3,7 +3,7 @@ import { HistoryHeader, HistorySection } from '../components/History'
 import { Text, Main, Button } from '../components/Reusable'
 import { useHistory, useTheme } from '../contexts'
 import { getBgColor, getBorderColor, getTextColor } from '../utils'
-import { ALERT_TYPE_ERROR } from '../utils/constants.util'
+import { ALERT_TYPE_ERROR, ACTION_INIT_HISTORY, ALERT_TYPE_SUCCESS, ACTION_REMOVE_HISTORY } from '../utils/constants.util'
 
 const History = () => {
     const { theme } = useTheme()
@@ -20,7 +20,7 @@ const History = () => {
             if (history === 404 || history === 500) {
                 showHistoryAlert('could not get your history', ALERT_TYPE_ERROR)
             } else {
-                historyDispatch({ type: 'INIT_HISTORY', payload: history })
+                historyDispatch({ type: ACTION_INIT_HISTORY, payload: history })
             }
         })()
     }, [])
@@ -30,7 +30,7 @@ const History = () => {
         if (removeHistoryResponse === 404 || removeHistoryResponse === 500) {
             showHistoryAlert('could not remove history', ALERT_TYPE_ERROR)
         } else {
-            historyDispatch({ type: 'REMOVE_HISTORY' })
+            historyDispatch({ type: ACTION_REMOVE_HISTORY })
         }
     }
 
@@ -55,9 +55,9 @@ const History = () => {
                 }
 
                 {
-                    type === 'error'
+                    type === ALERT_TYPE_ERROR
                         ? <Alert classes='bg-err'>{message}</Alert>
-                        : type === 'success' ? <Alert classes='bg-success'>{message}</Alert>
+                        : type === ALERT_TYPE_SUCCESS ? <Alert classes='bg-success'>{message}</Alert>
                             : ''
                 }
 

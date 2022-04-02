@@ -1,8 +1,8 @@
 export const ALERT_DISPLAY_TIME = 1500
 export const INPUT_ERROR_TIME = 3000
 
-export const API_LOGIN = '/api/login'
-export const API_SIGNUP = '/api/signup'
+export const API_LOGIN = '/api/auth/login'
+export const API_SIGNUP = '/api/auth/signup'
 export const API_VIDEOS = '/api/videos'
 export const API_CATEGORIES = '/api/categories'
 export const API_LIKES = '/api/user/likes'

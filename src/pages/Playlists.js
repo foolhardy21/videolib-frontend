@@ -3,12 +3,12 @@ import { Text, Main, Alert } from "../components/Reusable"
 import { PlaylistHeader, PlaylistsSection, LikesSection, PlaylistForm, WatchlaterSection } from "../components/Playlists"
 import { useTheme, useLikes, usePlaylists, useWatchlater } from "../contexts"
 import { getBgColor, getTextColor } from "../utils"
-import { ALERT_TYPE_ERROR } from '../utils/constants.util'
+import { ACTION_INIT_LIKES, ACTION_INIT_PLAYLISTS, ACTION_INIT_WATCHLATER, ALERT_TYPE_ERROR, ALERT_TYPE_SUCCESS } from '../utils/constants.util'
 
 const Playlists = () => {
     const { theme } = useTheme()
     const { watchlaterState, watchlaterDispatch, getWatchlater } = useWatchlater()
-    const { likesState, likesDispatch, getLikedVideos, showLikesAlert } = useLikes()
+    const { likesState, likesDispatch, getLikedVideos } = useLikes()
     const { playlistsState, playlistsDispatch, getPlaylists, showPlaylistsAlert } = usePlaylists()
 
     useEffect(() => {
@@ -17,19 +17,19 @@ const Playlists = () => {
             if (watchlaterVideosResponse === 404 || watchlaterVideosResponse === 500) {
                 showPlaylistsAlert('could not get watch later', ALERT_TYPE_ERROR)
             } else {
-                watchlaterDispatch({ type: 'INIT_WATCHLATER', payload: watchlaterVideosResponse })
+                watchlaterDispatch({ type: ACTION_INIT_WATCHLATER, payload: watchlaterVideosResponse })
             }
             const likedVideosResponse = await getLikedVideos()
             if (likedVideosResponse === 404 || likedVideosResponse === 500) {
                 showPlaylistsAlert('could not get liked videos', ALERT_TYPE_ERROR)
             } else {
-                likesDispatch({ type: 'INIT_LIKES', payload: likedVideosResponse })
+                likesDispatch({ type: ACTION_INIT_LIKES, payload: likedVideosResponse })
             }
             const getPlaylistsResponse = await getPlaylists()
             if (getPlaylistsResponse === 404 || getPlaylistsResponse === 500) {
                 showPlaylistsAlert('could not get playlists', ALERT_TYPE_ERROR)
             } else {
-                playlistsDispatch({ type: 'INIT_PLAYLISTS', payload: getPlaylistsResponse })
+                playlistsDispatch({ type: ACTION_INIT_PLAYLISTS, payload: getPlaylistsResponse })
             }
         })()
     }, [])
@@ -49,9 +49,9 @@ const Playlists = () => {
 
                 <div className='flx flx-center'>
                     {
-                        playlistsState.alert.type === 'error'
+                        playlistsState.alert.type === ALERT_TYPE_ERROR
                             ? <Alert classes='bg-err'>{playlistsState.alert.message}</Alert>
-                            : playlistsState.alert.type === 'success'
+                            : playlistsState.alert.type === ALERT_TYPE_SUCCESS
                                 ? <Alert classes='bg-success'>{playlistsState.alert.message}</Alert>
                                 : ''
                     }

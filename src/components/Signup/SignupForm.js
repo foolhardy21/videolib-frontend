@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom"
 import { Form, Input, Label, Button, Text } from "../Reusable"
 import { getSolidBtnTextColor, getSolidBtnBgColor } from "../../utils"
 import { useTheme, useSignup, useAuth } from '../../contexts'
+import { ACTION_INIT_FORM, ALERT_DISPLAY_TIME, ALERT_TYPE_ERROR, ALERT_TYPE_SUCCESS } from "../../utils/constants.util"
 
 const SignupForm = () => {
     const navigate = useNavigate()
@@ -15,11 +16,11 @@ const SignupForm = () => {
         if (!isFormInvalid()) {
             const signupUserResponse = await signupUser(signupFormState.email.value, signupFormState.password.value, signupFormState.firstName.value, signupFormState.lastName.value)
             if (signupUserResponse === 201) {
-                showSignupAlert('account created', 'success')
-                signupFormDispatch({ type: 'INIT_FORM' })
-                setTimeout(() => navigate('/login'), 1600)
+                showSignupAlert('account created', ALERT_TYPE_SUCCESS)
+                signupFormDispatch({ type: ACTION_INIT_FORM })
+                setTimeout(() => navigate('/login'), ALERT_DISPLAY_TIME + 100)
             } else if (signupUserResponse === 422) {
-                showSignupAlert('account already exists', 'error')
+                showSignupAlert('account already exists', ALERT_TYPE_ERROR)
             }
         }
 

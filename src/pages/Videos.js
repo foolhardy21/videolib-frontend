@@ -3,6 +3,7 @@ import { VideosFilter, VideosHeader, VideosSection, PlaylistModal } from '../com
 import { Alert, Main, Text } from '../components/Reusable'
 import { usePlaylists, useTheme, useVideos } from '../contexts'
 import { getBgColor, getTextColor } from '../utils'
+import { ACTION_INIT_VIDEOS, ALERT_TYPE_ERROR, ALERT_TYPE_SUCCESS } from '../utils/constants.util'
 
 const Videos = () => {
     const { theme } = useTheme()
@@ -21,7 +22,7 @@ const Videos = () => {
             if (videos === 404 || videos === 500) {
                 showVideosAlert('could not fetch the videos', ALERT_TYPE_ERROR)
             } else {
-                videosDispatch({ type: 'INIT_VIDEOS', payload: videos })
+                videosDispatch({ type: ACTION_INIT_VIDEOS, payload: videos })
             }
         })()
     }, [])
@@ -42,9 +43,9 @@ const Videos = () => {
                 <VideosFilter />
 
                 {
-                    type === 'error'
+                    type === ALERT_TYPE_ERROR
                         ? <Alert classes='bg-err'>{message}</Alert>
-                        : type === 'success' ? <Alert classes='bg-success'>{message}</Alert>
+                        : type === ALERT_TYPE_SUCCESS ? <Alert classes='bg-success'>{message}</Alert>
                             : ''
                 }
 
@@ -56,7 +57,6 @@ const Videos = () => {
 
             </Main>
 
-            {/* display modal only if user is logged in */}
             {
                 isPlaylistModalVisible && <PlaylistModal />
             }

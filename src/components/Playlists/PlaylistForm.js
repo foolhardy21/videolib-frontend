@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { usePlaylists, useTheme } from "../../contexts"
 import { getBgColor, getBorderColor, getTextColor } from "../../utils"
+import { ACTION_ADD_NEW_PLAYLIST, ALERT_TYPE_ERROR, ALERT_TYPE_SUCCESS } from "../../utils/constants.util"
 import { Button, Input, Label } from "../Reusable"
 
 const PlaylistForm = () => {
@@ -25,10 +26,10 @@ const PlaylistForm = () => {
         if (newPlaylistInfo.name.length > 0 && newPlaylistInfo.description.length > 0) {
             const newPlaylistResponse = await addNewPlaylist(newPlaylistInfo.name, newPlaylistInfo.description)
             if (newPlaylistResponse === 404 || newPlaylistResponse === 500) {
-                showPlaylistsAlert('could not create the playlist', 'error')
+                showPlaylistsAlert('could not create the playlist', ALERT_TYPE_ERROR)
             } else {
-                showPlaylistsAlert('playlist created', 'success')
-                playlistsDispatch({ type: 'ADD_NEW_PLAYLIST', payload: newPlaylistResponse[newPlaylistResponse.length - 1] })
+                showPlaylistsAlert('playlist created', ALERT_TYPE_SUCCESS)
+                playlistsDispatch({ type: ACTION_ADD_NEW_PLAYLIST, payload: newPlaylistResponse[newPlaylistResponse.length - 1] })
             }
             setNewPlaylistInfo({
                 name: '',

@@ -2,6 +2,7 @@ import { Button, Card, Text } from "../Reusable"
 import { getSolidBtnBgColor, getSolidBtnTextColor, getTextColor } from '../../utils'
 import { useHistory, useLikes, usePlaylists, useTheme, useVideos, useWatchlater } from "../../contexts"
 import styles from './videos.module.css'
+import { ACTION_ADD_TO_LIKES, ACTION_REMOVE_FROM_LIKES, ALERT_TYPE_ERROR } from "../../utils/constants.util"
 
 const VideoCard = ({ video, video: {
     _id,
@@ -24,7 +25,7 @@ const VideoCard = ({ video, video: {
         if (addToLikesResponse === 409 || addToLikesResponse === 404 || addToLikesResponse === 500) {
             showVideosAlert('could not like the video', ALERT_TYPE_ERROR)
         } else {
-            likesDispatch({ type: 'ADD_TO_LIKES', payload: video })
+            likesDispatch({ type: ACTION_ADD_TO_LIKES, payload: video })
         }
 
     }
@@ -32,9 +33,9 @@ const VideoCard = ({ video, video: {
     async function handleVideoUnlike() {
         const removeFromLikes = await removeVideoFromLikes(_id)
         if (removeFromLikes === 404 || removeFromLikes === 500) {
-            showVideosAlert('could not dislike the video', 'error')
+            showVideosAlert('could not dislike the video', ALERT_TYPE_ERROR)
         } else {
-            likesDispatch({ type: 'REMOVE_FROM_LIKES', payload: _id })
+            likesDispatch({ type: ACTION_REMOVE_FROM_LIKES, payload: _id })
         }
     }
 
