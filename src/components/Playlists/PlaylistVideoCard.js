@@ -21,6 +21,7 @@ const PlaylistVideoCard = ({ video: {
     async function handleRemoveVideoFromWatchlater() {
         const removeFromWatchlaterResponse = await removeFromWatchlater(_id)
         if (!(removeFromWatchlaterResponse === 404 || removeFromWatchlaterResponse === 500)) {
+            showPlaylistsAlert('video removed from watch later', ALERT_TYPE_SUCCESS)
             watchlaterDispatch({ type: ACTION_REMOVE_FROM_WATCHLATER, payload: _id })
         }
     }
@@ -30,7 +31,7 @@ const PlaylistVideoCard = ({ video: {
         if (removeVideoResponse === 404 || removeVideoResponse === 409 || removeVideoResponse === 500) {
             showPlaylistsAlert('could not remove the video', ALERT_TYPE_ERROR)
         } else {
-            showPlaylistsAlert('video removed', ALERT_TYPE_SUCCESS)
+            showPlaylistsAlert('video removed from playlist', ALERT_TYPE_SUCCESS)
             playlistsDispatch({ type: ACTION_REMOVE_VIDEO_FROM_PLAYLIST, payload: { videoId: _id, playlistId } })
         }
     }

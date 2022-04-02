@@ -2,7 +2,7 @@ import { Button, Card, Text } from "../Reusable"
 import { getSolidBtnBgColor, getSolidBtnTextColor, getTextColor } from '../../utils'
 import { useHistory, useLikes, usePlaylists, useTheme, useVideos, useWatchlater } from "../../contexts"
 import styles from './videos.module.css'
-import { ACTION_ADD_TO_LIKES, ACTION_REMOVE_FROM_LIKES, ALERT_TYPE_ERROR } from "../../utils/constants.util"
+import { ACTION_ADD_TO_LIKES, ACTION_REMOVE_FROM_LIKES, ALERT_TYPE_ERROR, ALERT_TYPE_SUCCESS } from "../../utils/constants.util"
 
 const VideoCard = ({ video, video: {
     _id,
@@ -25,6 +25,7 @@ const VideoCard = ({ video, video: {
         if (addToLikesResponse === 409 || addToLikesResponse === 404 || addToLikesResponse === 500) {
             showVideosAlert('could not like the video', ALERT_TYPE_ERROR)
         } else {
+            showVideosAlert('video added to likes', ALERT_TYPE_SUCCESS)
             likesDispatch({ type: ACTION_ADD_TO_LIKES, payload: video })
         }
 
@@ -35,6 +36,7 @@ const VideoCard = ({ video, video: {
         if (removeFromLikes === 404 || removeFromLikes === 500) {
             showVideosAlert('could not dislike the video', ALERT_TYPE_ERROR)
         } else {
+            showVideosAlert('video removed from likes', ALERT_TYPE_SUCCESS)
             likesDispatch({ type: ACTION_REMOVE_FROM_LIKES, payload: _id })
         }
     }
@@ -47,11 +49,11 @@ const VideoCard = ({ video, video: {
     async function handleWatchlater() {
         const addToWatchlaterResponse = await addToWatchlater(video)
         if (addToWatchlaterResponse === 409) {
-            showVideosAlert('already in watch later', 'success')
+            showVideosAlert('video is already in watch later', 'success')
         } else if (addToWatchlaterResponse === 404 || addToWatchlaterResponse === 500) {
             showVideosAlert('could not add to watch later', 'error')
         } else {
-            showVideosAlert('added to watch later', 'success')
+            showVideosAlert('video added to watch later', 'success')
             watchlaterDispatch({ type: 'ADD_TO_WATCHLATER', payload: video })
         }
     }

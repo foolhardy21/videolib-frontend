@@ -45,7 +45,6 @@ export const LikesProvider = ({ children }) => {
                     authorization: getUserToken()
                 }
             })
-            return response.data.likes
         } catch (e) {
             return e.response.status
         }

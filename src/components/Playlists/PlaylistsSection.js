@@ -3,7 +3,7 @@ import { Section, Text, Button, Icon } from "../Reusable"
 import { getTextColor, getBgColor, getIconColor } from '../../utils'
 import { useTheme, usePlaylists } from "../../contexts"
 import styles from './playlists.module.css'
-import { ACTION_REMOVE_PLAYLIST } from '../../utils/constants.util'
+import { ACTION_REMOVE_PLAYLIST, ALERT_TYPE_SUCCESS } from '../../utils/constants.util'
 
 const PlaylistsSection = () => {
     const { playlistsState: { playlists }, playlistsDispatch, removePlaylist, showPlaylistsAlert } = usePlaylists()
@@ -14,6 +14,7 @@ const PlaylistsSection = () => {
         if (removePlaylistResponse === 404 || removePlaylistResponse === 500) {
             showPlaylistsAlert('could not remove the playlist', ALERT_TYPE_ERROR)
         } else {
+            showPlaylistsAlert('playlist removed', ALERT_TYPE_SUCCESS)
             playlistsDispatch({ type: ACTION_REMOVE_PLAYLIST, payload: _id })
         }
     }
