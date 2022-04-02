@@ -1,6 +1,7 @@
 import { Card, Text, Button, Icon } from '../Reusable'
 import { usePlaylists, useTheme, useWatchlater } from '../../contexts'
 import { getTextColor, getBgColor, getIconColor } from '../../utils'
+import styles from './playlists.module.css'
 
 const PlaylistVideoCard = ({ video: {
     _id,
@@ -34,9 +35,9 @@ const PlaylistVideoCard = ({ video: {
     }
 
     return (
-        <Card id='container-video' classes='pd-xs pos-relative mg-right-xs'>
+        <Card id={styles.containerVideo} classes='pd-xs pos-relative mg-right-xs'>
 
-            <video id='card-video' controls controlsList='nodownload nofullscreen'>
+            <video id={styles.cardVideo} controls controlsList='nodownload nofullscreen'>
                 <source src={url}></source>
             </video>
 

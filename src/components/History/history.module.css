@@ -1,0 +1,12 @@
+#gridVideos {
+  gap: 1rem;
+  place-items: center;
+}
+
+#containerVideo:hover {
+  cursor: pointer;
+}
+
+#cardVideo {
+  width: 20rem;
+}

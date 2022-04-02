@@ -1,7 +1,7 @@
-import { useState } from "react"
 import { Button, Card, Text } from "../Reusable"
 import { getSolidBtnBgColor, getSolidBtnTextColor, getTextColor } from '../../utils'
 import { useHistory, useLikes, usePlaylists, useTheme, useVideos, useWatchlater } from "../../contexts"
+import styles from './videos.module.css'
 
 const VideoCard = ({ video, video: {
     _id,
@@ -56,13 +56,13 @@ const VideoCard = ({ video, video: {
     }
 
     return (
-        <Card id='container-video' classes='pd-xs pos-relative'>
+        <Card id={styles.containerVideo} classes='pd-xs pos-relative'>
 
             <Button onClick={handleWatchlater} classes={`btn-solid pos-absolute tr-1 z-1 ${getSolidBtnBgColor(theme)} ${getSolidBtnTextColor(theme)} pd-xs txt-md txt-lcase`}>
                 watch later
             </Button>
 
-            <video onPlay={() => addVideoToHistory(video)} id='card-video' controls controlsList="nodownload nofullscreen">
+            <video onPlay={() => addVideoToHistory(video)} id={styles.cardVideo} controls controlsList="nodownload nofullscreen">
                 <source src={url}></source>
             </video>
 

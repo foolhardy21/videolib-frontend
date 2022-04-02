@@ -1,10 +1,8 @@
-import axios from 'axios'
 import { useEffect } from 'react'
 import { HistoryHeader, HistorySection } from '../components/History'
 import { Text, Main, Button } from '../components/Reusable'
 import { useHistory, useTheme } from '../contexts'
 import { getBgColor, getBorderColor, getTextColor } from '../utils'
-import '../components/History/history.css'
 
 const History = () => {
     const { theme } = useTheme()

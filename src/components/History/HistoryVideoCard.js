@@ -1,6 +1,7 @@
 import { Button, Card, Icon, Text } from '../Reusable'
 import { useHistory, useTheme } from '../../contexts'
 import { getIconColor, getTextColor } from '../../utils'
+import styles from './history.module.css'
 
 const HistoryVideoCard = ({ video: {
     _id,
@@ -24,9 +25,9 @@ const HistoryVideoCard = ({ video: {
     }
 
     return (
-        <Card id='container-video' classes='pd-xs pos-relative'>
+        <Card id={styles.containerVideo} classes='pd-xs pos-relative'>
 
-            <video id='card-video' controls controlsList="nodownload nofullscreen">
+            <video id={styles.cardVideo} controls controlsList="nodownload nofullscreen">
                 <source src={url}></source>
             </video>
 

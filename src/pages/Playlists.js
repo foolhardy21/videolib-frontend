@@ -3,7 +3,6 @@ import { Text, Main, Alert } from "../components/Reusable"
 import { PlaylistHeader, PlaylistsSection, LikesSection, PlaylistForm, WatchlaterSection } from "../components/Playlists"
 import { useTheme, useLikes, usePlaylists, useWatchlater } from "../contexts"
 import { getBgColor, getTextColor } from "../utils"
-import '../components/Playlists/playlists.css'
 
 const Playlists = () => {
     const { theme } = useTheme()

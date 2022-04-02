@@ -2,6 +2,7 @@ import { PlaylistVideoCard } from './'
 import { Section, Text, Button, Icon } from "../Reusable"
 import { getTextColor, getBgColor, getIconColor } from '../../utils'
 import { useTheme, usePlaylists } from "../../contexts"
+import styles from './playlists.module.css'
 
 const PlaylistsSection = () => {
     const { playlistsState: { playlists }, playlistsDispatch, removePlaylist, showPlaylistsAlert } = usePlaylists()
@@ -44,7 +45,7 @@ const PlaylistsSection = () => {
 
                             </div>
 
-                            <div id='slider-playlist' className='flx flx-min-center pd-btm-xs'>
+                            <div id={styles.sliderPlaylist} className='flx flx-min-center pd-btm-xs'>
 
                                 {
                                     playlist.videos?.map(video => <PlaylistVideoCard key={video._id} video={video} playlistId={playlist._id} />)

@@ -2,6 +2,7 @@ import { PlaylistVideoCard } from '.'
 import { Section, Text } from "../Reusable"
 import { getTextColor } from '../../utils'
 import { useTheme, useWatchlater } from "../../contexts"
+import styles from './playlists.module.css'
 
 const WatchlaterSection = () => {
     const { theme } = useTheme()
@@ -12,7 +13,7 @@ const WatchlaterSection = () => {
 
             <Text classes={`txt-lg txt-cap ${getTextColor(theme)} mg-btm-md`}>watch later</Text>
 
-            <Section id='slider-playlist' classes='flx flx-min-center pd-btm-xs'>
+            <Section id={styles.sliderPlaylist} classes='flx flx-min-center pd-btm-xs'>
 
                 {
                     watchlaterVideos?.map(video => <PlaylistVideoCard key={video._id} video={video} watchlaterVideo={true} />)

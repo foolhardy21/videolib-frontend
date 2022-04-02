@@ -1,5 +1,6 @@
 import { useVideos } from "../../contexts"
 import VideoCard from "./VideoCard"
+import styles from './videos.module.css'
 
 const VideosSection = () => {
     const { videosState: {
@@ -7,7 +8,7 @@ const VideosSection = () => {
     } } = useVideos()
 
     return (
-        <section id='grid-videos' className='grid grid-maxcols-4 mg-top-lg'>
+        <section id={styles.gridVideos} className='grid grid-maxcols-4 mg-top-lg'>
 
             {
                 videos?.map(video => <VideoCard key={video._id} video={video} />)

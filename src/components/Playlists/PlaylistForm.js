@@ -1,4 +1,3 @@
-import axios from "axios"
 import { useState } from "react"
 import { usePlaylists, useTheme } from "../../contexts"
 import { getBgColor, getBorderColor, getTextColor } from "../../utils"

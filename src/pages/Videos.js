@@ -3,7 +3,6 @@ import { VideosFilter, VideosHeader, VideosSection, PlaylistModal } from '../com
 import { Alert, Main, Text } from '../components/Reusable'
 import { usePlaylists, useTheme, useVideos } from '../contexts'
 import { getBgColor, getTextColor } from '../utils'
-import '../components/Videos/videos.css'
 
 const Videos = () => {
     const { theme } = useTheme()

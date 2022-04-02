@@ -1,12 +1,12 @@
-#slider-playlist {
+#sliderPlaylist {
   overflow-x: auto;
   border-bottom: solid thin var(--clr-off-primary);
 }
 
-#container-video:hover {
+#containerVideo:hover {
   cursor: pointer;
 }
 
-#card-video {
+#cardVideo {
   width: 20rem;
 }

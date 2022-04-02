@@ -1,7 +1,8 @@
 import { PlaylistVideoCard } from './'
-import { Section, Text, Alert } from '../Reusable'
+import { Section, Text } from '../Reusable'
 import { getTextColor } from '../../utils'
 import { useLikes, useTheme } from '../../contexts'
+import styles from './playlists.module.css'
 
 const LikesSection = () => {
     const { theme } = useTheme()
@@ -12,7 +13,7 @@ const LikesSection = () => {
 
             <Text classes={`txt-lg txt-cap ${getTextColor(theme)} mg-btm-md`}>liked videos</Text>
 
-            <Section id='slider-playlist' classes='flx flx-min-center pd-btm-xs'>
+            <Section id={styles.sliderPlaylist} classes='flx flx-min-center pd-btm-xs'>
 
                 {
                     likedVideos?.map(video => <PlaylistVideoCard key={video._id} video={video} />)
