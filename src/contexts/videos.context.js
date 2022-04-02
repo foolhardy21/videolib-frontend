@@ -16,10 +16,19 @@ export const VideosProvider = ({ children }) => {
     })
     const [selectedVideo, setSelectedVideo] = useState({})
 
+    /*
+        * this function sets the current selected video
+        * @param {Object.prototype} video - video object    
+    */
     function updateSelectedVideo(video) {
         setSelectedVideo(video)
     }
 
+    /*
+        * this function shows alert on videos page
+        * @param {string} message - message to be displayed
+        * @param {string} type - type of alert(success/error)    
+    */
     function showVideosAlert(message, type) {
         videosDispatch({
             type: ACTION_SET_ALERT, payload: {
@@ -30,6 +39,11 @@ export const VideosProvider = ({ children }) => {
         setTimeout(() => videosDispatch({ type: ACTION_REMOVE_ALERT }), ALERT_DISPLAY_TIME)
     }
 
+    /*
+        * this function fetches all the videos
+        * @return {Array.prototype} response.data.videos - array of video objects
+        * @param {Number} e.response.status - error status code    
+    */
     async function getVideos() {
         videosDispatch({ type: ACTION_SET_LOADING })
         try {

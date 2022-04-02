@@ -18,14 +18,25 @@ export const PlaylistsProvider = ({ children }) => {
     const [isPlaylistModalVisible, setIsPlaylistModalVisible] = useState(false)
     const { getUserToken } = useAuth()
 
+    /*
+        * this function hides the playlist modal    
+    */
     function hidePlaylistModal() {
         setIsPlaylistModalVisible(false)
     }
 
+    /*
+        * this function shows the playlist modal    
+    */
     function showPlaylistModal() {
         setIsPlaylistModalVisible(true)
     }
 
+    /*
+        * this function shows the alert on playlist page
+        @param {string} message - message to be displayed
+        @param {string} type - type of alert(success/error)    
+    */
     function showPlaylistsAlert(message, type) {
         playlistsDispatch({
             type: ACTION_SET_ALERT, payload: {
@@ -36,6 +47,11 @@ export const PlaylistsProvider = ({ children }) => {
         setTimeout(() => playlistsDispatch({ type: ACTION_REMOVE_ALERT }), ALERT_DISPLAY_TIME)
     }
 
+    /*
+        * this function fetches all the playlists
+        @return {Array.prototype} response.data.playlists - array of playlist objects
+        @return {Number} e.response.status - error status code    
+    */
     async function getPlaylists() {
         playlistsDispatch({ type: ACTION_SET_LOADING })
         try {
@@ -52,6 +68,12 @@ export const PlaylistsProvider = ({ children }) => {
         }
     }
 
+    /*
+        * this function removes the playlist
+        @param {string} _id - id of playlist
+        @return {Array.prototype} response.data.playlists - array of updated playlist objects
+        @return {Number} e.response.status - error status code    
+    */
     async function removePlaylist(_id) {
         try {
             const response = await axios.delete(`${API_PLAYLISTS}/${_id}`, {
@@ -65,6 +87,13 @@ export const PlaylistsProvider = ({ children }) => {
         }
     }
 
+    /*
+        * this function adds a new playlist
+        @param {string} name - name of the playlist
+        @param {string} description - description of the playlist
+        @return {Array.prototype} response.data.playlists - array of updated playlist objects
+        @return {Number} e.response.status - error status code    
+    */
     async function addNewPlaylist(name, description) {
         try {
             const response = await axios.post(API_PLAYLISTS, {
@@ -83,6 +112,12 @@ export const PlaylistsProvider = ({ children }) => {
         }
     }
 
+    /*
+        * this function adds a video to the playlist
+        @param {Object.prototype} video - video object
+        @param {string} playlistId - id of the playlist
+        @return {Number} e.response.status - error status code    
+    */
     async function addVideoToPlaylist(video, playlistId) {
         try {
             await axios.post(`${API_PLAYLISTS}/${playlistId}`, {
@@ -97,6 +132,12 @@ export const PlaylistsProvider = ({ children }) => {
         }
     }
 
+    /*
+        * this function removes a video from the playlist
+        @param {string} videoId - id of the video
+        @param {string} playlistId - id of the playlist
+        @return {Number} e.response.status - error status code    
+    */
     async function removeVideoFromPlaylist(videoId, playlistId) {
         try {
             await axios.delete(`${API_PLAYLISTS}/${playlistId}/${videoId}`, {

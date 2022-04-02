@@ -13,6 +13,11 @@ export const LikesProvider = ({ children }) => {
     })
     const { getUserToken } = useAuth()
 
+    /*
+        * this function adds video to likes of the user
+        * @return {Array.prototype} response.data.likes - array of liked video objects
+        * @return {Number} e.response.status - error status code    
+    */
     async function addVideoToLikes(video) {
         try {
             const response = await axios.post(API_LIKES, {
@@ -28,9 +33,14 @@ export const LikesProvider = ({ children }) => {
         }
     }
 
+    /*
+        * this function removes the video from the likes of the user
+        * @return {Array.prototype} response.data.likes - array of liked video objects
+        * @return {Number} e.response.status - error status code    
+    */
     async function removeVideoFromLikes(_id) {
         try {
-            const response = await axios.delete(`${API_LIKES}/${_id}`, {
+            await axios.delete(`${API_LIKES}/${_id}`, {
                 headers: {
                     authorization: getUserToken()
                 }
@@ -41,6 +51,11 @@ export const LikesProvider = ({ children }) => {
         }
     }
 
+    /*
+        * this function fetches the liked videos of the user
+        * @return {Array.prototype} response.data.likes - array of liked video objects
+        * @return {Number} e.response.status - error status code    
+    */
     async function getLikedVideos() {
         likesDispatch({ type: ACTION_SET_LOADING })
         try {
@@ -57,6 +72,11 @@ export const LikesProvider = ({ children }) => {
         }
     }
 
+    /*
+        * this function checks if the video is liked or not
+        * @return {string} _id - id of the video object
+        * @return {boolean}    
+    */
     const isVideoLiked = _id => likesState.likedVideos.some(likedVideo => likedVideo._id === _id)
 
     return (

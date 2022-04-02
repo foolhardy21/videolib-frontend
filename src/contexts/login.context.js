@@ -23,6 +23,10 @@ export const LoginProvider = ({ children }) => {
         message: ''
     })
 
+    /*
+        * this function validates if the input values in login form
+        * @return {boolean} validationError    
+    */
     function isFormInvalid() {
         let validationError = false
 
@@ -39,6 +43,11 @@ export const LoginProvider = ({ children }) => {
         return validationError
     }
 
+    /*
+        * this function shows alert on login page
+        * @param {string} message - message to be displayed
+        * @param {string} type - type of alert(success/error)    
+    */
     function showLoginAlert(message, type) {
         setLoginAlert({
             message,

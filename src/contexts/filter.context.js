@@ -8,6 +8,11 @@ const FilterContext = createContext()
 export const FilterProvider = ({ children }) => {
     const [filterState, filterDispatch] = useReducer(filterReducer, [])
 
+    /*
+        * this function is used to fetch the categories
+        * @return {Array.prototype} response.data.categories - array of category objects 
+        * @return {Number} e.response.status - the error status code
+    */
     async function getCategories() {
         try {
             const response = await axios.get(API_CATEGORIES)
@@ -17,10 +22,12 @@ export const FilterProvider = ({ children }) => {
         }
     }
 
-    function isCategoryIncludedInFilter(value) {
-        return !filterState.find(category => category === value) ? false : true
-    }
-
+    /*
+        * this function checks if the chosen category is in the filter array or not
+        * @param {string} value - chosen category  
+        * @return {boolean} 
+    */
+    const isCategoryIncludedInFilter = value => !filterState.find(category => category === value) ? false : true
 
     return (
         <FilterContext.Provider

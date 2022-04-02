@@ -37,6 +37,10 @@ export const SignupProvider = ({ children }) => {
         }
     )
 
+    /*
+        * this function validates if the input values in signup form
+        * @return {boolean} validationError    
+    */
     function isFormInvalid() {
         let validationError = false
 
@@ -68,6 +72,11 @@ export const SignupProvider = ({ children }) => {
         return validationError
     }
 
+    /*
+        * this function shows alert on signup page
+        * @param {string} message - message to be displayed
+        * @param {string} type - type of alert(success/error)    
+    */
     function showSignupAlert(message, type) {
         setSignupAlert({
             message,

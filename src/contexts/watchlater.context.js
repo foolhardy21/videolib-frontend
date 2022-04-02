@@ -13,6 +13,11 @@ export const WatchlaterProvider = ({ children }) => {
     })
     const { getUserToken } = useAuth()
 
+    /*
+        * this function fetches all the watch later videos
+        * @return {Array.prototype} response.data.watchlater - array of video objects
+        * @param {Number} e.response.status - error status code
+    */
     async function getWatchlater() {
         watchlaterDispatch({ type: ACTION_SET_LOADING })
         try {
@@ -29,6 +34,12 @@ export const WatchlaterProvider = ({ children }) => {
         }
     }
 
+    /*
+        * this function adds a video to watch later
+        @param {Object.prototype} video - video object
+        @return {Array.prototype} response.data.watchlater - array of watch later video objects
+        @return {Number} e.response.status - error status code    
+    */
     async function addToWatchlater(video) {
         try {
             const response = await axios.post(API_WATCHLATER, {
@@ -44,6 +55,11 @@ export const WatchlaterProvider = ({ children }) => {
         }
     }
 
+    /*
+        * this function removes a video from watch later
+        @param {string} videoId - id of the video
+        @return {Number} e.response.status - error status code    
+    */
     async function removeFromWatchlater(videoId) {
         try {
             await axios.delete(`${API_WATCHLATER}/${videoId}`, {
