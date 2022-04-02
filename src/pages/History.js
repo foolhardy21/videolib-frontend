@@ -2,10 +2,12 @@ import { useEffect } from 'react'
 import { HistoryHeader, HistorySection } from '../components/History'
 import { Text, Main, Button } from '../components/Reusable'
 import { useHistory, useTheme } from '../contexts'
+import { useTitle } from '../hooks/useTitle'
 import { getBgColor, getBorderColor, getTextColor } from '../utils'
 import { ALERT_TYPE_ERROR, ACTION_INIT_HISTORY, ALERT_TYPE_SUCCESS, ACTION_REMOVE_HISTORY } from '../utils/constants.util'
 
 const History = () => {
+    useTitle('History')
     const { theme } = useTheme()
     const { historyState: {
         history,
