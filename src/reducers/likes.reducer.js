@@ -4,20 +4,6 @@ export function likesReducer(state, action) {
 
         case 'INIT_LIKES': return { ...state, likedVideos: action.payload }
 
-        case 'SET_ALERT': return {
-            ...state, alert: {
-                message: action.payload.message,
-                type: action.payload.type
-            }
-        }
-
-        case 'REMOVE_ALERT': return {
-            ...state, alert: {
-                message: '',
-                type: ''
-            }
-        }
-
         case 'SET_LOADING': return { ...state, loading: true }
 
         case 'REMOVE_LOADING': return { ...state, loading: false }

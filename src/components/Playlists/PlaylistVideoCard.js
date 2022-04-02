@@ -1,5 +1,5 @@
 import { Card, Text, Button, Icon } from '../Reusable'
-import { usePlaylists, useTheme } from '../../contexts'
+import { usePlaylists, useTheme, useWatchlater } from '../../contexts'
 import { getTextColor, getBgColor, getIconColor } from '../../utils'
 
 const PlaylistVideoCard = ({ video: {
@@ -10,10 +10,18 @@ const PlaylistVideoCard = ({ video: {
     views,
     uploadedOn,
     category
-}, playlistId
+}, playlistId, watchlaterVideo
 }) => {
     const { theme } = useTheme()
     const { removeVideoFromPlaylist, showPlaylistsAlert, playlistsDispatch } = usePlaylists()
+    const { removeFromWatchlater, watchlaterDispatch } = useWatchlater()
+
+    async function handleRemoveVideoFromWatchlater() {
+        const removeFromWatchlaterResponse = await removeFromWatchlater(_id)
+        if (!(removeFromWatchlaterResponse === 404 || removeFromWatchlaterResponse === 500)) {
+            watchlaterDispatch({ type: 'REMOVE_FROM_WATCHLATER', payload: _id })
+        }
+    }
 
     async function handleRemoveVideoFromPlaylist() {
         const removeVideoResponse = await removeVideoFromPlaylist(_id, playlistId)
@@ -46,13 +54,27 @@ const PlaylistVideoCard = ({ video: {
 
             <Text classes={`txt-md txt-cap ${getTextColor(theme)} card-txtw-s`}>{`category - ${category}`}</Text>
 
-            <div className='flx flx-maj-end'>
-                <Button onClick={handleRemoveVideoFromPlaylist} classes={`btn-txt ${getTextColor(theme)} ${getBgColor(theme)}`}>
-                    <Icon classes={getIconColor(theme)}>
-                        delete
-                    </Icon>
-                </Button>
-            </div>
+            {
+                playlistId &&
+                <div className='flx flx-maj-end'>
+                    <Button onClick={handleRemoveVideoFromPlaylist} classes={`btn-txt ${getTextColor(theme)} ${getBgColor(theme)}`}>
+                        <Icon classes={getIconColor(theme)}>
+                            delete
+                        </Icon>
+                    </Button>
+                </div>
+            }
+
+            {
+                watchlaterVideo &&
+                <div className='flx flx-maj-end'>
+                    <Button onClick={handleRemoveVideoFromWatchlater} classes={`btn-txt ${getTextColor(theme)} ${getBgColor(theme)}`}>
+                        <Icon classes={getIconColor(theme)}>
+                            delete
+                        </Icon>
+                    </Button>
+                </div>
+            }
 
         </Card>
     )

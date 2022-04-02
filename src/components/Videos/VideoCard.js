@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { Button, Card, Text } from "../Reusable"
-import { getTextColor } from '../../utils'
-import { useHistory, useLikes, usePlaylists, useTheme, useVideos } from "../../contexts"
+import { getSolidBtnBgColor, getSolidBtnTextColor, getTextColor } from '../../utils'
+import { useHistory, useLikes, usePlaylists, useTheme, useVideos, useWatchlater } from "../../contexts"
 
 const VideoCard = ({ video, video: {
     _id,
@@ -17,6 +17,7 @@ const VideoCard = ({ video, video: {
     const { isVideoLiked, addVideoToLikes, removeVideoFromLikes, likesDispatch } = useLikes()
     const { showVideosAlert, updateSelectedVideo } = useVideos()
     const { showPlaylistModal } = usePlaylists()
+    const { addToWatchlater, watchlaterDispatch } = useWatchlater()
 
     async function handleVideoLike() {
         const addToLikesResponse = await addVideoToLikes(video)
@@ -42,9 +43,24 @@ const VideoCard = ({ video, video: {
         showPlaylistModal()
     }
 
+    async function handleWatchlater() {
+        const addToWatchlaterResponse = await addToWatchlater(video)
+        if (addToWatchlaterResponse === 409) {
+            showVideosAlert('already in watch later', 'success')
+        } else if (addToWatchlaterResponse === 404 || addToWatchlaterResponse === 500) {
+            showVideosAlert('could not add to watch later', 'error')
+        } else {
+            showVideosAlert('added to watch later', 'success')
+            watchlaterDispatch({ type: 'ADD_TO_WATCHLATER', payload: video })
+        }
+    }
 
     return (
         <Card id='container-video' classes='pd-xs pos-relative'>
+
+            <Button onClick={handleWatchlater} classes={`btn-solid pos-absolute tr-1 z-1 ${getSolidBtnBgColor(theme)} ${getSolidBtnTextColor(theme)} pd-xs txt-md txt-lcase`}>
+                watch later
+            </Button>
 
             <video onPlay={() => addVideoToHistory(video)} id='card-video' controls controlsList="nodownload nofullscreen">
                 <source src={url}></source>
