@@ -35,7 +35,6 @@ const VideoCard = ({ video, video: {
         }
     }
 
-
     return (
         <Card id='container-video' classes='pd-xs pos-relative'>
 

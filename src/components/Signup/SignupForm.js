@@ -52,7 +52,7 @@ const SignupForm = () => {
                 signupFormState.password.error && <Text classes="txt-md txt-err txt-cap mg-left-xs mg-top-xs">password must be alphanumeric {<br />} with special characters</Text>
             }
 
-            <Input type={signupFormState.passwordInputType} placeholder="password" value={signupFormState.confirmedPassword.value} onChange={(e) => signupFormDispatch({ type: 'UPDATE_CONFIRMED_PASSWORD', payload: e.target.value })}
+            <Input type={signupFormState.passwordInputType} placeholder="confirm password" value={signupFormState.confirmedPassword.value} onChange={(e) => signupFormDispatch({ type: 'UPDATE_CONFIRMED_PASSWORD', payload: e.target.value })}
                 classes={`${signupFormState.confirmedPassword.error && 'input-err'} input-lg txt-md pd-xs mg-top-s`} />
             {
                 signupFormState.confirmedPassword.error && <Text classes="txt-md txt-err txt-cap mg-left-xs mg-top-xs">password is not matching</Text>
