@@ -1,10 +1,10 @@
-import { useState } from 'react'
-import { Header, Text, NavBar, Icon, Button } from '../Reusable'
-import { getTextColor, getBgColor, getIconColor } from '../../utils'
-import { useTheme } from '../../contexts'
+import { useState } from "react"
+import { Header, Text, Icon, Button, NavBar } from "../Reusable"
+import { useTheme } from "../../contexts"
+import { getBgColor, getTextColor, getIconColor } from '../../utils'
 import { Link } from 'react-router-dom'
 
-const SignupHeader = () => {
+const LoginHeader = () => {
     const { theme, toggleTheme } = useTheme()
     const [isSmallNavVisible, setIsSmallNavVisible] = useState(false)
 
@@ -35,15 +35,17 @@ const SignupHeader = () => {
                     </Icon>
                 </Link>
 
+
                 <Link to='/history'>
                     <Icon classes={`${getIconColor(theme)} mg-right-lg`}>
                         history
                     </Icon>
                 </Link>
 
-                <Link to='/login'>
-                    <Button classes={`btn-txt txt-lcase ${getTextColor(theme)} bg-primary pd-xs txt-md`}>
-                        login
+
+                <Link to='/signup'>
+                    <Button classes={`btn-txt txt-lcase ${getTextColor(theme)} pd-xs txt-md`}>
+                        signup
                     </Button>
                 </Link>
 
@@ -63,9 +65,9 @@ const SignupHeader = () => {
                     isSmallNavVisible &&
                     <NavBar id='nav-small' classes={`flx-column pd-md ${getBgColor(theme)} pos-absolute z-index tl-0 b-solid`}>
 
-                        <Button onClick={toggleNavVisibility} classes='btn-txt mg-btm-s'>
+                        <Button onClick={toggleNavVisibility} classes='btn-txt mg-btm-xs'>
 
-                            <Icon classes={`${getIconColor(theme)}`}>
+                            <Icon classes={getIconColor(theme)}>
                                 close
                             </Icon>
 
@@ -91,9 +93,9 @@ const SignupHeader = () => {
                             </Icon>
                         </Link>
 
-                        <Link to='/login'>
+                        <Link to='/signup'>
                             <Button classes={`btn-txt txt-lcase ${getTextColor(theme)} txt-md`}>
-                                login
+                                signup
                             </Button>
                         </Link>
 
@@ -101,7 +103,7 @@ const SignupHeader = () => {
 
                 }
 
-            </div >
+            </div>
 
             <Button onClick={toggleTheme} classes='btn-txt pd-xs'>
 
@@ -112,8 +114,8 @@ const SignupHeader = () => {
                 </Icon>
             </Button>
 
-        </Header >
+        </Header>
     )
 }
 
-export default SignupHeader
+export default LoginHeader
