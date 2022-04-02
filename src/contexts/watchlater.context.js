@@ -3,7 +3,7 @@ import { createContext, useContext, useReducer } from "react";
 import { useAuth } from "./";
 import { watchlaterReducer } from '../reducers'
 
-const WatchlaterContext = createContext()
+const WatchlaterContext = createContext(null)
 
 export const WatchlaterProvider = ({ children }) => {
     const [watchlaterState, watchlaterDispatch] = useReducer(watchlaterReducer, {
