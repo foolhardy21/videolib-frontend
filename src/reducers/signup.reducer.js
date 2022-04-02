@@ -1,3 +1,4 @@
+
 export function signupFormReducer(state, { type, payload }) {
 
     switch (type) {

@@ -1,6 +1,6 @@
-#grid-videos {
+#grid-likes {
     gap: 1rem;
-    place-items: center;
+    border-bottom: solid thin var(--clr-off-primary);
 }
 
 #container-video:hover {
