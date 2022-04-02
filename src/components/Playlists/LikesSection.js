@@ -1,5 +1,3 @@
-import axios from 'axios'
-import { useEffect } from 'react'
 import { PlaylistVideoCard } from './'
 import { Section, Text, Alert } from '../Reusable'
 import { getTextColor } from '../../utils'
