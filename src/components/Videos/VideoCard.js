@@ -1,3 +1,4 @@
+import { useState } from "react"
 import { Button, Card, Text } from "../Reusable"
 import { getSolidBtnBgColor, getSolidBtnTextColor, getTextColor } from '../../utils'
 import { useHistory, useLikes, usePlaylists, useTheme, useVideos, useWatchlater } from "../../contexts"
@@ -53,7 +54,6 @@ const VideoCard = ({ video, video: {
             watchlaterDispatch({ type: 'ADD_TO_WATCHLATER', payload: video })
         }
     }
-
 
     return (
         <Card id='container-video' classes='pd-xs pos-relative'>
