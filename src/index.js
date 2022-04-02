@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
 import { makeServer } from "./server";
-import { ThemeProvider, VideosProvider, FilterProvider, HistoryProvider, LikesProvider, AuthProvider } from './contexts'
+import { AuthProvider, ThemeProvider, VideosProvider, FilterProvider, HistoryProvider, LikesProvider, PlaylistsProvider } from './contexts'
 import './stylesheet/style.css'
 
 // Call make Server
@@ -16,7 +16,9 @@ ReactDOM.render(
           <FilterProvider>
             <HistoryProvider>
               <LikesProvider>
-                <App />
+                <PlaylistsProvider>
+                  <App />
+                </PlaylistsProvider>
               </LikesProvider>
             </HistoryProvider>
           </FilterProvider>

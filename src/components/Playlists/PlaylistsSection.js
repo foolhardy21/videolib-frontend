@@ -1,26 +1,66 @@
-import { Section, Text } from "../Reusable"
-import { LikesSection } from "./"
-import { getTextColor } from '../../utils'
-import { useLikes, useTheme } from "../../contexts"
+import { PlaylistVideoCard } from './'
+import { Section, Text, Button, Icon } from "../Reusable"
+import { getTextColor, getBgColor, getIconColor } from '../../utils'
+import { useTheme, usePlaylists } from "../../contexts"
 
 const PlaylistsSection = () => {
-    const { likesState: {
-        loading,
-    }
-    } = useLikes()
+    const { playlistsState: { playlists }, playlistsDispatch, removePlaylist, showPlaylistsAlert } = usePlaylists()
     const { theme } = useTheme()
 
+    async function handleDeletePlaylist(_id) {
+        const removePlaylistResponse = await removePlaylist(_id)
+        if (removePlaylistResponse === 404 || removePlaylistResponse === 500) {
+            showPlaylistsAlert('could not remove the playlist', 'error')
+        } else {
+            playlistsDispatch({ type: 'REMOVE_PLAYLIST', payload: _id })
+        }
+    }
+
     return (
-        <Section classes='flx flx-column'>
+        <Section classes='flx flx-column mg-left-md'>
 
             {
-                loading
-                    ? <Text classes={`${getTextColor(theme)} txt-xlg txt-500 txt-cap`}>loading...</Text>
-                    : <LikesSection />
+                playlists?.map(playlist =>
+
+                    <Section key={playlist._id} classes=''>
+
+                        <div className="flx flx-column">
+
+                            <div className="flx mg-btm-xs">
+
+                                <div className='flx flx-column mg-right-s'>
+
+                                    <Text classes={`txt-lg txt-cap ${getTextColor(theme)} mg-btm-xs mg-right-xs`} >{playlist.name}</Text>
+
+                                    <Text classes={`txt-md txt-cap ${getTextColor(theme)}`} >{playlist.description}</Text>
+
+                                </div>
+
+                                <Button onClick={() => handleDeletePlaylist(playlist._id)} classes={`btn-txt ${getTextColor(theme)} ${getBgColor(theme)}`}>
+                                    <Icon classes={getIconColor(theme)}>
+                                        delete
+                                    </Icon>
+                                </Button>
+
+                            </div>
+
+                            <div id='grid-playlist' className='grid grid-maxcols-4 pd-btm-s mg-btm-s'>
+
+                                {
+                                    playlist.videos?.map(video => <PlaylistVideoCard key={video._id} video={video} playlistId={playlist._id} />)
+                                }
+
+                            </div>
+
+                        </div>
+
+                    </Section>
+                )
             }
 
         </Section>
     )
+
 }
 
 export default PlaylistsSection

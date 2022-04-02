@@ -1,6 +1,7 @@
+import { useState } from "react"
 import { Button, Card, Text } from "../Reusable"
 import { getTextColor } from '../../utils'
-import { useHistory, useLikes, useTheme, useVideos } from "../../contexts"
+import { useHistory, useLikes, usePlaylists, useTheme, useVideos } from "../../contexts"
 
 const VideoCard = ({ video, video: {
     _id,
@@ -14,7 +15,8 @@ const VideoCard = ({ video, video: {
     const { theme } = useTheme()
     const { addVideoToHistory } = useHistory()
     const { isVideoLiked, addVideoToLikes, removeVideoFromLikes, likesDispatch } = useLikes()
-    const { showVideosAlert } = useVideos()
+    const { showVideosAlert, updateSelectedVideo } = useVideos()
+    const { showPlaylistModal } = usePlaylists()
 
     async function handleVideoLike() {
         const addToLikesResponse = await addVideoToLikes(video)
@@ -34,6 +36,12 @@ const VideoCard = ({ video, video: {
             likesDispatch({ type: 'REMOVE_FROM_LIKES', payload: _id })
         }
     }
+
+    function handleAddToPlaylist() {
+        updateSelectedVideo(video)
+        showPlaylistModal()
+    }
+
 
     return (
         <Card id='container-video' classes='pd-xs pos-relative'>
@@ -65,7 +73,7 @@ const VideoCard = ({ video, video: {
                         <Button onClick={handleVideoLike} classes={`btn-txt txt-md ${getTextColor(theme)} mg-right-s`}>like</Button>
                 }
 
-                <Button classes={`btn-txt txt-md ${getTextColor(theme)}`}>add to playlist</Button>
+                <Button onClick={handleAddToPlaylist} classes={`btn-txt txt-md ${getTextColor(theme)}`}>add to playlist</Button>
 
             </div>
 
