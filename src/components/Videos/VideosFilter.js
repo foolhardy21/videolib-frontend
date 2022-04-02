@@ -1,4 +1,3 @@
-import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { Label } from "../Reusable"
 import { useTheme, useFilter, useVideos } from '../../contexts'
@@ -45,9 +44,9 @@ const VideosFilter = () => {
         <div className='flx flx-maj-even mg-top-md'>
 
             {
-                categories.map(({ categoryName, id }) => <Label key={id} classes={`txt-md ${getTextColor(theme)} txt-cap flx flx-min-center mg-right-s`} htmlFor={`category-${categoryName}`}>
-                    <input onChange={(e) => handleFilterInputChange(e)} checked={isCategoryIncludedInFilter(categoryName)} value={categoryName} type='checkbox' id={`category-${categoryName}`} />
-                    {categoryName}
+                categories.map(({ name, _id }) => <Label key={_id} classes={`txt-md ${getTextColor(theme)} txt-cap flx flx-min-center mg-right-s`} htmlFor={`category-${name}`}>
+                    <input onChange={(e) => handleFilterInputChange(e)} checked={isCategoryIncludedInFilter(name)} value={name} type='checkbox' id={`category-${name}`} />
+                    {name}
                 </Label>
                 )
             }
