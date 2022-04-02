@@ -19,7 +19,7 @@ const Videos = () => {
         (async () => {
             const videos = await getVideos()
             if (videos === 404 || videos === 500) {
-                showVideosAlert('could not fetch the videos', 'error')
+                showVideosAlert('could not fetch the videos', ALERT_TYPE_ERROR)
             } else {
                 videosDispatch({ type: 'INIT_VIDEOS', payload: videos })
             }

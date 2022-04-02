@@ -18,7 +18,7 @@ const HistoryVideoCard = ({ video: {
     async function handleRemoveFromHistory() {
         const removeFromHistoryResponse = await removeVideoFromHistory(_id)
         if (removeFromHistoryResponse === 404 || removeFromHistoryResponse === 500) {
-            showHistoryAlert('could not remove the video', 'error')
+            showHistoryAlert('could not remove the video', ALERT_TYPE_ERROR)
         } else {
             historyDispatch({ type: 'REMOVE_FROM_HISTORY', payload: _id })
         }

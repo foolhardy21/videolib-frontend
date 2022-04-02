@@ -13,7 +13,7 @@ const VideosFilter = () => {
         (async () => {
             const categories = await getCategories()
             if (categories === 404 || categories === 500) {
-                showVideosAlert('could not fetch categories', 'error')
+                showVideosAlert('could not fetch categories', ALERT_TYPE_ERROR)
             } else {
                 setCategories(categories)
             }
@@ -24,7 +24,7 @@ const VideosFilter = () => {
         (async () => {
             const videos = await getVideos()
             if (videos === 404 || videos === 500) {
-                showVideosAlert('could not fetch the videos', 'error')
+                showVideosAlert('could not fetch the videos', ALERT_TYPE_ERROR)
             } else {
                 videosDispatch({ type: 'FILTER_VIDEOS', payload: { videos, filterState } })
             }

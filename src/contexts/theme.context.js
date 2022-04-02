@@ -1,12 +1,14 @@
+import { THEME_DARK, THEME_LIGHT } from "../utils/constants.util";
+
 const { createContext, useContext, useState } = require("react");
 
 const ThemeContext = createContext()
 
 export const ThemeProvider = ({ children }) => {
-    const [theme, setTheme] = useState('light')
+    const [theme, setTheme] = useState(THEME_LIGHT)
 
     function toggleTheme() {
-        theme === 'light' ? setTheme('dark') : setTheme('light')
+        theme === THEME_LIGHT ? setTheme(THEME_DARK) : setTheme(THEME_LIGHT)
     }
 
     return (

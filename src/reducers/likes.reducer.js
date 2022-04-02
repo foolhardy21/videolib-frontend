@@ -1,16 +1,18 @@
-export function likesReducer(state, action) {
+import { ACTION_ADD_TO_LIKES, ACTION_INIT_LIKES, ACTION_REMOVE_FROM_LIKES, ACTION_REMOVE_LOADING, ACTION_SET_LOADING } from "../utils/constants.util"
 
-    switch (action.type) {
+export function likesReducer(state, { type, payload }) {
 
-        case 'INIT_LIKES': return { ...state, likedVideos: action.payload }
+    switch (type) {
 
-        case 'SET_LOADING': return { ...state, loading: true }
+        case ACTION_INIT_LIKES: return { ...state, likedVideos: payload }
 
-        case 'REMOVE_LOADING': return { ...state, loading: false }
+        case ACTION_SET_LOADING: return { ...state, loading: true }
 
-        case 'ADD_TO_LIKES': return { ...state, likedVideos: state.likedVideos.concat({ ...action.payload }) }
+        case ACTION_REMOVE_LOADING: return { ...state, loading: false }
 
-        case 'REMOVE_FROM_LIKES': return { ...state, likedVideos: state.likedVideos.filter(video => video._id !== action.payload) }
+        case ACTION_ADD_TO_LIKES: return { ...state, likedVideos: state.likedVideos.concat({ ...payload }) }
+
+        case ACTION_REMOVE_FROM_LIKES: return { ...state, likedVideos: state.likedVideos.filter(video => video._id !== payload) }
 
         default: return state
 

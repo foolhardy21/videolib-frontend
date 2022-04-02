@@ -1,6 +1,7 @@
 import axios from "axios";
 import { createContext, useContext, useReducer } from "react";
 import { filterReducer } from "../reducers";
+import { API_CATEGORIES } from "../utils/constants.util";
 
 const FilterContext = createContext()
 
@@ -9,7 +10,7 @@ export const FilterProvider = ({ children }) => {
 
     async function getCategories() {
         try {
-            const response = await axios.get('/api/categories')
+            const response = await axios.get(API_CATEGORIES)
             return response.data.categories
         } catch (e) {
             return e.response.status

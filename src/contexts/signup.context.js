@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, useReducer } from "react";
 import { arePasswordAndConfirmedPasswordDiff, isEmailInvalid, isNameInvalid, isPasswordInvalid } from "../utils";
 import { signupFormReducer } from "../reducers";
+import { ACTION_REMOVE_CONFIRMED_PASSWORD_ERROR, ACTION_REMOVE_EMAIL_ERROR, ACTION_REMOVE_FIRST_NAME_ERROR, ACTION_REMOVE_LAST_NAME_ERROR, ACTION_REMOVE_PASSWORD_ERROR, ACTION_SET_CONFIRMED_PASSWORD_ERROR, ACTION_SET_EMAIL_ERROR, ACTION_SET_FIRST_NAME_ERROR, ACTION_SET_LAST_NAME_ERROR, ACTION_SET_PASSWORD_ERROR, ALERT_DISPLAY_TIME, INPUT_ERROR_TIME } from "../utils/constants.util";
 
 const SignupContext = createContext()
 
@@ -41,28 +42,28 @@ export const SignupProvider = ({ children }) => {
 
         if (isEmailInvalid(signupFormState.email.value)) {
             validationError = true
-            signupFormDispatch({ type: 'SET_EMAIL_ERROR' })
-            setTimeout(() => signupFormDispatch({ type: 'REMOVE_EMAIL_ERROR' }), 3000)
+            signupFormDispatch({ type: ACTION_SET_EMAIL_ERROR })
+            setTimeout(() => signupFormDispatch({ type: ACTION_REMOVE_EMAIL_ERROR }), INPUT_ERROR_TIME)
         }
         if (isNameInvalid(signupFormState.firstName.value)) {
             validationError = true
-            signupFormDispatch({ type: 'SET_FIRST_NAME_ERROR' })
-            setTimeout(() => signupFormDispatch({ type: 'REMOVE_FIRST_NAME_ERROR' }), 3000)
+            signupFormDispatch({ type: ACTION_SET_FIRST_NAME_ERROR })
+            setTimeout(() => signupFormDispatch({ type: ACTION_REMOVE_FIRST_NAME_ERROR }), INPUT_ERROR_TIME)
         }
         if (isNameInvalid(signupFormState.lastName.value)) {
             validationError = true
-            signupFormDispatch({ type: 'SET_LAST_NAME_ERROR' })
-            setTimeout(() => signupFormDispatch({ type: 'REMOVE_LAST_NAME_ERROR' }), 3000)
+            signupFormDispatch({ type: ACTION_SET_LAST_NAME_ERROR })
+            setTimeout(() => signupFormDispatch({ type: ACTION_REMOVE_LAST_NAME_ERROR }), INPUT_ERROR_TIME)
         }
         if (isPasswordInvalid(signupFormState.password.value)) {
             validationError = true
-            signupFormDispatch({ type: 'SET_PASSWORD_ERROR' })
-            setTimeout(() => signupFormDispatch({ type: 'REMOVE_PASSWORD_ERROR' }), 3000)
+            signupFormDispatch({ type: ACTION_SET_PASSWORD_ERROR })
+            setTimeout(() => signupFormDispatch({ type: ACTION_REMOVE_PASSWORD_ERROR }), INPUT_ERROR_TIME)
         }
         if (arePasswordAndConfirmedPasswordDiff(signupFormState.password.value, signupFormState.confirmedPassword.value)) {
             validationError = true
-            signupFormDispatch({ type: 'SET_CONFIRMED_PASSWORD_ERROR' })
-            setTimeout(() => signupFormDispatch({ type: 'REMOVE_CONFIRMED_PASSWORD_ERROR' }), 3000)
+            signupFormDispatch({ type: ACTION_SET_CONFIRMED_PASSWORD_ERROR })
+            setTimeout(() => signupFormDispatch({ type: ACTION_REMOVE_CONFIRMED_PASSWORD_ERROR }), INPUT_ERROR_TIME)
         }
         return validationError
     }
@@ -75,7 +76,7 @@ export const SignupProvider = ({ children }) => {
         setTimeout(() => setSignupAlert({
             message: '',
             type: ''
-        }), 1500)
+        }), ALERT_DISPLAY_TIME)
     }
 
     return (

@@ -1,10 +1,12 @@
-export function filterReducer(state, action) {
+import { ACTION_ADD_CATEGORY_TO_FILTER, ACTION_REMOVE_CATEGORY_FROM_FILTER } from "../utils/constants.util"
 
-    switch (action.type) {
+export function filterReducer(state, { type, payload }) {
 
-        case 'ADD_CATEGORY': return state.concat(action.payload)
+    switch (type) {
 
-        case 'REMOVE_CATEGORY': return state.filter(category => category !== action.payload)
+        case ACTION_ADD_CATEGORY_TO_FILTER: return state.concat(payload)
+
+        case ACTION_REMOVE_CATEGORY_FROM_FILTER: return state.filter(category => category !== payload)
 
         default: return state
     }

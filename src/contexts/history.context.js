@@ -1,6 +1,7 @@
 import axios from "axios";
 import { createContext, useContext, useReducer } from "react";
 import { historyReducer } from "../reducers";
+import { ACTION_REMOVE_ALERT, ACTION_REMOVE_LOADING, ACTION_SET_ALERT, ACTION_SET_LOADING, ALERT_DISPLAY_TIME, API_HISTORY } from "../utils/constants.util";
 import { useAuth } from "./";
 
 const HistoryContext = createContext()
@@ -18,18 +19,18 @@ export const HistoryProvider = ({ children }) => {
 
     function showHistoryAlert(message, type) {
         historyDispatch({
-            type: 'SET_ALERT', payload: {
+            type: ACTION_SET_ALERT, payload: {
                 message,
                 type
             }
         })
-        setTimeout(() => historyDispatch({ type: 'REMOVE_ALERT' }), 1500)
+        setTimeout(() => historyDispatch({ type: ACTION_REMOVE_ALERT }), ALERT_DISPLAY_TIME)
     }
 
     async function getHistory() {
-        historyDispatch({ type: 'SET_LOADING' })
+        historyDispatch({ type: ACTION_SET_LOADING })
         try {
-            const response = await axios.get('/api/user/history', {
+            const response = await axios.get(API_HISTORY, {
                 headers: {
                     authorization: getUserToken()
                 }
@@ -38,13 +39,13 @@ export const HistoryProvider = ({ children }) => {
         } catch (e) {
             return e.response.status
         } finally {
-            historyDispatch({ type: 'REMOVE_LOADING' })
+            historyDispatch({ type: ACTION_REMOVE_LOADING })
         }
     }
 
     async function removeHistory() {
         try {
-            const response = await axios.delete('/api/user/history/all', {
+            const response = await axios.delete(`${API_HISTORY}/all`, {
                 headers: {
                     authorization: getUserToken()
                 }
@@ -57,7 +58,7 @@ export const HistoryProvider = ({ children }) => {
 
     async function addVideoToHistory(video) {
         try {
-            await axios.post('/api/user/history', {
+            await axios.post(API_HISTORY, {
                 video
             }, {
                 headers: {
@@ -71,7 +72,7 @@ export const HistoryProvider = ({ children }) => {
 
     async function removeVideoFromHistory(_id) {
         try {
-            const response = await axios.delete(`/api/user/history/${_id}`, {
+            const response = await axios.delete(`${API_HISTORY}/${_id}`, {
                 headers: {
                     authorization: getUserToken()
                 }

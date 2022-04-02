@@ -3,6 +3,7 @@ import { HistoryHeader, HistorySection } from '../components/History'
 import { Text, Main, Button } from '../components/Reusable'
 import { useHistory, useTheme } from '../contexts'
 import { getBgColor, getBorderColor, getTextColor } from '../utils'
+import { ALERT_TYPE_ERROR } from '../utils/constants.util'
 
 const History = () => {
     const { theme } = useTheme()
@@ -17,7 +18,7 @@ const History = () => {
         (async () => {
             const history = await getHistory()
             if (history === 404 || history === 500) {
-                showHistoryAlert('could not get your history', 'error')
+                showHistoryAlert('could not get your history', ALERT_TYPE_ERROR)
             } else {
                 historyDispatch({ type: 'INIT_HISTORY', payload: history })
             }
@@ -27,7 +28,7 @@ const History = () => {
     async function handleRemoveHistory() {
         const removeHistoryResponse = await removeHistory()
         if (removeHistoryResponse === 404 || removeHistoryResponse === 500) {
-            showHistoryAlert('could not remove history', 'error')
+            showHistoryAlert('could not remove history', ALERT_TYPE_ERROR)
         } else {
             historyDispatch({ type: 'REMOVE_HISTORY' })
         }

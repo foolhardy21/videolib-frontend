@@ -11,7 +11,7 @@ const PlaylistsSection = () => {
     async function handleDeletePlaylist(_id) {
         const removePlaylistResponse = await removePlaylist(_id)
         if (removePlaylistResponse === 404 || removePlaylistResponse === 500) {
-            showPlaylistsAlert('could not remove the playlist', 'error')
+            showPlaylistsAlert('could not remove the playlist', ALERT_TYPE_ERROR)
         } else {
             playlistsDispatch({ type: 'REMOVE_PLAYLIST', payload: _id })
         }

@@ -1,8 +1,10 @@
-export function loginFormReducer(state, action) {
+import { ACTION_INIT_FORM, ACTION_REMOVE_EMAIL_ERROR, ACTION_REMOVE_PASSWORD_ERROR, ACTION_SET_EMAIL_ERROR, ACTION_SET_PASSWORD_ERROR, ACTION_TOGGLE_PASSWORD_TYPE, ACTION_UPDATE_EMAIL, ACTION_UPDATE_PASSWORD } from "../utils/constants.util"
 
-    switch (action.type) {
+export function loginFormReducer(state, { type, action }) {
 
-        case 'INIT_FORM': return {
+    switch (type) {
+
+        case ACTION_INIT_FORM: return {
             ...state,
             email: {
                 ...state.email,
@@ -14,39 +16,39 @@ export function loginFormReducer(state, action) {
             },
             passwordInputType: 'password'
         }
-        case 'UPDATE_EMAIL': return {
+        case ACTION_UPDATE_EMAIL: return {
             ...state, email: {
                 ...state.email,
-                value: action.payload
+                value: payload
             }
         }
-        case 'UPDATE_PASSWORD': return {
+        case ACTION_UPDATE_PASSWORD: return {
             ...state, password: {
                 ...state.password,
-                value: action.payload
+                value: payload
             }
         }
-        case 'TOGGLE_PASSWORD_TYPE': return { ...state, passwordInputType: state.passwordInputType === 'password' ? 'text' : 'password' }
+        case ACTION_TOGGLE_PASSWORD_TYPE: return { ...state, passwordInputType: state.passwordInputType === 'password' ? 'text' : 'password' }
 
-        case 'SET_EMAIL_ERROR': return {
+        case ACTION_SET_EMAIL_ERROR: return {
             ...state, email: {
                 ...state.email,
                 error: true
             }
         }
-        case 'REMOVE_EMAIL_ERROR': return {
+        case ACTION_REMOVE_EMAIL_ERROR: return {
             ...state, email: {
                 ...state.email,
                 error: false
             }
         }
-        case 'SET_PASSWORD_ERROR': return {
+        case ACTION_SET_PASSWORD_ERROR: return {
             ...state, password: {
                 ...state.password,
                 error: true
             }
         }
-        case 'REMOVE_PASSWORD_ERROR': return {
+        case ACTION_REMOVE_PASSWORD_ERROR: return {
             ...state, password: {
                 ...state.password,
                 error: false

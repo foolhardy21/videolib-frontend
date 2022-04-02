@@ -1,6 +1,7 @@
 import axios from "axios";
 import { createContext, useContext, useReducer, useState } from "react";
 import { playlistsReducer } from '../reducers'
+import { ACTION_REMOVE_ALERT, ACTION_REMOVE_LOADING, ACTION_SET_ALERT, ACTION_SET_LOADING, ALERT_DISPLAY_TIME, API_PLAYLISTS } from "../utils/constants.util";
 import { useAuth } from "./";
 
 const PlaylistsContext = createContext()
@@ -27,18 +28,18 @@ export const PlaylistsProvider = ({ children }) => {
 
     function showPlaylistsAlert(message, type) {
         playlistsDispatch({
-            type: 'SET_ALERT', payload: {
+            type: ACTION_SET_ALERT, payload: {
                 message,
                 type
             }
         })
-        setTimeout(() => playlistsDispatch({ type: 'REMOVE_ALERT' }), 1500)
+        setTimeout(() => playlistsDispatch({ type: ACTION_REMOVE_ALERT }), ALERT_DISPLAY_TIME)
     }
 
     async function getPlaylists() {
-        playlistsDispatch({ type: 'SET_LOADING' })
+        playlistsDispatch({ type: ACTION_SET_LOADING })
         try {
-            const response = await axios.get('/api/user/playlists', {
+            const response = await axios.get(API_PLAYLISTS, {
                 headers: {
                     authorization: getUserToken()
                 }
@@ -47,13 +48,13 @@ export const PlaylistsProvider = ({ children }) => {
         } catch (e) {
             return e.response.status
         } finally {
-            playlistsDispatch({ type: 'REMOVE_LOADING' })
+            playlistsDispatch({ type: ACTION_REMOVE_LOADING })
         }
     }
 
     async function removePlaylist(_id) {
         try {
-            const response = await axios.delete(`/api/user/playlists/${_id}`, {
+            const response = await axios.delete(`${API_PLAYLISTS}/${_id}`, {
                 headers: {
                     authorization: getUserToken()
                 }
@@ -66,7 +67,7 @@ export const PlaylistsProvider = ({ children }) => {
 
     async function addNewPlaylist(name, description) {
         try {
-            const response = await axios.post('/api/user/playlists', {
+            const response = await axios.post(API_PLAYLISTS, {
                 playlist: {
                     name,
                     description,
@@ -84,7 +85,7 @@ export const PlaylistsProvider = ({ children }) => {
 
     async function addVideoToPlaylist(video, playlistId) {
         try {
-            await axios.post(`/api/user/playlists/${playlistId}`, {
+            await axios.post(`${API_PLAYLISTS}/${playlistId}`, {
                 video
             }, {
                 headers: {
@@ -98,7 +99,7 @@ export const PlaylistsProvider = ({ children }) => {
 
     async function removeVideoFromPlaylist(videoId, playlistId) {
         try {
-            await axios.delete(`/api/user/playlists/${playlistId}/${videoId}`, {
+            await axios.delete(`${API_PLAYLISTS}/${playlistId}/${videoId}`, {
                 headers: {
                     authorization: getUserToken()
                 }

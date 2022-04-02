@@ -1,16 +1,18 @@
-export function watchlaterReducer(state, action) {
+import { ACTION_SET_LOADING, ACTION_REMOVE_LOADING, ACTION_INIT_WATCHLATER, ACTION_ADD_TO_WATCHLATER, ACTION_REMOVE_FROM_WATCHLATER } from '../utils/constants.util'
 
-    switch (action.type) {
+export function watchlaterReducer(state, { type, payload }) {
 
-        case 'SET_LOADING': return { ...state, loading: true }
+    switch (type) {
 
-        case 'REMOVE_LOADING': return { ...state, loading: false }
+        case ACTION_SET_LOADING: return { ...state, loading: true }
 
-        case 'INIT_WATCHLATER': return { ...state, watchlaterVideos: action.payload }
+        case ACTION_REMOVE_LOADING: return { ...state, loading: false }
 
-        case 'ADD_TO_WATCHLATER': return { ...state, watchlaterVideos: state.watchlaterVideos.concat(action.payload) }
+        case ACTION_INIT_WATCHLATER: return { ...state, watchlaterVideos: payload }
 
-        case 'REMOVE_FROM_WATCHLATER': return { ...state, watchlaterVideos: state.watchlaterVideos.filter(video => video._id !== action.payload) }
+        case ACTION_ADD_TO_WATCHLATER: return { ...state, watchlaterVideos: state.watchlaterVideos.concat(payload) }
+
+        case ACTION_REMOVE_FROM_WATCHLATER: return { ...state, watchlaterVideos: state.watchlaterVideos.filter(video => video._id !== payload) }
 
         default: return state
 

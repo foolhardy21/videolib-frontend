@@ -2,8 +2,9 @@ import axios from "axios";
 import { createContext, useContext, useReducer } from "react";
 import { useAuth } from "./";
 import { watchlaterReducer } from '../reducers'
+import { ACTION_REMOVE_LOADING, ACTION_SET_LOADING, API_WATCHLATER } from "../utils/constants.util";
 
-const WatchlaterContext = createContext(null)
+const WatchlaterContext = createContext()
 
 export const WatchlaterProvider = ({ children }) => {
     const [watchlaterState, watchlaterDispatch] = useReducer(watchlaterReducer, {
@@ -13,9 +14,9 @@ export const WatchlaterProvider = ({ children }) => {
     const { getUserToken } = useAuth()
 
     async function getWatchlater() {
-        watchlaterDispatch({ type: 'SET_LOADING' })
+        watchlaterDispatch({ type: ACTION_SET_LOADING })
         try {
-            const response = await axios.get('/api/user/watchlater', {
+            const response = await axios.get(API_WATCHLATER, {
                 headers: {
                     authorization: getUserToken()
                 }
@@ -24,13 +25,13 @@ export const WatchlaterProvider = ({ children }) => {
         } catch (e) {
             return e.response.status
         } finally {
-            watchlaterDispatch({ type: 'REMOVE_LOADING' })
+            watchlaterDispatch({ type: ACTION_REMOVE_LOADING })
         }
     }
 
     async function addToWatchlater(video) {
         try {
-            const response = await axios.post('/api/user/watchlater', {
+            const response = await axios.post(API_WATCHLATER, {
                 video
             }, {
                 headers: {
@@ -45,7 +46,7 @@ export const WatchlaterProvider = ({ children }) => {
 
     async function removeFromWatchlater(videoId) {
         try {
-            await axios.delete(`/api/user/watchlater/${videoId}`, {
+            await axios.delete(`${API_WATCHLATER}/${videoId}`, {
                 headers: {
                     authorization: getUserToken()
                 }

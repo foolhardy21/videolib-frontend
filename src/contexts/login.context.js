@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, useReducer } from "react";
 import { isEmailInvalid, isPasswordInvalid } from "../utils";
 import { loginFormReducer } from "../reducers/login.reducer";
+import { ACTION_REMOVE_EMAIL_ERROR, ACTION_REMOVE_PASSWORD_ERROR, ACTION_SET_EMAIL_ERROR, ACTION_SET_PASSWORD_ERROR, ALERT_DISPLAY_TIME, INPUT_ERROR_TIME } from '../utils/constants.util'
 
 const LoginContext = createContext()
 
@@ -27,13 +28,13 @@ export const LoginProvider = ({ children }) => {
 
         if (isEmailInvalid(loginFormState.email.value)) {
             validationError = true
-            loginFormDispatch({ type: 'SET_EMAIL_ERROR' })
-            setTimeout(() => loginFormDispatch({ type: 'REMOVE_EMAIL_ERROR' }), 3000)
+            loginFormDispatch({ type: ACTION_SET_EMAIL_ERROR })
+            setTimeout(() => loginFormDispatch({ type: ACTION_REMOVE_EMAIL_ERROR }), INPUT_ERROR_TIME)
         }
         if (isPasswordInvalid(loginFormState.password.value)) {
             validationError = true
-            loginFormDispatch({ type: 'SET_PASSWORD_ERROR' })
-            setTimeout(() => loginFormDispatch({ type: 'REMOVE_PASSWORD_ERROR' }), 3000)
+            loginFormDispatch({ type: ACTION_SET_PASSWORD_ERROR })
+            setTimeout(() => loginFormDispatch({ type: ACTION_REMOVE_PASSWORD_ERROR }), INPUT_ERROR_TIME)
         }
         return validationError
     }
@@ -46,7 +47,7 @@ export const LoginProvider = ({ children }) => {
         setTimeout(() => setLoginAlert({
             message: '',
             type: ''
-        }), 1500)
+        }), ALERT_DISPLAY_TIME)
     }
 
     return (

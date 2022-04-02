@@ -1,16 +1,18 @@
-export function historyReducer(state, action) {
+import { ACTION_INIT_HISTORY, ACTION_REMOVE_FROM_HISTORY, ACTION_REMOVE_HISTORY, ACTION_REMOVE_LOADING, ACTION_SET_LOADING } from "../utils/constants.util"
 
-    switch (action.type) {
+export function historyReducer(state, { type, payload }) {
 
-        case 'INIT_HISTORY': return { ...state, history: action.payload }
+    switch (type) {
 
-        case 'SET_LOADING': return { ...state, loading: true }
+        case ACTION_INIT_HISTORY: return { ...state, history: payload }
 
-        case 'REMOVE_LOADING': return { ...state, loading: false }
+        case ACTION_SET_LOADING: return { ...state, loading: true }
 
-        case 'REMOVE_FROM_HISTORY': return { ...state, history: state.history.filter(video => video._id !== action.payload) }
+        case ACTION_REMOVE_LOADING: return { ...state, loading: false }
 
-        case 'REMOVE_HISTORY': return { ...state, history: [] }
+        case ACTION_REMOVE_FROM_HISTORY: return { ...state, history: state.history.filter(video => video._id !== payload) }
+
+        case ACTION_REMOVE_HISTORY: return { ...state, history: [] }
 
         default: return state
 

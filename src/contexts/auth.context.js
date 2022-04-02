@@ -1,6 +1,7 @@
 import axios from "axios"
 import { createContext, useState, useContext } from "react"
 import { Navigate, useLocation } from "react-router-dom"
+import { API_LOGIN, API_SIGNUP } from '../utils/constants.util'
 
 const AuthContext = createContext()
 
@@ -14,7 +15,7 @@ export const AuthProvider = ({ children }) => {
 
     async function loginUser(email, password) {
         try {
-            const response = await axios.post('/api/auth/login', {
+            const response = await axios.post(API_LOGIN, {
                 email,
                 password,
             })
@@ -28,7 +29,7 @@ export const AuthProvider = ({ children }) => {
 
     async function signupUser(email, password, firstName, lastName) {
         try {
-            const response = await axios.post('/api/auth/signup', {
+            const response = await axios.post(API_SIGNUP, {
                 email,
                 password,
                 firstName,

@@ -1,28 +1,30 @@
-export function videosReducer(state, action) {
+import { ACTION_INIT_VIDEOS, ACTION_SET_ALERT, ACTION_REMOVE_ALERT, ACTION_SET_LOADING, ACTION_REMOVE_LOADING, ACTION_FILTER_VIDEOS } from '../utils/constants.util'
 
-    switch (action.type) {
+export function videosReducer(state, { type, payload }) {
 
-        case 'INIT_VIDEOS': return { ...state, videos: action.payload }
+    switch (type) {
 
-        case 'SET_ALERT': return {
+        case ACTION_INIT_VIDEOS: return { ...state, videos: payload }
+
+        case ACTION_SET_ALERT: return {
             ...state, alert: {
-                message: action.payload.message,
-                type: action.payload.type
+                message: payload.message,
+                type: payload.type
             }
         }
 
-        case 'REMOVE_ALERT': return {
+        case ACTION_REMOVE_ALERT: return {
             ...state, alert: {
                 message: '',
                 type: ''
             }
         }
 
-        case 'SET_LOADING': return { ...state, loading: true }
+        case ACTION_SET_LOADING: return { ...state, loading: true }
 
-        case 'REMOVE_LOADING': return { ...state, loading: false }
+        case ACTION_REMOVE_LOADING: return { ...state, loading: false }
 
-        case 'FILTER_VIDEOS': return { ...state, videos: filterVideos(action.payload.videos, action.payload.filterState) }
+        case ACTION_FILTER_VIDEOS: return { ...state, videos: filterVideos(payload.videos, payload.filterState) }
 
         default: return state
 

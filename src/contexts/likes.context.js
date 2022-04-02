@@ -2,6 +2,7 @@ import axios from 'axios'
 import { createContext, useContext, useReducer } from 'react'
 import { useAuth } from './auth.context'
 import { likesReducer } from '../reducers'
+import { ACTION_REMOVE_LOADING, ACTION_SET_LOADING, API_LIKES } from '../utils/constants.util'
 
 const LikesContext = createContext()
 
@@ -14,7 +15,7 @@ export const LikesProvider = ({ children }) => {
 
     async function addVideoToLikes(video) {
         try {
-            const response = await axios.post('/api/user/likes', {
+            const response = await axios.post(API_LIKES, {
                 video
             }, {
                 headers: {
@@ -29,7 +30,7 @@ export const LikesProvider = ({ children }) => {
 
     async function removeVideoFromLikes(_id) {
         try {
-            const response = await axios.delete(`/api/user/likes/${_id}`, {
+            const response = await axios.delete(`${API_LIKES}/${_id}`, {
                 headers: {
                     authorization: getUserToken()
                 }
@@ -41,9 +42,9 @@ export const LikesProvider = ({ children }) => {
     }
 
     async function getLikedVideos() {
-        likesDispatch({ type: 'SET_LOADING' })
+        likesDispatch({ type: ACTION_SET_LOADING })
         try {
-            const response = await axios.get('/api/user/likes', {
+            const response = await axios.get(API_LIKES, {
                 headers: {
                     authorization: getUserToken()
                 }
@@ -52,7 +53,7 @@ export const LikesProvider = ({ children }) => {
         } catch (e) {
             return e.response.status
         } finally {
-            likesDispatch({ type: 'REMOVE_LOADING' })
+            likesDispatch({ type: ACTION_REMOVE_LOADING })
         }
     }
 
