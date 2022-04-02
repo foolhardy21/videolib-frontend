@@ -15,7 +15,6 @@ const VideoCard = ({ video, video: {
     const { theme } = useTheme()
     const { addVideoToHistory } = useHistory()
 
-
     return (
         <Card id='container-video' classes='pd-xs pos-relative'>
 
@@ -36,7 +35,6 @@ const VideoCard = ({ video, video: {
             </div>
 
             <Text classes={`txt-md txt-cap ${getTextColor(theme)} card-txtw-s`}>{`category - ${category}`}</Text>
-
 
             <div className='flx flx-maj-end mg-top-xs'>
 
