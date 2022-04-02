@@ -12,8 +12,6 @@ const VideoCard = ({ video: {
     return (
         <Card id='container-video' classes='pd-xs pos-relative'>
 
-            {/* <Button classes={`btn-solid ${getSolidBtnBgColor(theme)} ${getSolidBtnTextColor(theme)} txt-md txt-lcase pd-xs pos-absolute tr-1`}>watch later</Button> */}
-
             <video id='card-video' controls>
                 <source src={video}></source>
             </video>
