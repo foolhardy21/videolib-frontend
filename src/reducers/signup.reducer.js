@@ -1,6 +1,6 @@
-export function signupFormReducer(state, action) {
+export function signupFormReducer(state, { type, payload }) {
 
-    switch (action.type) {
+    switch (type) {
 
         case 'INIT_FORM': return {
             ...state,
@@ -29,31 +29,31 @@ export function signupFormReducer(state, action) {
         case 'UPDATE_EMAIL': return {
             ...state, email: {
                 ...state.email,
-                value: action.payload
+                value: payload
             }
         }
         case 'UPDATE_FIRST_NAME': return {
             ...state, firstName: {
                 ...state.firstName,
-                value: action.payload
+                value: payload
             }
         }
         case 'UPDATE_LAST_NAME': return {
             ...state, lastName: {
                 ...state.lastName,
-                value: action.payload
+                value: payload
             }
         }
         case 'UPDATE_PASSWORD': return {
             ...state, password: {
                 ...state.password,
-                value: action.payload
+                value: payload
             }
         }
         case 'UPDATE_CONFIRMED_PASSWORD': return {
             ...state, confirmedPassword: {
                 ...state.confirmedPassword,
-                value: action.payload
+                value: payload
             }
         }
         case 'TOGGLE_PASSWORD_TYPE': return { ...state, passwordInputType: state.passwordInputType === 'password' ? 'text' : 'password' }
