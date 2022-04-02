@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import BarLoader from 'react-spinners/BarLoader'
 import { Text, Main, Alert } from "../components/Reusable"
 import { PlaylistHeader, PlaylistsSection, LikesSection, PlaylistForm, WatchlaterSection } from "../components/Playlists"
 import { useTheme, useLikes, usePlaylists, useWatchlater } from "../contexts"
@@ -15,6 +16,12 @@ const Playlists = () => {
 
     useEffect(() => {
         (async () => {
+            const getPlaylistsResponse = await getPlaylists()
+            if (getPlaylistsResponse === 404 || getPlaylistsResponse === 500) {
+                showPlaylistsAlert('could not get playlists', ALERT_TYPE_ERROR)
+            } else {
+                playlistsDispatch({ type: ACTION_INIT_PLAYLISTS, payload: getPlaylistsResponse })
+            }
             const watchlaterVideosResponse = await getWatchlater()
             if (watchlaterVideosResponse === 404 || watchlaterVideosResponse === 500) {
                 showPlaylistsAlert('could not get watch later', ALERT_TYPE_ERROR)
@@ -26,12 +33,6 @@ const Playlists = () => {
                 showPlaylistsAlert('could not get liked videos', ALERT_TYPE_ERROR)
             } else {
                 likesDispatch({ type: ACTION_INIT_LIKES, payload: likedVideosResponse })
-            }
-            const getPlaylistsResponse = await getPlaylists()
-            if (getPlaylistsResponse === 404 || getPlaylistsResponse === 500) {
-                showPlaylistsAlert('could not get playlists', ALERT_TYPE_ERROR)
-            } else {
-                playlistsDispatch({ type: ACTION_INIT_PLAYLISTS, payload: getPlaylistsResponse })
             }
         })()
     }, [])
@@ -63,19 +64,19 @@ const Playlists = () => {
 
                 {
                     playlistsState.loading
-                        ? <Text classes={`${getTextColor(theme)} txt-xlg txt-500 txt-cap`}>loading...</Text>
+                        ? <BarLoader width={300} height={5} css={{ marginLeft: '80px' }} />
                         : <PlaylistsSection />
                 }
 
                 {
                     watchlaterState.loading
-                        ? <Text classes={`${getTextColor(theme)} txt-xlg txt-500 txt-cap`}>loading...</Text>
+                        ? <BarLoader width={300} height={5} css={{ marginLeft: '80px' }} />
                         : <WatchlaterSection />
                 }
 
                 {
                     likesState.loading
-                        ? <Text classes={`${getTextColor(theme)} txt-xlg txt-500 txt-cap`}>loading...</Text>
+                        ? <BarLoader width={300} height={5} css={{ marginLeft: '80px' }} />
                         : <LikesSection />
                 }
 

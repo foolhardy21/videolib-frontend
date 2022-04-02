@@ -43,7 +43,7 @@ const PlaylistVideoCard = ({ video: {
                 <source src={url}></source>
             </video>
 
-            <Text classes={`txt-md txt-cap txt-500 ${getTextColor(theme)} mg-btm-xs`}>{title}</Text>
+            <Text classes={`txt-md txt-cap txt-500 ${getTextColor(theme)} card-txtw-s mg-btm-xs`}>{title}</Text>
 
             <Text classes={`txt-md txt-cap ${getTextColor(theme)} card-txtw-s`}>{description.slice(0, 40)}...</Text>
 

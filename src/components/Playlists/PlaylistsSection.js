@@ -23,6 +23,10 @@ const PlaylistsSection = () => {
         <Section classes='flx flx-column mg-left-md mg-btm-md'>
 
             {
+                playlists.length === 0 && <Text classes={`${getTextColor(theme)} txt-lg txt-cap mg-btm-md`}>no playlists</Text>
+            }
+
+            {
                 playlists?.map(playlist =>
 
                     <Section key={playlist._id} classes=''>

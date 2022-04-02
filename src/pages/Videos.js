@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import BarLoader from "react-spinners/BarLoader";
 import { VideosFilter, VideosHeader, VideosSection, PlaylistModal } from '../components/Videos'
 import { Alert, Main, Text } from '../components/Reusable'
 import { usePlaylists, useTheme, useVideos } from '../contexts'
@@ -53,7 +54,7 @@ const Videos = () => {
 
                 {
                     loading
-                        ? <Text classes={`${getTextColor(theme)} txt-xlg txt-500 txt-cap mg-top-md`}>loading...</Text>
+                        ? <BarLoader height={5} width={300} css={{ marginTop: '50px' }} />
                         : <VideosSection />
                 }
 

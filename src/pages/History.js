@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import BarLoader from "react-spinners/BarLoader";
 import { HistoryHeader, HistorySection } from '../components/History'
 import { Text, Main, Button } from '../components/Reusable'
 import { useHistory, useTheme } from '../contexts'
@@ -65,7 +66,7 @@ const History = () => {
 
                 {
                     loading
-                        ? <Text classes={`${getTextColor(theme)} txt-cap txt-xlg txt-500`}>loading...</Text>
+                        ? <BarLoader width={300} height={5} css={{ marginTop: '50px' }} />
                         : <HistorySection />
                 }
 
