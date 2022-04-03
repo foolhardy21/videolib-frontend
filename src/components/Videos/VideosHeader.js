@@ -1,16 +1,25 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { Header, Text, Button, Icon, NavBar } from 'components/Reusable'
+import { Header, Text, Button, Icon, NavBar, Input } from 'components/Reusable'
 import { getTextColor, getIconColor, getBgColor } from 'utils'
-import { useAuth, useTheme } from 'contexts'
+import { useAuth, useTheme, useVideos } from 'contexts'
+import { ACTION_INIT_VIDEOS } from 'utils/constants.util'
 
 const VideosHeader = () => {
     const [isSmallNavVisible, setIsSmallNavVisible] = useState(false)
+    const [searchQuery, setSearchQuery] = useState('')
     const { theme, toggleTheme } = useTheme()
     const { isUserLoggedIn, logoutUser } = useAuth()
+    const { videosDispatch, getVideos } = useVideos()
 
     function toggleNavVisibility() {
         setIsSmallNavVisible(!isSmallNavVisible)
+    }
+
+    async function handleSearchSubmit() {
+        const getVideosResponse = await getVideos()
+        const filteredVideos = getVideosResponse.filter(video => video.title.toLowerCase().includes(searchQuery.toLowerCase()) || video.description.toLowerCase().includes(searchQuery.toLowerCase()))
+        videosDispatch({ type: ACTION_INIT_VIDEOS, payload: filteredVideos })
     }
 
     return (
@@ -21,6 +30,16 @@ const VideosHeader = () => {
                     sneakerviews
                 </Text>
             </Link>
+
+            <div className='flx'>
+
+                <Input placeholder='search...' value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} classes={`input-s txt-md ${getTextColor(theme)}`} />
+
+                <Button onClick={handleSearchSubmit} classes='btn-txt'>
+                    <Icon classes='pd-xs'>search</Icon>
+                </Button>
+
+            </div>
 
             <NavBar id='nav-big' classes='flx-min-center'>
 
