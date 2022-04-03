@@ -1,3 +1,7 @@
+.sortContainer {
+  width: 100%;
+}
+
 #gridVideos {
   gap: 1rem;
   place-items: center;

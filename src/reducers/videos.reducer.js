@@ -1,4 +1,4 @@
-import { ACTION_INIT_VIDEOS, ACTION_SET_ALERT, ACTION_REMOVE_ALERT, ACTION_SET_LOADING, ACTION_REMOVE_LOADING, ACTION_FILTER_VIDEOS } from 'utils/constants.util'
+import { ACTION_INIT_VIDEOS, ACTION_SET_ALERT, ACTION_REMOVE_ALERT, ACTION_SET_LOADING, ACTION_REMOVE_LOADING, ACTION_FILTER_VIDEOS, ACTION_SORT_VIDEOS_LATEST } from 'utils/constants.util'
 
 export function videosReducer(state, { type, payload }) {
 
@@ -25,6 +25,8 @@ export function videosReducer(state, { type, payload }) {
         case ACTION_REMOVE_LOADING: return { ...state, loading: false }
 
         case ACTION_FILTER_VIDEOS: return { ...state, videos: filterVideos(payload.videos, payload.filterState) }
+
+        case ACTION_SORT_VIDEOS_LATEST: return { ...state, videos: state.videos.sort((a, b) => new Date(a.uploadedOn) - new Date(b.uploadedOn)) }
 
         default: return state
 

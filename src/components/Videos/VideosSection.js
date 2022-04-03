@@ -7,6 +7,8 @@ const VideosSection = () => {
         videos
     } } = useVideos()
 
+    // console.log(videos)
+
     return (
         <section id={styles.gridVideos} className='grid grid-maxcols-4 mg-top-lg'>
 
