@@ -1,7 +1,7 @@
 import { createContext, useContext, useState, useReducer } from "react";
-import { arePasswordAndConfirmedPasswordDiff, isEmailInvalid, isNameInvalid, isPasswordInvalid } from "../utils";
-import { signupFormReducer } from "../reducers";
-import { ACTION_REMOVE_CONFIRMED_PASSWORD_ERROR, ACTION_REMOVE_EMAIL_ERROR, ACTION_REMOVE_FIRST_NAME_ERROR, ACTION_REMOVE_LAST_NAME_ERROR, ACTION_REMOVE_PASSWORD_ERROR, ACTION_SET_CONFIRMED_PASSWORD_ERROR, ACTION_SET_EMAIL_ERROR, ACTION_SET_FIRST_NAME_ERROR, ACTION_SET_LAST_NAME_ERROR, ACTION_SET_PASSWORD_ERROR, ALERT_DISPLAY_TIME, INPUT_ERROR_TIME } from "../utils/constants.util";
+import { arePasswordAndConfirmedPasswordDiff, isEmailInvalid, isNameInvalid, isPasswordInvalid } from "utils";
+import { signupFormReducer } from "reducers";
+import { ACTION_REMOVE_CONFIRMED_PASSWORD_ERROR, ACTION_REMOVE_EMAIL_ERROR, ACTION_REMOVE_FIRST_NAME_ERROR, ACTION_REMOVE_LAST_NAME_ERROR, ACTION_REMOVE_PASSWORD_ERROR, ACTION_SET_CONFIRMED_PASSWORD_ERROR, ACTION_SET_EMAIL_ERROR, ACTION_SET_FIRST_NAME_ERROR, ACTION_SET_LAST_NAME_ERROR, ACTION_SET_PASSWORD_ERROR, ALERT_DISPLAY_TIME, INPUT_ERROR_TIME } from "utils/constants.util";
 
 const SignupContext = createContext()
 

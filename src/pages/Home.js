@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import { useTitle } from '../hooks/useTitle'
+import { useTitle } from 'hooks/useTitle'
 
 const Home = () => {
     useTitle('Home')

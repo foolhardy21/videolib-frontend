@@ -1,7 +1,7 @@
 import { PlaylistVideoCard } from '.'
-import { Section, Text } from "../Reusable"
-import { getTextColor } from '../../utils'
-import { useTheme, useWatchlater } from "../../contexts"
+import { Section, Text } from "components/Reusable"
+import { getTextColor } from 'utils'
+import { useTheme, useWatchlater } from "contexts"
 import styles from './playlists.module.css'
 
 const WatchlaterSection = () => {

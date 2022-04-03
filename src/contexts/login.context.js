@@ -1,7 +1,7 @@
 import { createContext, useContext, useState, useReducer } from "react";
-import { isEmailInvalid, isPasswordInvalid } from "../utils";
-import { loginFormReducer } from "../reducers/login.reducer";
-import { ACTION_REMOVE_EMAIL_ERROR, ACTION_REMOVE_PASSWORD_ERROR, ACTION_SET_EMAIL_ERROR, ACTION_SET_PASSWORD_ERROR, ALERT_DISPLAY_TIME, INPUT_ERROR_TIME } from '../utils/constants.util'
+import { isEmailInvalid, isPasswordInvalid } from "utils";
+import { loginFormReducer } from "reducers";
+import { ACTION_REMOVE_EMAIL_ERROR, ACTION_REMOVE_PASSWORD_ERROR, ACTION_SET_EMAIL_ERROR, ACTION_SET_PASSWORD_ERROR, ALERT_DISPLAY_TIME, INPUT_ERROR_TIME } from 'utils/constants.util'
 
 const LoginContext = createContext()
 

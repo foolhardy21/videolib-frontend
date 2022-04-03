@@ -1,9 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import App from "./App";
-import { makeServer } from "./server";
-import { AuthProvider, ThemeProvider, VideosProvider, FilterProvider, HistoryProvider, LikesProvider, PlaylistsProvider, WatchlaterProvider } from './contexts'
-import './stylesheet/style.css'
+import App from "App";
+import { makeServer } from "server";
+import { AuthProvider, ThemeProvider, VideosProvider, FilterProvider, HistoryProvider, LikesProvider, PlaylistsProvider, WatchlaterProvider } from 'contexts'
+import 'stylesheet/style.css'
 
 // Call make Server
 makeServer();

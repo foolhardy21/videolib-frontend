@@ -1,11 +1,11 @@
 import { useEffect } from 'react'
 import BarLoader from "react-spinners/BarLoader";
-import { VideosFilter, VideosHeader, VideosSection, PlaylistModal } from '../components/Videos'
-import { Alert, Main, Text } from '../components/Reusable'
-import { usePlaylists, useTheme, useVideos } from '../contexts'
-import { useTitle } from '../hooks/useTitle'
-import { getBgColor, getTextColor } from '../utils'
-import { ACTION_INIT_VIDEOS, ALERT_TYPE_ERROR, ALERT_TYPE_SUCCESS } from '../utils/constants.util'
+import { VideosFilter, VideosHeader, VideosSection, PlaylistModal } from 'components/Videos'
+import { Alert, Main, Text } from 'components/Reusable'
+import { usePlaylists, useTheme, useVideos } from 'contexts'
+import { useTitle } from 'hooks/useTitle'
+import { getBgColor, getTextColor } from 'utils'
+import { ACTION_INIT_VIDEOS, ALERT_TYPE_ERROR, ALERT_TYPE_SUCCESS } from 'utils/constants.util'
 
 const Videos = () => {
     useTitle('Videos')

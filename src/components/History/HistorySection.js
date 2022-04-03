@@ -1,6 +1,6 @@
 import { HistoryVideoCard } from "."
-import { Section } from '../Reusable'
-import { useHistory } from '../../contexts'
+import { Section } from 'components/Reusable'
+import { useHistory } from 'contexts'
 import styles from './history.module.css'
 
 const HistorySection = () => {

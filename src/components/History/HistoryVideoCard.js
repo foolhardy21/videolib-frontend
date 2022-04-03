@@ -1,8 +1,8 @@
-import { Button, Card, Icon, Text } from '../Reusable'
-import { useHistory, useTheme } from '../../contexts'
-import { getIconColor, getTextColor } from '../../utils'
+import { Button, Card, Icon, Text } from 'components/Reusable'
+import { useHistory, useTheme } from 'contexts'
+import { getIconColor, getTextColor } from 'utils'
+import { ACTION_REMOVE_FROM_HISTORY } from 'utils/constants.util'
 import styles from './history.module.css'
-import { ACTION_REMOVE_FROM_HISTORY } from '../../utils/constants.util'
 
 const HistoryVideoCard = ({ video: {
     _id,

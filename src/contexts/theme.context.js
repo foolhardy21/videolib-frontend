@@ -1,4 +1,4 @@
-import { THEME_DARK, THEME_LIGHT } from "../utils/constants.util";
+import { THEME_DARK, THEME_LIGHT } from "utils/constants.util";
 
 const { createContext, useContext, useState } = require("react");
 

@@ -1,8 +1,8 @@
-import { Card, Text, Button, Icon } from '../Reusable'
-import { usePlaylists, useTheme, useWatchlater } from '../../contexts'
-import { getTextColor, getBgColor, getIconColor } from '../../utils'
+import { Card, Text, Button, Icon } from 'components/Reusable'
+import { usePlaylists, useTheme, useWatchlater } from 'contexts'
+import { getTextColor, getBgColor, getIconColor } from 'utils'
+import { ACTION_REMOVE_FROM_WATCHLATER, ACTION_REMOVE_VIDEO_FROM_PLAYLIST, ALERT_TYPE_ERROR, ALERT_TYPE_SUCCESS } from 'utils/constants.util'
 import styles from './playlists.module.css'
-import { ACTION_REMOVE_FROM_WATCHLATER, ACTION_REMOVE_VIDEO_FROM_PLAYLIST, ALERT_TYPE_ERROR, ALERT_TYPE_SUCCESS } from '../../utils/constants.util'
 
 const PlaylistVideoCard = ({ video: {
     _id,

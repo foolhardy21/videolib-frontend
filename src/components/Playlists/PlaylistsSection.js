@@ -1,9 +1,9 @@
 import { PlaylistVideoCard } from './'
-import { Section, Text, Button, Icon } from "../Reusable"
-import { getTextColor, getBgColor, getIconColor } from '../../utils'
-import { useTheme, usePlaylists } from "../../contexts"
+import { Section, Text, Button, Icon } from "components/Reusable"
+import { getTextColor, getBgColor, getIconColor } from 'utils'
+import { useTheme, usePlaylists } from "contexts"
+import { ACTION_REMOVE_PLAYLIST, ALERT_TYPE_SUCCESS } from 'utils/constants.util'
 import styles from './playlists.module.css'
-import { ACTION_REMOVE_PLAYLIST, ALERT_TYPE_SUCCESS } from '../../utils/constants.util'
 
 const PlaylistsSection = () => {
     const { playlistsState: { playlists }, playlistsDispatch, removePlaylist, showPlaylistsAlert } = usePlaylists()

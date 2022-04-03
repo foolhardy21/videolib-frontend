@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Header, Text, Button, Icon, NavBar } from '../Reusable'
-import { getTextColor, getIconColor, getBgColor } from '../../utils'
-import { useAuth, useTheme } from '../../contexts'
+import { Header, Text, Button, Icon, NavBar } from 'components/Reusable'
+import { getTextColor, getIconColor, getBgColor } from 'utils'
+import { useAuth, useTheme } from 'contexts'
 
 const VideosHeader = () => {
     const [isSmallNavVisible, setIsSmallNavVisible] = useState(false)

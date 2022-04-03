@@ -1,8 +1,8 @@
 import { useState } from "react"
 import { Link } from "react-router-dom"
-import { Header, Button, Text, Icon, NavBar } from "../Reusable"
-import { getTextColor, getIconColor, getBgColor } from '../../utils'
-import { useAuth, useTheme } from "../../contexts"
+import { Header, Button, Text, Icon, NavBar } from "components/Reusable"
+import { getTextColor, getIconColor, getBgColor } from 'utils'
+import { useAuth, useTheme } from "contexts"
 
 const PlaylistHeader = () => {
     const { theme, toggleTheme } = useTheme()

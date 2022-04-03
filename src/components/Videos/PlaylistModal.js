@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react"
-import { Label, Section, Text, Card, Button } from "../Reusable"
-import { usePlaylists, useTheme, useVideos } from "../../contexts"
-import { getBgColor, getSolidBtnBgColor, getSolidBtnTextColor, getTextColor } from "../../utils"
-import { ACTION_INIT_PLAYLISTS } from "../../utils/constants.util"
+import { Label, Section, Text, Card, Button } from "components/Reusable"
+import { usePlaylists, useTheme, useVideos } from "contexts"
+import { getBgColor, getSolidBtnBgColor, getSolidBtnTextColor, getTextColor } from "utils"
+import { ACTION_INIT_PLAYLISTS } from "utils/constants.util"
 
 const PlaylistModal = () => {
     const [selectedPlaylist, setSelectedPlaylist] = useState({})

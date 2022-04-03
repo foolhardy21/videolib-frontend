@@ -1,8 +1,8 @@
 import axios from "axios";
 import { createContext, useContext, useReducer } from "react";
 import { useAuth } from "./";
-import { watchlaterReducer } from '../reducers'
-import { ACTION_REMOVE_LOADING, ACTION_SET_LOADING, API_WATCHLATER } from "../utils/constants.util";
+import { watchlaterReducer } from 'reducers'
+import { ACTION_REMOVE_LOADING, ACTION_SET_LOADING, API_WATCHLATER } from "utils/constants.util";
 
 const WatchlaterContext = createContext()
 

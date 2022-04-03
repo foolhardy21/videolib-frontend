@@ -1,11 +1,11 @@
 import { useEffect } from 'react'
 import BarLoader from 'react-spinners/BarLoader'
-import { Text, Main, Alert } from "../components/Reusable"
-import { PlaylistHeader, PlaylistsSection, LikesSection, PlaylistForm, WatchlaterSection } from "../components/Playlists"
-import { useTheme, useLikes, usePlaylists, useWatchlater } from "../contexts"
-import { useTitle } from '../hooks/useTitle'
-import { getBgColor, getTextColor } from "../utils"
-import { ACTION_INIT_LIKES, ACTION_INIT_PLAYLISTS, ACTION_INIT_WATCHLATER, ALERT_TYPE_ERROR, ALERT_TYPE_SUCCESS } from '../utils/constants.util'
+import { Text, Main, Alert } from "components/Reusable"
+import { PlaylistHeader, PlaylistsSection, LikesSection, PlaylistForm, WatchlaterSection } from "components/Playlists"
+import { useTheme, useLikes, usePlaylists, useWatchlater } from "contexts"
+import { useTitle } from 'hooks/useTitle'
+import { getBgColor, getTextColor } from "utils"
+import { ACTION_INIT_LIKES, ACTION_INIT_PLAYLISTS, ACTION_INIT_WATCHLATER, ALERT_TYPE_ERROR, ALERT_TYPE_SUCCESS } from 'utils/constants.util'
 
 const Playlists = () => {
     useTitle('Playlists')

@@ -1,4 +1,4 @@
-import { ACTION_ADD_TO_LIKES, ACTION_INIT_LIKES, ACTION_REMOVE_FROM_LIKES, ACTION_REMOVE_LOADING, ACTION_SET_LOADING } from "../utils/constants.util"
+import { ACTION_ADD_TO_LIKES, ACTION_INIT_LIKES, ACTION_REMOVE_FROM_LIKES, ACTION_REMOVE_LOADING, ACTION_SET_LOADING } from "utils/constants.util"
 
 export function likesReducer(state, { type, payload }) {
 

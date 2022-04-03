@@ -1,7 +1,7 @@
 import axios from "axios";
 import { createContext, useContext, useReducer, useState } from "react";
-import { playlistsReducer } from '../reducers'
-import { ACTION_REMOVE_ALERT, ACTION_REMOVE_LOADING, ACTION_SET_ALERT, ACTION_SET_LOADING, ALERT_DISPLAY_TIME, API_PLAYLISTS } from "../utils/constants.util";
+import { playlistsReducer } from 'reducers'
+import { ACTION_REMOVE_ALERT, ACTION_REMOVE_LOADING, ACTION_SET_ALERT, ACTION_SET_LOADING, ALERT_DISPLAY_TIME, API_PLAYLISTS } from "utils/constants.util";
 import { useAuth } from "./";
 
 const PlaylistsContext = createContext()

@@ -1,8 +1,8 @@
 import axios from 'axios'
 import { createContext, useContext, useReducer } from 'react'
-import { useAuth } from './auth.context'
-import { likesReducer } from '../reducers'
-import { ACTION_REMOVE_LOADING, ACTION_SET_LOADING, API_LIKES } from '../utils/constants.util'
+import { useAuth } from './'
+import { likesReducer } from 'reducers'
+import { ACTION_REMOVE_LOADING, ACTION_SET_LOADING, API_LIKES } from 'utils/constants.util'
 
 const LikesContext = createContext()
 

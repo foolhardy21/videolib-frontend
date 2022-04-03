@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Signup, Login, Videos, History, Playlists } from "./pages";
-import { SignupProvider, LoginProvider, useAuth } from './contexts'
-import { ROUTE_HISTORY, ROUTE_LOGIN, ROUTE_PLAYLISTS, ROUTE_SIGNUP, ROUTE_VIDEOS } from "./utils/constants.util";
+import { Signup, Login, Videos, History, Playlists } from "pages";
+import { SignupProvider, LoginProvider, useAuth } from 'contexts'
+import { ROUTE_HISTORY, ROUTE_LOGIN, ROUTE_PLAYLISTS, ROUTE_SIGNUP, ROUTE_VIDEOS } from "utils/constants.util";
 
 const App = () => {
   const { RequireAuth } = useAuth()

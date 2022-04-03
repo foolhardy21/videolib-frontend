@@ -1,7 +1,7 @@
 import axios from "axios";
 import { createContext, useContext, useReducer } from "react";
-import { filterReducer } from "../reducers";
-import { API_CATEGORIES } from "../utils/constants.util";
+import { filterReducer } from "reducers";
+import { API_CATEGORIES } from "utils/constants.util";
 
 const FilterContext = createContext()
 

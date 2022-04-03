@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
-import { Label } from "../Reusable"
-import { useTheme, useFilter, useVideos } from '../../contexts'
-import { getTextColor } from '../../utils'
-import { ACTION_ADD_CATEGORY_TO_FILTER, ACTION_FILTER_VIDEOS, ACTION_REMOVE_CATEGORY_FROM_FILTER } from '../../utils/constants.util'
+import { Label } from "components/Reusable"
+import { useTheme, useFilter, useVideos } from 'contexts'
+import { getTextColor } from 'utils'
+import { ACTION_ADD_CATEGORY_TO_FILTER, ACTION_FILTER_VIDEOS, ACTION_REMOVE_CATEGORY_FROM_FILTER } from 'utils/constants.util'
 
 const VideosFilter = () => {
     const [categories, setCategories] = useState([])

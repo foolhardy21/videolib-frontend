@@ -1,8 +1,8 @@
-import { Button, Card, Text } from "../Reusable"
-import { getSolidBtnBgColor, getSolidBtnTextColor, getTextColor } from '../../utils'
-import { useHistory, useLikes, usePlaylists, useTheme, useVideos, useWatchlater } from "../../contexts"
+import { Button, Card, Text } from "components/Reusable"
+import { getSolidBtnBgColor, getSolidBtnTextColor, getTextColor } from 'utils'
+import { useHistory, useLikes, usePlaylists, useTheme, useVideos, useWatchlater } from "contexts"
+import { ACTION_ADD_TO_LIKES, ACTION_REMOVE_FROM_LIKES, ALERT_TYPE_ERROR, ALERT_TYPE_SUCCESS } from "utils/constants.util"
 import styles from './videos.module.css'
-import { ACTION_ADD_TO_LIKES, ACTION_REMOVE_FROM_LIKES, ALERT_TYPE_ERROR, ALERT_TYPE_SUCCESS } from "../../utils/constants.util"
 
 const VideoCard = ({ video, video: {
     _id,

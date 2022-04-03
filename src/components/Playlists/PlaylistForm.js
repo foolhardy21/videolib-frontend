@@ -1,8 +1,8 @@
 import { useState } from "react"
-import { usePlaylists, useTheme } from "../../contexts"
-import { getBgColor, getBorderColor, getTextColor } from "../../utils"
-import { ACTION_ADD_NEW_PLAYLIST, ALERT_TYPE_ERROR, ALERT_TYPE_SUCCESS } from "../../utils/constants.util"
-import { Button, Input, Label } from "../Reusable"
+import { usePlaylists, useTheme } from "contexts"
+import { getBgColor, getBorderColor, getTextColor } from "utils"
+import { ACTION_ADD_NEW_PLAYLIST, ALERT_TYPE_ERROR, ALERT_TYPE_SUCCESS } from "utils/constants.util"
+import { Button, Input, Label } from "components/Reusable"
 
 const PlaylistForm = () => {
     const [newPlaylistInfo, setNewPlaylistInfo] = useState({

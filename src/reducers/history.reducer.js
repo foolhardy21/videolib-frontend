@@ -1,4 +1,4 @@
-import { ACTION_INIT_HISTORY, ACTION_REMOVE_FROM_HISTORY, ACTION_REMOVE_HISTORY, ACTION_REMOVE_LOADING, ACTION_SET_LOADING } from "../utils/constants.util"
+import { ACTION_INIT_HISTORY, ACTION_REMOVE_FROM_HISTORY, ACTION_REMOVE_HISTORY, ACTION_REMOVE_LOADING, ACTION_SET_LOADING } from "utils/constants.util"
 
 export function historyReducer(state, { type, payload }) {
 

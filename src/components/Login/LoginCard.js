@@ -1,8 +1,8 @@
-import { LoginForm } from './'
-import { Card, Text, Button, Icon } from '../Reusable'
-import { useTheme } from '../../contexts'
-import { getBorderColor, getTextColor } from '../../utils'
 import { Link } from 'react-router-dom'
+import { LoginForm } from './'
+import { Card, Text, Button, Icon } from 'components/Reusable'
+import { useTheme } from 'contexts'
+import { getBorderColor, getTextColor } from 'utils'
 
 const LoginCard = () => {
     const { theme } = useTheme()

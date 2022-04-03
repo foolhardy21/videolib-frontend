@@ -1,5 +1,5 @@
-import { useVideos } from "../../contexts"
-import VideoCard from "./VideoCard"
+import { useVideos } from "contexts"
+import { VideoCard } from "./"
 import styles from './videos.module.css'
 
 const VideosSection = () => {

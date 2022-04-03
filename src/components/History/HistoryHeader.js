@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Header, NavBar, Button, Text, Icon } from '../Reusable'
-import { getTextColor, getIconColor, getBgColor } from '../../utils'
-import { useAuth, useTheme } from '../../contexts'
+import { Header, NavBar, Button, Text, Icon } from 'components/Reusable'
+import { getTextColor, getIconColor, getBgColor } from 'utils'
+import { useAuth, useTheme } from 'contexts'
 
 const HistoryHeader = () => {
     const [isSmallNavVisible, setIsSmallNavVisible] = useState(false)

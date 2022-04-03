@@ -1,9 +1,9 @@
 import { useEffect, useRef } from "react"
 import { useNavigate, useLocation } from "react-router-dom"
-import { Form, Text, Button, Input, Label } from "../Reusable"
-import { getSolidBtnBgColor, getSolidBtnTextColor, getTextColor } from "../../utils"
-import { useLogin, useTheme, useAuth } from '../../contexts'
-import { ACTION_TOGGLE_PASSWORD_TYPE, ACTION_UPDATE_EMAIL, ACTION_UPDATE_PASSWORD, ALERT_DISPLAY_TIME, ALERT_TYPE_ERROR, ALERT_TYPE_SUCCESS } from "../../utils/constants.util"
+import { Form, Text, Button, Input, Label } from "components/Reusable"
+import { getSolidBtnBgColor, getSolidBtnTextColor, getTextColor } from "utils"
+import { useLogin, useTheme, useAuth } from 'contexts'
+import { ACTION_TOGGLE_PASSWORD_TYPE, ACTION_UPDATE_EMAIL, ACTION_UPDATE_PASSWORD, ALERT_DISPLAY_TIME, ALERT_TYPE_ERROR, ALERT_TYPE_SUCCESS } from "utils/constants.util"
 
 const LoginForm = () => {
     const loginBtnRef = useRef(null)
