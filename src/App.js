@@ -1,9 +1,10 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Signup, Login, Videos, History, Playlists } from "./pages";
-import { SignupProvider, LoginProvider } from './contexts'
+import { SignupProvider, LoginProvider, useAuth } from './contexts'
 import { ROUTE_HISTORY, ROUTE_LOGIN, ROUTE_PLAYLISTS, ROUTE_SIGNUP, ROUTE_VIDEOS } from "./utils/constants.util";
 
 const App = () => {
+  const { RequireAuth } = useAuth()
 
   return (
 
@@ -21,8 +22,16 @@ const App = () => {
             <Login />
           </LoginProvider>} />
         <Route path={ROUTE_VIDEOS} element={<Videos />} />
-        <Route path={ROUTE_HISTORY} element={<History />} />
-        <Route path={ROUTE_PLAYLISTS} element={<Playlists />} />
+        <Route path={ROUTE_HISTORY} element={
+          <RequireAuth>
+            <History />
+          </RequireAuth>
+        } />
+        <Route path={ROUTE_PLAYLISTS} element={
+          <RequireAuth>
+            <Playlists />
+          </RequireAuth>
+        } />
       </Routes>
     </BrowserRouter>
   );

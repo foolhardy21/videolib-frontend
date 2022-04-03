@@ -2,11 +2,12 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Header, NavBar, Button, Text, Icon } from '../Reusable'
 import { getTextColor, getIconColor, getBgColor } from '../../utils'
-import { useTheme } from '../../contexts'
+import { useAuth, useTheme } from '../../contexts'
 
 const HistoryHeader = () => {
     const [isSmallNavVisible, setIsSmallNavVisible] = useState(false)
     const { theme, toggleTheme } = useTheme()
+    const { logoutUser } = useAuth()
 
     function toggleNavVisibility() {
         setIsSmallNavVisible(!isSmallNavVisible)
@@ -41,9 +42,9 @@ const HistoryHeader = () => {
                     </Icon>
                 </Link>
 
-                <Link to='/login'>
-                    <Button classes={`btn-txt txt-lcase ${getTextColor(theme)} bg-primary pd-xs txt-md`}>
-                        login
+                <Link to='/'>
+                    <Button onClick={logoutUser} classes={`btn-txt txt-lcase ${getTextColor(theme)} bg-primary pd-xs txt-md`}>
+                        logout
                     </Button>
                 </Link>
 
@@ -91,9 +92,9 @@ const HistoryHeader = () => {
                             </Icon>
                         </Link>
 
-                        <Link to='/login'>
-                            <Button classes={`btn-txt txt-lcase ${getTextColor(theme)} txt-md`}>
-                                login
+                        <Link to='/'>
+                            <Button onClick={logoutUser} classes={`btn-txt txt-lcase ${getTextColor(theme)} txt-md`}>
+                                logout
                             </Button>
                         </Link>
 

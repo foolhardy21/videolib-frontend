@@ -22,7 +22,6 @@ const LoginCard = () => {
                     <Icon>
                         chevron_right
                     </Icon>
-
                 </Button>
             </Link>
 

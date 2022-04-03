@@ -48,6 +48,7 @@ export function makeServer({ environment = "development" } = {}) {
       like: Model,
       history: Model,
       playlist: Model,
+      watchlater: Model,
     },
 
     // Runs on the start of the server
@@ -63,6 +64,7 @@ export function makeServer({ environment = "development" } = {}) {
           likes: [],
           history: [],
           playlists: [],
+          watchlater: [],
         })
       );
     },

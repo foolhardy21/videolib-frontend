@@ -2,11 +2,12 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Header, Text, Button, Icon, NavBar } from '../Reusable'
 import { getTextColor, getIconColor, getBgColor } from '../../utils'
-import { useTheme } from '../../contexts'
+import { useAuth, useTheme } from '../../contexts'
 
 const VideosHeader = () => {
     const [isSmallNavVisible, setIsSmallNavVisible] = useState(false)
     const { theme, toggleTheme } = useTheme()
+    const { isUserLoggedIn, logoutUser } = useAuth()
 
     function toggleNavVisibility() {
         setIsSmallNavVisible(!isSmallNavVisible)
@@ -41,11 +42,19 @@ const VideosHeader = () => {
                     </Icon>
                 </Link>
 
-                <Link to='/login'>
-                    <Button classes={`btn-txt txt-lcase ${getTextColor(theme)} bg-primary pd-xs txt-md`}>
-                        login
-                    </Button>
-                </Link>
+                {
+                    isUserLoggedIn
+                        ? <Link to='/'>
+                            <Button onClick={logoutUser} classes={`btn-txt txt-lcase ${getTextColor(theme)} bg-primary pd-xs txt-md`}>
+                                logout
+                            </Button>
+                        </Link>
+                        : <Link to='/login'>
+                            <Button classes={`btn-txt txt-lcase ${getTextColor(theme)} bg-primary pd-xs txt-md`}>
+                                login
+                            </Button>
+                        </Link>
+                }
 
             </NavBar>
 

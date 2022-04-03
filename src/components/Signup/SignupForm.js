@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom"
 import { Form, Input, Label, Button, Text } from "../Reusable"
 import { getSolidBtnTextColor, getSolidBtnBgColor } from "../../utils"
 import { useTheme, useSignup, useAuth } from '../../contexts'
-import { ACTION_INIT_FORM, ALERT_DISPLAY_TIME, ALERT_TYPE_ERROR, ALERT_TYPE_SUCCESS } from "../../utils/constants.util"
+import { ACTION_INIT_FORM, ACTION_TOGGLE_PASSWORD_TYPE, ACTION_UPDATE_CONFIRMED_PASSWORD, ACTION_UPDATE_EMAIL, ACTION_UPDATE_FIRST_NAME, ACTION_UPDATE_LAST_NAME, ACTION_UPDATE_PASSWORD, ALERT_DISPLAY_TIME, ALERT_TYPE_ERROR, ALERT_TYPE_SUCCESS } from "../../utils/constants.util"
 
 const SignupForm = () => {
     const navigate = useNavigate()
@@ -30,30 +30,30 @@ const SignupForm = () => {
 
         <Form>
 
-            <Input type='email' placeholder="email" value={signupFormState.email.value} onChange={(e) => signupFormDispatch({ type: 'UPDATE_EMAIL', payload: e.target.value })} classes={`${signupFormState.email.error && 'input-err'} input-lg txt-md pd-xs mg-top-s`} />
+            <Input type='email' placeholder="email" value={signupFormState.email.value} onChange={(e) => signupFormDispatch({ type: ACTION_UPDATE_EMAIL, payload: e.target.value })} classes={`${signupFormState.email.error && 'input-err'} input-lg txt-md pd-xs mg-top-s`} />
             {
                 signupFormState.email.error && <Text classes="txt-md txt-cap txt-err mg-top-xs mg-left-xs">email is invalid</Text>
             }
 
-            <Input type='text' placeholder="first name" value={signupFormState.firstName.value} onChange={(e) => signupFormDispatch({ type: 'UPDATE_FIRST_NAME', payload: e.target.value })}
+            <Input type='text' placeholder="first name" value={signupFormState.firstName.value} onChange={(e) => signupFormDispatch({ type: ACTION_UPDATE_FIRST_NAME, payload: e.target.value })}
                 classes={`${signupFormState.firstName.error && 'input-err'} input-lg txt-md pd-xs mg-top-s`} />
             {
                 signupFormState.firstName.error && <Text classes="txt-md txt-err txt-cap mg-top-xs mg-left-xs">first name is invalid</Text>
             }
 
-            <Input type='text' placeholder="last name" value={signupFormState.lastName.value} onChange={(e) => signupFormDispatch({ type: 'UPDATE_LAST_NAME', payload: e.target.value })}
+            <Input type='text' placeholder="last name" value={signupFormState.lastName.value} onChange={(e) => signupFormDispatch({ type: ACTION_UPDATE_LAST_NAME, payload: e.target.value })}
                 classes={`${signupFormState.lastName.error && 'input-err'} input-lg txt-md pd-xs mg-top-s`} />
             {
                 signupFormState.lastName.error && <span className="txt-md txt-err txt-cap mg-left-xs mg-top-xs">last name is invalid</span>
             }
 
-            <Input type={signupFormState.passwordInputType} placeholder="password" value={signupFormState.password.value} onChange={(e) => signupFormDispatch({ type: 'UPDATE_PASSWORD', payload: e.target.value })}
+            <Input type={signupFormState.passwordInputType} placeholder="password" value={signupFormState.password.value} onChange={(e) => signupFormDispatch({ type: ACTION_UPDATE_PASSWORD, payload: e.target.value })}
                 classes={`${signupFormState.password.error && 'input-err'} input-lg txt-md pd-xs mg-top-s`} />
             {
                 signupFormState.password.error && <Text classes="txt-md txt-err txt-cap mg-left-xs mg-top-xs">password must be alphanumeric {<br />} with special characters</Text>
             }
 
-            <Input type={signupFormState.passwordInputType} placeholder="confirm password" value={signupFormState.confirmedPassword.value} onChange={(e) => signupFormDispatch({ type: 'UPDATE_CONFIRMED_PASSWORD', payload: e.target.value })}
+            <Input type={signupFormState.passwordInputType} placeholder="confirm password" value={signupFormState.confirmedPassword.value} onChange={(e) => signupFormDispatch({ type: ACTION_UPDATE_CONFIRMED_PASSWORD, payload: e.target.value })}
                 classes={`${signupFormState.confirmedPassword.error && 'input-err'} input-lg txt-md pd-xs mg-top-s`} />
             {
                 signupFormState.confirmedPassword.error && <Text classes="txt-md txt-err txt-cap mg-left-xs mg-top-xs">password is not matching</Text>
@@ -62,7 +62,7 @@ const SignupForm = () => {
             <div className='flx flx-maj-end flx-min-center mg-top-xs mg-btm-md'>
 
                 <Label htmlFor='toggle-pass' classes='txt-cap txt-md'>
-                    <Input type='checkbox' id='toggle-pass' onChange={() => signupFormDispatch({ type: 'TOGGLE_PASSWORD_TYPE' })} classes='mg-right-xs' />
+                    <Input type='checkbox' id='toggle-pass' onChange={() => signupFormDispatch({ type: ACTION_TOGGLE_PASSWORD_TYPE })} classes='mg-right-xs' />
                     show password
                 </Label>
 

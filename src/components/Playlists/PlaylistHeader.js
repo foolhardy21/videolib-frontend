@@ -2,11 +2,12 @@ import { useState } from "react"
 import { Link } from "react-router-dom"
 import { Header, Button, Text, Icon, NavBar } from "../Reusable"
 import { getTextColor, getIconColor, getBgColor } from '../../utils'
-import { useTheme } from "../../contexts"
+import { useAuth, useTheme } from "../../contexts"
 
 const PlaylistHeader = () => {
     const { theme, toggleTheme } = useTheme()
     const [isSmallNavVisible, setIsSmallNavVisible] = useState(false)
+    const { logoutUser } = useAuth()
 
     function toggleNavVisibility() {
         setIsSmallNavVisible(!isSmallNavVisible)
@@ -43,9 +44,9 @@ const PlaylistHeader = () => {
                 </Link>
 
 
-                <Link to='/signup'>
-                    <Button classes={`btn-txt txt-lcase ${getTextColor(theme)} pd-xs txt-md`}>
-                        signup
+                <Link to='/'>
+                    <Button onClick={logoutUser} classes={`btn-txt txt-lcase ${getTextColor(theme)} pd-xs txt-md`}>
+                        logout
                     </Button>
                 </Link>
 
@@ -93,9 +94,9 @@ const PlaylistHeader = () => {
                             </Icon>
                         </Link>
 
-                        <Link to='/signup'>
-                            <Button classes={`btn-txt txt-lcase ${getTextColor(theme)} txt-md`}>
-                                signup
+                        <Link to='/'>
+                            <Button onClick={logoutUser} classes={`btn-txt txt-lcase ${getTextColor(theme)} txt-md`}>
+                                logout
                             </Button>
                         </Link>
 
