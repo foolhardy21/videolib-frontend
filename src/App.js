@@ -1,7 +1,8 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Signup, Login, Videos, History, Playlists } from "pages";
 import { SignupProvider, LoginProvider, useAuth } from 'contexts'
-import { ROUTE_HISTORY, ROUTE_LOGIN, ROUTE_PLAYLISTS, ROUTE_SIGNUP, ROUTE_VIDEOS } from "utils/constants.util";
+import { ROUTE_HISTORY, ROUTE_HOME, ROUTE_LOGIN, ROUTE_PLAYLISTS, ROUTE_SIGNUP, ROUTE_VIDEOS } from "utils/constants.util";
+import Home from "pages/Home";
 
 const App = () => {
   const { RequireAuth } = useAuth()
@@ -32,6 +33,7 @@ const App = () => {
             <Playlists />
           </RequireAuth>
         } />
+        <Route path={ROUTE_HOME} element={<Home />} />
       </Routes>
     </BrowserRouter>
   );

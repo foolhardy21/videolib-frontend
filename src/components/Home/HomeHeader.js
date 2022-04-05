@@ -1,25 +1,16 @@
-import { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
-import { Header, Text, Button, Icon, NavBar, Input } from 'components/Reusable'
+import { useState } from 'react'
+import { Link } from "react-router-dom"
+import { Header, Icon, Text, Button, NavBar } from 'components/Reusable'
+import { useAuth, useTheme } from "contexts"
 import { getTextColor, getIconColor, getBgColor } from 'utils'
-import { useAuth, useTheme, useVideos } from 'contexts'
-import { ACTION_INIT_VIDEOS } from 'utils/constants.util'
 
-const VideosHeader = () => {
+const HomeHeader = () => {
     const [isSmallNavVisible, setIsSmallNavVisible] = useState(false)
-    const [searchQuery, setSearchQuery] = useState('')
     const { theme, toggleTheme } = useTheme()
     const { isUserLoggedIn, logoutUser } = useAuth()
-    const { videosDispatch, getVideos } = useVideos()
 
     function toggleNavVisibility() {
         setIsSmallNavVisible(!isSmallNavVisible)
-    }
-
-    async function handleSearchSubmit() {
-        const getVideosResponse = await getVideos()
-        const filteredVideos = getVideosResponse.filter(video => video.title.toLowerCase().includes(searchQuery.toLowerCase()) || video.description.toLowerCase().includes(searchQuery.toLowerCase()))
-        videosDispatch({ type: ACTION_INIT_VIDEOS, payload: filteredVideos })
     }
 
     return (
@@ -30,16 +21,6 @@ const VideosHeader = () => {
                     sneakerviews
                 </Text>
             </Link>
-
-            <div className='flx'>
-
-                <Input placeholder='search...' value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} classes={`input-s txt-md ${getTextColor(theme)}`} />
-
-                <Button onClick={handleSearchSubmit} classes='btn-txt'>
-                    <Icon classes='pd-xs'>search</Icon>
-                </Button>
-
-            </div>
 
             <NavBar id='nav-big' classes='flx-min-center'>
 
@@ -55,6 +36,7 @@ const VideosHeader = () => {
                     </Icon>
                 </Link>
 
+
                 <Link to='/history'>
                     <Icon classes={`${getIconColor(theme)} mg-right-lg`}>
                         history
@@ -63,13 +45,11 @@ const VideosHeader = () => {
 
                 {
                     isUserLoggedIn
-                        ? <Link to='/'>
-                            <Button onClick={logoutUser} classes={`btn-txt txt-lcase ${getTextColor(theme)} bg-primary pd-xs txt-md`}>
-                                logout
-                            </Button>
-                        </Link>
+                        ? <Button onClick={logoutUser} classes={`btn-txt txt-lcase ${getTextColor(theme)} pd-xs txt-md`}>
+                            logout
+                        </Button>
                         : <Link to='/login'>
-                            <Button classes={`btn-txt txt-lcase ${getTextColor(theme)} bg-primary pd-xs txt-md`}>
+                            <Button classes={`btn-txt txt-lcase ${getTextColor(theme)} pd-xs txt-md`}>
                                 login
                             </Button>
                         </Link>
@@ -91,9 +71,9 @@ const VideosHeader = () => {
                     isSmallNavVisible &&
                     <NavBar id='nav-small' classes={`flx-column pd-md ${getBgColor(theme)} pos-absolute z-index tl-0 b-solid`}>
 
-                        <Button onClick={toggleNavVisibility} classes='btn-txt mg-btm-s'>
+                        <Button onClick={toggleNavVisibility} classes='btn-txt mg-btm-xs'>
 
-                            <Icon classes={`${getIconColor(theme)}`}>
+                            <Icon classes={getIconColor(theme)}>
                                 close
                             </Icon>
 
@@ -119,17 +99,23 @@ const VideosHeader = () => {
                             </Icon>
                         </Link>
 
-                        <Link to='/login'>
-                            <Button classes={`btn-txt txt-lcase ${getTextColor(theme)} txt-md`}>
-                                login
-                            </Button>
-                        </Link>
+                        {
+                            isUserLoggedIn
+                                ? <Button onClick={logoutUser} classes={`btn-txt txt-lcase ${getTextColor(theme)} pd-xs txt-md`}>
+                                    logout
+                                </Button>
+                                : <Link to='/login'>
+                                    <Button classes={`btn-txt txt-lcase ${getTextColor(theme)} pd-xs txt-md`}>
+                                        login
+                                    </Button>
+                                </Link>
+                        }
 
                     </NavBar>
 
                 }
 
-            </div >
+            </div>
 
             <Button onClick={toggleTheme} classes='btn-txt pd-xs'>
 
@@ -140,8 +126,8 @@ const VideosHeader = () => {
                 </Icon>
             </Button>
 
-        </Header >
+        </Header>
     )
 }
 
-export default VideosHeader
+export default HomeHeader

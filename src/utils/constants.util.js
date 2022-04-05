@@ -10,7 +10,7 @@ export const API_WATCHLATER = '/api/user/watchlater'
 export const API_PLAYLISTS = '/api/user/playlists'
 export const API_HISTORY = '/api/user/history'
 
-export const ROUTE_HOME = '/home'
+export const ROUTE_HOME = '/'
 export const ROUTE_VIDEOS = '/videos'
 export const ROUTE_LOGIN = '/login'
 export const ROUTE_SIGNUP = '/signup'
@@ -38,6 +38,7 @@ export const ACTION_REMOVE_FROM_WATCHLATER = 'REMOVE_FROM_WATCHLATER'
 
 export const ACTION_INIT_VIDEOS = 'INIT_VIDEOS'
 export const ACTION_FILTER_VIDEOS = 'FILTER_VIDEOS'
+export const ACTION_SORT_VIDEOS_LATEST = 'SORT_VIDEOS_LATEST'
 
 export const ACTION_INIT_FORM = 'INIT_FORM'
 export const ACTION_UPDATE_EMAIL = 'UPDATE_EMAIL'
