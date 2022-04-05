@@ -1,20 +1,22 @@
-import { useState } from 'react'
-import { Link } from "react-router-dom"
-import { Header, Icon, Text, Button, NavBar } from 'components/Reusable'
 import { useTitle } from 'hooks/useTitle'
-import { useAuth, useTheme } from "contexts"
-import { getTextColor, getIconColor, getBgColor } from 'utils'
+import { useTheme } from "contexts"
+import { getBgColor } from 'utils'
 import { CategorySection, HomeHeader } from 'components/Home'
 
 const Home = () => {
     useTitle('Home')
+    const { theme } = useTheme()
 
 
     return (
-        <>
+        <div style={{
+            minHeight: '100vh'
+        }}
+            className={getBgColor(theme)}
+        >
             <HomeHeader />
             <CategorySection />
-        </>
+        </div>
     )
 }
 
