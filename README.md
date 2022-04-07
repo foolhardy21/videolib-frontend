@@ -34,3 +34,5 @@
 - Axios for making API requests
 - [React Spinners](https://github.com/davidhu2000/react-spinners) for loading animations
 - [MockBee](https://mockbee.netlify.app/docs/introduction) for mock backend
+
+![](./app.gif)
