@@ -35,6 +35,8 @@ const PlaylistForm = () => {
                 name: '',
                 description: ''
             })
+        } else {
+            showPlaylistsAlert('form is empty', ALERT_TYPE_ERROR)
         }
     }
 
@@ -42,21 +44,15 @@ const PlaylistForm = () => {
         <form className='flx flx-column mg-left-md mg-btm-xlg' onSubmit={handleNewPlaylistSubmit}>
 
             <Label htmlFor='playlist-name' classes='mg-btm-s'>
-
                 <Input type='text' id='playlist-name' value={newPlaylistInfo.name} onChange={(e) => handleNameChange(e)} placeholder='name' classes='input-md txt-md' />
-
             </Label>
 
             <Label htmlFor='playlist-desc' classes='mg-btm-s'>
-
                 <Input type='text' id='playlist-desc' value={newPlaylistInfo.description} onChange={(e) => handleDescriptionChange(e)} placeholder='description' classes='input-md txt-md' />
-
             </Label>
 
             <div className="flx flx-maj-start">
-
                 <Button classes={`btn-outlined ${getBorderColor(theme)} ${getTextColor(theme)} ${getBgColor(theme)} txt-md txt-cap pd-xs`} >create new playlist</Button>
-
             </div>
         </form>
     )

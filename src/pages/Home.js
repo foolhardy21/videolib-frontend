@@ -7,7 +7,6 @@ const Home = () => {
     useTitle('Home')
     const { theme } = useTheme()
 
-
     return (
         <div style={{
             minHeight: '100vh'
@@ -15,7 +14,9 @@ const Home = () => {
             className={getBgColor(theme)}
         >
             <HomeHeader />
+
             <CategorySection />
+
         </div>
     )
 }

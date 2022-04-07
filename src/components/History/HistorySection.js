@@ -10,7 +10,7 @@ const HistorySection = () => {
         <Section id={styles.gridVideos} classes='grid grid-maxcols-4'>
 
             {
-                history.map(historyVideo => <HistoryVideoCard key={historyVideo._id} video={historyVideo} />)
+                history?.map(historyVideo => <HistoryVideoCard key={historyVideo._id} video={historyVideo} />)
             }
 
         </Section>

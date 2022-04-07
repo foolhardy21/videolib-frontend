@@ -4,7 +4,7 @@ import { historyReducer } from "reducers";
 import { ACTION_REMOVE_ALERT, ACTION_REMOVE_LOADING, ACTION_SET_ALERT, ACTION_SET_LOADING, ALERT_DISPLAY_TIME, API_HISTORY } from "utils/constants.util";
 import { useAuth } from "./";
 
-const HistoryContext = createContext()
+const HistoryContext = createContext({})
 
 export const HistoryProvider = ({ children }) => {
     const [historyState, historyDispatch] = useReducer(historyReducer, {
@@ -17,7 +17,7 @@ export const HistoryProvider = ({ children }) => {
     })
     const { getUserToken } = useAuth()
 
-    /*
+    /**
         * this function is used to show the alert on history page
         * @param {string} message - message to be displayed
         * @param {string} type - type of alert (success/error)    
@@ -32,7 +32,7 @@ export const HistoryProvider = ({ children }) => {
         setTimeout(() => historyDispatch({ type: ACTION_REMOVE_ALERT }), ALERT_DISPLAY_TIME)
     }
 
-    /*
+    /**
         * this function is used to fetch history of the logged in user
         * @return {Array.prototype} response.data.history - array of history video objects
         * @return {Number} e.response.status - error status code    
@@ -53,7 +53,7 @@ export const HistoryProvider = ({ children }) => {
         }
     }
 
-    /*
+    /**
         * this function is used to remove the entire history of the user
         * @return {Number} e.response.status - error status code    
     */
@@ -70,7 +70,7 @@ export const HistoryProvider = ({ children }) => {
         }
     }
 
-    /*
+    /**
         * this function is used to add video to the history the user
         * @return {Number} e.response.status - error status code    
     */
@@ -88,7 +88,7 @@ export const HistoryProvider = ({ children }) => {
         }
     }
 
-    /*
+    /**
         * this function is used to remove video from the history the user
         * @return {Array.prototype} response.data.history - array of history video objects
         * @return {Number} e.response.status - error status code    

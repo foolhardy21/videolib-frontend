@@ -8,3 +8,5 @@ export {
     isNameInvalid,
     arePasswordAndConfirmedPasswordDiff
 } from './inputValidation.util'
+
+export { getDateForVideoCard } from './video.util'

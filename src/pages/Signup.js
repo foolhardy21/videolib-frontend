@@ -22,17 +22,12 @@ const Signup = () => {
 
             <div className='flx flx-center'>
                 {
-                    signupAlert.type === ALERT_TYPE_SUCCESS
-                        ? <Alert classes='bg-success'>{signupAlert.message}</Alert>
-                        : signupAlert.type === ALERT_TYPE_ERROR ? <Alert classes='bg-err'>{signupAlert.message}</Alert>
-                            : ''
+                    signupAlert.message && <Alert type={signupAlert.type}>{signupAlert.message}</Alert>
                 }
             </div>
 
             <Main classes='flx flx-maj-even'>
-
                 <SignupCard />
-
             </Main>
 
         </div>

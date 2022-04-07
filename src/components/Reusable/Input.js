@@ -1,5 +1,5 @@
-import { useTheme } from "../../contexts"
-import { getBgColor, getTextColor } from "../../utils"
+import { useTheme } from "contexts"
+import { getBgColor, getTextColor } from "utils"
 
 const Input = ({ id, type, placeholder, value, onChange, classes }) => {
     const { theme } = useTheme()

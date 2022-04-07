@@ -52,11 +52,7 @@ const Playlists = () => {
 
                 <div className='flx flx-center'>
                     {
-                        playlistsState.alert.type === ALERT_TYPE_ERROR
-                            ? <Alert classes='bg-err'>{playlistsState.alert.message}</Alert>
-                            : playlistsState.alert.type === ALERT_TYPE_SUCCESS
-                                ? <Alert classes='bg-success'>{playlistsState.alert.message}</Alert>
-                                : ''
+                        playlistsState.alert.message && <Alert type={playlistsState.alert.type}>{playlistsState.alert.message}</Alert>
                     }
                 </div>
 

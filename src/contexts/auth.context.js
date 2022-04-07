@@ -3,12 +3,12 @@ import { createContext, useState, useContext } from "react"
 import { Navigate, useLocation } from "react-router-dom"
 import { API_LOGIN, API_SIGNUP } from 'utils/constants.util'
 
-const AuthContext = createContext()
+const AuthContext = createContext(false)
 
 export const AuthProvider = ({ children }) => {
     const [isUserLoggedIn, setIsUserLoggedIn] = useState(false)
 
-    /*
+    /**
         * this function restricts access to private routes
         * @params {React.Component} children - All the components wrapper inside this function
         * @return {React.Component} - if the user is logged in then the child component is returned, otherwise app is redirected to login page 
@@ -19,7 +19,7 @@ export const AuthProvider = ({ children }) => {
         return isUserLoggedIn ? children : <Navigate to='/login' state={{ from: location }} replace />
     }
 
-    /*
+    /**
         * this function logs in the user
         * @params {string} email - email entered in login form
         * @params {string} password - password entered in login form
@@ -40,7 +40,7 @@ export const AuthProvider = ({ children }) => {
         }
     }
 
-    /*
+    /**
         * this function signs up the user
         * @params {string} email - email entered in login form
         * @params {string} password - password entered in login form
@@ -62,7 +62,7 @@ export const AuthProvider = ({ children }) => {
         }
     }
 
-    /*
+    /**
         * this function logs out the user by removing the token from local storage.
     */
     function logoutUser() {
@@ -70,7 +70,7 @@ export const AuthProvider = ({ children }) => {
         setIsUserLoggedIn(false)
     }
 
-    /*
+    /**
         * this getter function returns the token of logged in user 
         * @return {string} - the token stored in local storage of the browser
     */

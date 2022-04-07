@@ -37,7 +37,7 @@ const PlaylistsSection = () => {
 
                                 <div className='flx flx-column mg-right-s'>
 
-                                    <Text classes={`txt-lg txt-cap ${getTextColor(theme)} mg-btm-xs mg-right-xs`} >{playlist.name}</Text>
+                                    <Text classes={`txt-lg txt-cap ${getTextColor(theme)} mg-btm-xs mg-right-xs`} >{`${playlist.name} (${playlist.videos?.length})`}</Text>
 
                                     <Text classes={`txt-md txt-cap ${getTextColor(theme)}`} >{playlist.description}</Text>
 

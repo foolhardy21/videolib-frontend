@@ -23,7 +23,6 @@ const SignupForm = () => {
                 showSignupAlert('account already exists', ALERT_TYPE_ERROR)
             }
         }
-
     }
 
     return (

@@ -4,7 +4,7 @@ import { useAuth } from './'
 import { likesReducer } from 'reducers'
 import { ACTION_REMOVE_LOADING, ACTION_SET_LOADING, API_LIKES } from 'utils/constants.util'
 
-const LikesContext = createContext()
+const LikesContext = createContext({})
 
 export const LikesProvider = ({ children }) => {
     const [likesState, likesDispatch] = useReducer(likesReducer, {
@@ -13,7 +13,7 @@ export const LikesProvider = ({ children }) => {
     })
     const { getUserToken } = useAuth()
 
-    /*
+    /**
         * this function adds video to likes of the user
         * @return {Array.prototype} response.data.likes - array of liked video objects
         * @return {Number} e.response.status - error status code    
@@ -33,7 +33,7 @@ export const LikesProvider = ({ children }) => {
         }
     }
 
-    /*
+    /**
         * this function removes the video from the likes of the user
         * @return {Array.prototype} response.data.likes - array of liked video objects
         * @return {Number} e.response.status - error status code    
@@ -50,7 +50,7 @@ export const LikesProvider = ({ children }) => {
         }
     }
 
-    /*
+    /**
         * this function fetches the liked videos of the user
         * @return {Array.prototype} response.data.likes - array of liked video objects
         * @return {Number} e.response.status - error status code    
@@ -71,7 +71,7 @@ export const LikesProvider = ({ children }) => {
         }
     }
 
-    /*
+    /**
         * this function checks if the video is liked or not
         * @return {string} _id - id of the video object
         * @return {boolean}    

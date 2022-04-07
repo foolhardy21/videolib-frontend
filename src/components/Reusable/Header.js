@@ -1,5 +1,5 @@
-import { useTheme } from "../../contexts"
-import { getBgColor } from "../../utils"
+import { useTheme } from "contexts"
+import { getBgColor } from "utils"
 
 const Header = ({ children }) => {
     const { theme } = useTheme()

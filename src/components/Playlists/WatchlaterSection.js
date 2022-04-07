@@ -11,14 +11,12 @@ const WatchlaterSection = () => {
     return (
         <Section classes='flx flx-column mg-left-md mg-btm-md'>
 
-            <Text classes={`txt-lg txt-cap ${getTextColor(theme)} mg-btm-md`}>watch later</Text>
+            <Text classes={`txt-lg txt-cap ${getTextColor(theme)} mg-btm-md`}>{`watch later (${watchlaterVideos.length})`}</Text>
 
             <Section id={styles.sliderPlaylist} classes='flx flx-min-center pd-btm-xs'>
-
                 {
                     watchlaterVideos?.map(video => <PlaylistVideoCard key={video._id} video={video} watchlaterVideo={true} />)
                 }
-
             </Section>
 
         </Section>

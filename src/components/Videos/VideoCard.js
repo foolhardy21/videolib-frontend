@@ -1,5 +1,5 @@
 import { Button, Card, Text } from "components/Reusable"
-import { getSolidBtnBgColor, getSolidBtnTextColor, getTextColor } from 'utils'
+import { getDateForVideoCard, getSolidBtnBgColor, getSolidBtnTextColor, getTextColor } from 'utils'
 import { useHistory, useLikes, usePlaylists, useTheme, useVideos, useWatchlater } from "contexts"
 import { ACTION_ADD_TO_LIKES, ACTION_REMOVE_FROM_LIKES, ALERT_TYPE_ERROR, ALERT_TYPE_SUCCESS } from "utils/constants.util"
 import styles from './videos.module.css'
@@ -31,7 +31,7 @@ const VideoCard = ({ video, video: {
 
     }
 
-    async function handleVideoUnlike() {
+    async function handleVideoDislike() {
         const removeFromLikes = await removeVideoFromLikes(_id)
         if (removeFromLikes === 404 || removeFromLikes === 500) {
             showVideosAlert('could not dislike the video', ALERT_TYPE_ERROR)
@@ -71,13 +71,13 @@ const VideoCard = ({ video, video: {
 
             <Text classes={`txt-md txt-cap txt-500 ${getTextColor(theme)} card-txtw-s mg-btm-xs`}>{title}</Text>
 
-            <Text classes={`txt-md txt-cap ${getTextColor(theme)} card-txtw-s`}>{description.slice(0, 40)}</Text>
+            <Text classes={`txt-md txt-cap ${getTextColor(theme)} card-txtw-s`}>{description.slice(0, 40)}....</Text>
 
             <div className="flx flx-maj-start mg-top-s mg-btm-s">
 
                 <Text classes={`txt-md txt-cap ${getTextColor(theme)} mg-right-xs`}>{`${views} views`}</Text>
 
-                <Text classes={`txt-md txt-cap ${getTextColor(theme)}`}>{uploadedOn.slice(0, -14)}</Text>
+                <Text classes={`txt-md txt-cap ${getTextColor(theme)}`}>{getDateForVideoCard(uploadedOn)}</Text>
 
             </div>
 
@@ -88,7 +88,7 @@ const VideoCard = ({ video, video: {
 
                 {
                     isVideoLiked(_id) ?
-                        <Button onClick={handleVideoUnlike} classes={`btn-txt txt-md ${getTextColor(theme)} mg-right-s`}>liked</Button> :
+                        <Button onClick={handleVideoDislike} classes={`btn-txt txt-md ${getTextColor(theme)} mg-right-s`}>liked</Button> :
                         <Button onClick={handleVideoLike} classes={`btn-txt txt-md ${getTextColor(theme)} mg-right-s`}>like</Button>
                 }
 

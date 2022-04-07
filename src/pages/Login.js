@@ -19,17 +19,12 @@ const Login = () => {
 
             <div className='flx flx-center'>
                 {
-                    loginAlert.type === ALERT_TYPE_ERROR
-                        ? <Alert classes='bg-err'>{loginAlert.message}</Alert>
-                        : loginAlert.type === ALERT_TYPE_SUCCESS ? <Alert classes='bg-success'>{loginAlert.message}</Alert>
-                            : ''
+                    loginAlert.message && <Alert type={loginAlert.type}>{loginAlert.message}</Alert>
                 }
             </div>
 
             <Main classes='flx flx-maj-even mg-top-xxlg'>
-
                 <LoginCard />
-
             </Main>
         </div>
     );

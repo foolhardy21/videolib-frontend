@@ -1,4 +1,4 @@
-const { useEffect } = require("react");
+import { useEffect } from "react";
 
 export function useTitle(title) {
 

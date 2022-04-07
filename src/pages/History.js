@@ -56,14 +56,9 @@ const History = () => {
                         remove all
                     </Button>
                 }
-
                 {
-                    type === ALERT_TYPE_ERROR
-                        ? <Alert classes='bg-err'>{message}</Alert>
-                        : type === ALERT_TYPE_SUCCESS ? <Alert classes='bg-success'>{message}</Alert>
-                            : ''
+                    message && <Alert type={type}>{message}</Alert>
                 }
-
                 {
                     loading
                         ? <BarLoader width={300} height={5} css={{ marginTop: '50px' }} />

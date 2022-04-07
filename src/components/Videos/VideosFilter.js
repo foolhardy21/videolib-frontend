@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
-import { Label, Section, Button } from "components/Reusable"
+import { Label, Button } from "components/Reusable"
 import { useTheme, useFilter, useVideos } from 'contexts'
-import { getBorderColor, getSolidBtnBgColor, getSolidBtnTextColor, getTextColor } from 'utils'
+import { getBorderColor, getTextColor } from 'utils'
 import { ACTION_ADD_CATEGORY_TO_FILTER, ACTION_FILTER_VIDEOS, ACTION_INIT_VIDEOS, ACTION_REMOVE_CATEGORY_FROM_FILTER, ACTION_SORT_VIDEOS_LATEST } from 'utils/constants.util'
 import styles from './videos.module.css'
 

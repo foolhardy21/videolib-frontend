@@ -4,7 +4,7 @@ import { useAuth } from "./";
 import { watchlaterReducer } from 'reducers'
 import { ACTION_REMOVE_LOADING, ACTION_SET_LOADING, API_WATCHLATER } from "utils/constants.util";
 
-const WatchlaterContext = createContext()
+const WatchlaterContext = createContext({})
 
 export const WatchlaterProvider = ({ children }) => {
     const [watchlaterState, watchlaterDispatch] = useReducer(watchlaterReducer, {
@@ -13,7 +13,7 @@ export const WatchlaterProvider = ({ children }) => {
     })
     const { getUserToken } = useAuth()
 
-    /*
+    /**     
         * this function fetches all the watch later videos
         * @return {Array.prototype} response.data.watchlater - array of video objects
         * @param {Number} e.response.status - error status code
@@ -34,7 +34,7 @@ export const WatchlaterProvider = ({ children }) => {
         }
     }
 
-    /*
+    /**
         * this function adds a video to watch later
         @param {Object.prototype} video - video object
         @return {Array.prototype} response.data.watchlater - array of watch later video objects
@@ -55,7 +55,7 @@ export const WatchlaterProvider = ({ children }) => {
         }
     }
 
-    /*
+    /**
         * this function removes a video from watch later
         @param {string} videoId - id of the video
         @return {Number} e.response.status - error status code    

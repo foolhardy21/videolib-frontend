@@ -11,14 +11,12 @@ const LikesSection = () => {
     return (
         <Section classes='flx flx-column mg-left-md mg-btm-md'>
 
-            <Text classes={`txt-lg txt-cap ${getTextColor(theme)} mg-btm-md`}>liked videos</Text>
+            <Text classes={`txt-lg txt-cap ${getTextColor(theme)} mg-btm-md`}>{`liked videos (${likedVideos.length})`}</Text>
 
             <Section id={styles.sliderPlaylist} classes='flx flx-min-center pd-btm-xs'>
-
                 {
                     likedVideos?.map(video => <PlaylistVideoCard key={video._id} video={video} />)
                 }
-
             </Section>
 
         </Section>

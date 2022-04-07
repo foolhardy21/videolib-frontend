@@ -16,6 +16,7 @@ const LoginForm = () => {
 
     async function handleLoginSubmit(e) {
         e.preventDefault()
+
         if (!isFormInvalid()) {
             const loginUserResponse = await loginUser(loginFormState.email.value, loginFormState.password.value)
             if (loginUserResponse === 404) {

@@ -56,7 +56,7 @@ const PlaylistModal = () => {
                                 <Label key={playlist._id} htmlFor={`playlist-${playlist.name}`} classes={`${getTextColor(theme)} flx flx-min-center mg-btm-xs`}>
                                     <input id={`playlist-${playlist.name}`} value={playlist.name} onChange={() => handleInputChange(playlist)} type='radio' name='playlist-list' className="mg-right-xs" /> {playlist.name}
                                 </Label>)
-                            : <Text classes={`${getTextColor(theme)} txt-md txt-cap`}>no playlists</Text>
+                            : <Text classes={`${getTextColor(theme)} txt-md txt-500 txt-cap`}>no playlists created</Text>
                     }
 
                 </div>

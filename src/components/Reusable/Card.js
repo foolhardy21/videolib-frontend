@@ -1,4 +1,4 @@
-import { useTheme } from '../../contexts'
+import { useTheme } from 'contexts'
 
 const Card = ({ id, classes, children, onClick }) => {
     const { theme } = useTheme()

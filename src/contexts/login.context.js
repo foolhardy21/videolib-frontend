@@ -3,7 +3,7 @@ import { isEmailInvalid, isPasswordInvalid } from "utils";
 import { loginFormReducer } from "reducers";
 import { ACTION_REMOVE_EMAIL_ERROR, ACTION_REMOVE_PASSWORD_ERROR, ACTION_SET_EMAIL_ERROR, ACTION_SET_PASSWORD_ERROR, ALERT_DISPLAY_TIME, INPUT_ERROR_TIME } from 'utils/constants.util'
 
-const LoginContext = createContext()
+const LoginContext = createContext({})
 
 export const LoginProvider = ({ children }) => {
     const initialLoginFormValues = {
@@ -23,7 +23,7 @@ export const LoginProvider = ({ children }) => {
         message: ''
     })
 
-    /*
+    /**
         * this function validates if the input values in login form
         * @return {boolean} validationError    
     */
@@ -43,7 +43,7 @@ export const LoginProvider = ({ children }) => {
         return validationError
     }
 
-    /*
+    /**
         * this function shows alert on login page
         * @param {string} message - message to be displayed
         * @param {string} type - type of alert(success/error)    

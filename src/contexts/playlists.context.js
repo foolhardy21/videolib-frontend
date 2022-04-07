@@ -4,7 +4,7 @@ import { playlistsReducer } from 'reducers'
 import { ACTION_REMOVE_ALERT, ACTION_REMOVE_LOADING, ACTION_SET_ALERT, ACTION_SET_LOADING, ALERT_DISPLAY_TIME, API_PLAYLISTS } from "utils/constants.util";
 import { useAuth } from "./";
 
-const PlaylistsContext = createContext()
+const PlaylistsContext = createContext({})
 
 export const PlaylistsProvider = ({ children }) => {
     const [playlistsState, playlistsDispatch] = useReducer(playlistsReducer, {
@@ -18,21 +18,21 @@ export const PlaylistsProvider = ({ children }) => {
     const [isPlaylistModalVisible, setIsPlaylistModalVisible] = useState(false)
     const { getUserToken } = useAuth()
 
-    /*
+    /**
         * this function hides the playlist modal    
     */
     function hidePlaylistModal() {
         setIsPlaylistModalVisible(false)
     }
 
-    /*
+    /**
         * this function shows the playlist modal    
     */
     function showPlaylistModal() {
         setIsPlaylistModalVisible(true)
     }
 
-    /*
+    /**
         * this function shows the alert on playlist page
         @param {string} message - message to be displayed
         @param {string} type - type of alert(success/error)    
@@ -47,7 +47,7 @@ export const PlaylistsProvider = ({ children }) => {
         setTimeout(() => playlistsDispatch({ type: ACTION_REMOVE_ALERT }), ALERT_DISPLAY_TIME)
     }
 
-    /*
+    /**
         * this function fetches all the playlists
         @return {Array.prototype} response.data.playlists - array of playlist objects
         @return {Number} e.response.status - error status code    
@@ -68,7 +68,7 @@ export const PlaylistsProvider = ({ children }) => {
         }
     }
 
-    /*
+    /**
         * this function removes the playlist
         @param {string} _id - id of playlist
         @return {Array.prototype} response.data.playlists - array of updated playlist objects
@@ -87,7 +87,7 @@ export const PlaylistsProvider = ({ children }) => {
         }
     }
 
-    /*
+    /**
         * this function adds a new playlist
         @param {string} name - name of the playlist
         @param {string} description - description of the playlist
@@ -112,7 +112,7 @@ export const PlaylistsProvider = ({ children }) => {
         }
     }
 
-    /*
+    /**
         * this function adds a video to the playlist
         @param {Object.prototype} video - video object
         @param {string} playlistId - id of the playlist
@@ -132,7 +132,7 @@ export const PlaylistsProvider = ({ children }) => {
         }
     }
 
-    /*
+    /**
         * this function removes a video from the playlist
         @param {string} videoId - id of the video
         @param {string} playlistId - id of the playlist

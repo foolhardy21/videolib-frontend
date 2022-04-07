@@ -3,12 +3,12 @@ import { createContext, useContext, useReducer } from "react";
 import { filterReducer } from "reducers";
 import { API_CATEGORIES } from "utils/constants.util";
 
-const FilterContext = createContext()
+const FilterContext = createContext([])
 
 export const FilterProvider = ({ children }) => {
     const [filterState, filterDispatch] = useReducer(filterReducer, [])
 
-    /*
+    /**
         * this function is used to fetch the categories
         * @return {Array.prototype} response.data.categories - array of category objects 
         * @return {Number} e.response.status - the error status code
@@ -22,7 +22,7 @@ export const FilterProvider = ({ children }) => {
         }
     }
 
-    /*
+    /**
         * this function checks if the chosen category is in the filter array or not
         * @param {string} value - chosen category  
         * @return {boolean} 

@@ -49,11 +49,9 @@ const HistoryVideoCard = ({ video: {
             <div className='flx flx-maj-end'>
 
                 <Button onClick={handleRemoveFromHistory} classes={`btn-txt pd-xs`}>
-
                     <Icon classes={`${getIconColor(theme)}`}>
                         delete
                     </Icon>
-
                 </Button>
 
             </div>
