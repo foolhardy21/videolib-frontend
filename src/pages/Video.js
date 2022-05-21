@@ -82,23 +82,27 @@ const Video = () => {
 
                     </div>
 
-                    <Text classes={`txt-md txt-cap ${getTextColor(theme)} mg-top-s mg-left-xs`}>{`category - ${currentVideo?.category}`}</Text>
 
-                    <div className='flx flx-maj-end mg-top-xs'>
+                    <div className='flx flx-min-center flx-maj-stretch mg-top-xs'>
 
-                        {
-                            isVideoLiked(currentVideo?._id) ?
-                                <Button onClick={handleVideoDislike} classes={`btn-txt txt-md ${getTextColor(theme)} mg-right-s`}>liked</Button> :
-                                <Button onClick={handleVideoLike} classes={`btn-txt txt-md ${getTextColor(theme)} mg-right-s`}>like</Button>
-                        }
+                        <Text classes={`txt-md txt-cap ${getTextColor(theme)} mg-left-xs`}>{`category - ${currentVideo?.category}`}</Text>
 
-                        <Button onClick={handleAddToPlaylist} classes={`btn-txt txt-md ${getTextColor(theme)}`}>add to playlist</Button>
+                        <div className="flx">
 
+                            {
+                                isVideoLiked(currentVideo?._id) ?
+                                    <Button onClick={handleVideoDislike} classes={`btn-txt txt-md ${getTextColor(theme)} mg-right-s`}>liked</Button> :
+                                    <Button onClick={handleVideoLike} classes={`btn-txt txt-md ${getTextColor(theme)} mg-right-s`}>like</Button>
+                            }
+
+                            <Button onClick={handleAddToPlaylist} classes={`btn-txt txt-md ${getTextColor(theme)}`}>add to playlist</Button>
+
+                        </div>
                     </div>
 
                 </Main>
 
-                <aside className={`${styles.videoAside} mg-left-s`}>
+                <aside className={`mg-left-s`}>
                     <Text classes={`${getTextColor(theme)} txt-lg txt-ucase mg-btm-md`}>similar videos</Text>
                     {
                         similarVideos?.map(similarVideo =>
