@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Signup, Login, Videos, History, Playlists, NotFound } from "pages";
+import { Signup, Login, Videos, History, Playlists, NotFound, Video } from "pages";
 import { SignupProvider, LoginProvider, useAuth } from 'contexts'
 import { ROUTE_HISTORY, ROUTE_HOME, ROUTE_LOGIN, ROUTE_PLAYLISTS, ROUTE_SIGNUP, ROUTE_VIDEOS } from "utils/constants.util";
 import Home from "pages/Home";
@@ -40,6 +40,8 @@ const App = () => {
         } />
 
         <Route path={ROUTE_HOME} element={<Home />} />
+
+        <Route path='/videos/:videoId' element={<Video />} />
 
         <Route path='*' element={<NotFound />} />
 

@@ -3,6 +3,8 @@ import { getDateForVideoCard, getSolidBtnBgColor, getSolidBtnTextColor, getTextC
 import { useHistory, useLikes, usePlaylists, useTheme, useVideos, useWatchlater } from "contexts"
 import { ACTION_ADD_TO_LIKES, ACTION_REMOVE_FROM_LIKES, ALERT_TYPE_ERROR, ALERT_TYPE_SUCCESS } from "utils/constants.util"
 import styles from './videos.module.css'
+import { useState } from "react"
+import { Link } from "react-router-dom"
 
 const VideoCard = ({ video, video: {
     _id,
@@ -13,8 +15,8 @@ const VideoCard = ({ video, video: {
     uploadedOn,
     category
 } }) => {
+    const [isVideoAddedToWatchLater, setIsVideoAddedToWatchLater] = useState(false)
     const { theme } = useTheme()
-    const { addVideoToHistory } = useHistory()
     const { isVideoLiked, addVideoToLikes, removeVideoFromLikes, likesDispatch } = useLikes()
     const { showVideosAlert, updateSelectedVideo } = useVideos()
     const { showPlaylistModal } = usePlaylists()
@@ -53,6 +55,7 @@ const VideoCard = ({ video, video: {
         } else if (addToWatchlaterResponse === 404 || addToWatchlaterResponse === 500) {
             showVideosAlert('could not add to watch later', 'error')
         } else {
+            setIsVideoAddedToWatchLater(true)
             showVideosAlert('video added to watch later', 'success')
             watchlaterDispatch({ type: 'ADD_TO_WATCHLATER', payload: video })
         }
@@ -62,12 +65,18 @@ const VideoCard = ({ video, video: {
         <Card id={styles.containerVideo} classes='pd-xs pos-relative'>
 
             <Button onClick={handleWatchlater} classes={`btn-solid pos-absolute tr-1 z-1 ${getSolidBtnBgColor(theme)} ${getSolidBtnTextColor(theme)} pd-xs txt-md txt-lcase`}>
-                watch later
+                {
+                    isVideoAddedToWatchLater
+                        ? 'added to watch later'
+                        : 'watch later'
+                }
             </Button>
 
-            <video onPlay={() => addVideoToHistory(video)} id={styles.cardVideo} controls controlsList="nodownload nofullscreen">
-                <source src={url}></source>
-            </video>
+            <Link to={`/videos/${_id}`}>
+                <video id={styles.cardVideo}>
+                    <source src={url}></source>
+                </video>
+            </Link>
 
             <Text classes={`txt-md txt-cap txt-500 ${getTextColor(theme)} card-txtw-s mg-btm-xs`}>{title}</Text>
 
