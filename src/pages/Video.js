@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { Button, Main, Text } from "components/Reusable"
+import { Alert, Button, Main, Text } from "components/Reusable"
 import { PlaylistModal, VideosHeader } from "components/Videos"
 import { useHistory, useLikes, usePlaylists, useTheme, useVideos } from "contexts"
 import { getBgColor, getDateForVideoCard, getTextColor } from "utils"
@@ -14,7 +14,7 @@ const Video = () => {
     const { theme } = useTheme()
     const { addVideoToHistory } = useHistory()
     const { showPlaylistModal, isPlaylistModalVisible } = usePlaylists()
-    const { videosState: { videos }, showVideosAlert, updateSelectedVideo } = useVideos()
+    const { videosState: { videos, alert: { message, type } }, showVideosAlert, updateSelectedVideo } = useVideos()
     const { isVideoLiked, addVideoToLikes, removeVideoFromLikes, likesDispatch } = useLikes()
 
     useEffect(() => {
@@ -64,7 +64,14 @@ const Video = () => {
 
             <div className={`${styles.singleVideoPgContainer} flx pd-xlg`}>
 
+
                 <Main classes='flx flx-column'>
+
+                    <div className="flx flx-center mg-xs">
+                        {
+                            message && <Alert type={type}>{message}</Alert>
+                        }
+                    </div>
 
                     <video onPlay={() => addVideoToHistory(currentVideo)} className={styles.videoPlayer} controls>
                         <source src={currentVideo?.url}></source>
