@@ -26,7 +26,7 @@ export function videosReducer(state, { type, payload }) {
 
         case ACTION_FILTER_VIDEOS: return { ...state, videos: filterVideos(payload.videos, payload.filterState) }
 
-        case ACTION_SORT_VIDEOS_LATEST: return { ...state, videos: state.videos.sort((a, b) => new Date(a.uploadedOn) - new Date(b.uploadedOn)) }
+        case ACTION_SORT_VIDEOS_LATEST: return { ...state, videos: state.videos.sort((a, b) => new Date(b.uploadedOn) - new Date(a.uploadedOn)) }
 
         default: return state
 

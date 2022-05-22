@@ -70,7 +70,7 @@ const VideosFilter = () => {
             </div>
 
             <div className={`flx flx-maj-end ${styles.sortContainer} pd-top-md pd-right-xlg`} >
-                <Button onClick={handleSortByDateClick} classes={`btn-outlined b-solid ${getTextColor(theme)} ${getBorderColor(theme)} txt-md pd-xs`}>sort by latest</Button>
+                <Button onClick={handleSortByDateClick} classes={`${isVideosSorted ? 'btn-outlined b-solid' : 'btn-txt'}  ${getTextColor(theme)} ${getBorderColor(theme)} txt-md pd-xs`}>sort by latest</Button>
             </div>
 
         </>
