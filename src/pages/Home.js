@@ -4,12 +4,14 @@ import { useTitle } from 'hooks/useTitle'
 import { useTheme, useVideos } from "contexts"
 import { CategorySection, HomeHeader } from 'components/Home'
 import { ACTION_INIT_VIDEOS, ALERT_TYPE_ERROR } from 'utils/constants.util'
-import { getBgColor, getIconColor, getSolidBtnBgColor, getSolidBtnTextColor } from 'utils'
+import { getBgColor, getSolidBtnBgColor, getSolidBtnTextColor } from 'utils'
 import styles from 'components/Home/home.module.css'
+import { useNavigate } from 'react-router-dom'
 
 const Home = () => {
     useTitle('Home')
     const [currentVideoIndexInCarousel, setCurrentVideoIndexInCarousel] = useState(0)
+    const navigate = useNavigate()
     const { theme } = useTheme()
     const { videosState: {
         videos }, getVideos, showVideosAlert, videosDispatch } = useVideos()
@@ -57,15 +59,22 @@ const Home = () => {
             <div className='flx flx-center mg-top-xs'>
                 <section className={`flx ${styles.containerCaraousel}`}>
                     {
-                        videos?.map((video, index) => <article key={video._id} id={`videoCarousel-${index}`} className='pos-relative'>
-                            <video className={styles.cardCarousel}>
-                                <source src={video.url}></source>
-                            </video>
-                            <div className={`flx flx-column mg-s pos-absolute ${styles.txtInfo}`}>
-                                <Text classes={`txt-secondary bg-secondary txt-cap mg-btm-xs`}>{video.title}</Text>
-                                <Text classes={`txt-secondary bg-secondary txt-cap`}>{video.category}</Text>
-                            </div>
-                        </article>)
+                        videos?.map((video, index) =>
+                            <article onClick={() => navigate(`/videos/${video._id}`)} key={video._id} id={`videoCarousel-${index}`} className='pos-relative'>
+
+                                <video className={styles.cardCarousel}>
+                                    <source src={video.url}></source>
+                                </video>
+
+                                <div className={`flx flx-column mg-s pos-absolute ${styles.txtInfo}`}>
+
+                                    <Text classes={`txt-secondary bg-secondary txt-cap mg-btm-xs`}>{video.title}</Text>
+
+                                    <Text classes={`txt-secondary bg-secondary txt-cap`}>{video.category}</Text>
+
+                                </div>
+
+                            </article>)
                     }
                 </section>
             </div>

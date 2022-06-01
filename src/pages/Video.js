@@ -67,11 +67,9 @@ const Video = () => {
 
                 <Main classes='flx flx-column'>
 
-                    <div className="flx flx-center mg-xs">
-                        {
-                            message && <Alert type={type}>{message}</Alert>
-                        }
-                    </div>
+                    {
+                        message && <Alert type={type}>{message}</Alert>
+                    }
 
                     <video onPlay={() => addVideoToHistory(currentVideo)} className={styles.videoPlayer} controls>
                         <source src={currentVideo?.url}></source>

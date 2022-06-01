@@ -3,7 +3,6 @@ import { Main, Alert } from 'components/Reusable'
 import { useLogin, useTheme } from "contexts"
 import { useTitle } from 'hooks/useTitle'
 import { getBgColor } from "utils"
-import { ALERT_TYPE_ERROR, ALERT_TYPE_SUCCESS } from 'utils/constants.util'
 
 const Login = () => {
     useTitle('Login')
@@ -17,11 +16,9 @@ const Login = () => {
 
             <LoginHeader />
 
-            <div className='flx flx-center'>
-                {
-                    loginAlert.message && <Alert type={loginAlert.type}>{loginAlert.message}</Alert>
-                }
-            </div>
+            {
+                loginAlert.message && <Alert type={loginAlert.type}>{loginAlert.message}</Alert>
+            }
 
             <Main classes='flx flx-maj-even mg-top-xxlg'>
                 <LoginCard />
