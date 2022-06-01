@@ -1,3 +1,23 @@
+.btnCarousel {
+  right: 0;
+  bottom: 0;
+}
+
+.txtInfo {
+  left: 0;
+  bottom: 0;
+  align-items: flex-start;
+}
+
+.containerCaraousel {
+  overflow-x: hidden;
+  width: 40rem;
+}
+
+.cardCarousel {
+  width: 40rem;
+}
+
 .gridCategory {
   gap: 1rem;
   place-items: center;
@@ -16,4 +36,14 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+@media only screen and (max-width: 650px) {
+  .containerCaraousel {
+    width: 30rem;
+  }
+
+  .cardCarousel {
+    width: 30rem;
+  }
 }

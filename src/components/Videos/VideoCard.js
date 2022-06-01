@@ -1,6 +1,6 @@
 import { Button, Card, Text } from "components/Reusable"
 import { getDateForVideoCard, getSolidBtnBgColor, getSolidBtnTextColor, getTextColor } from 'utils'
-import { useHistory, useLikes, usePlaylists, useTheme, useVideos, useWatchlater } from "contexts"
+import { useLikes, usePlaylists, useTheme, useVideos, useWatchlater } from "contexts"
 import { ACTION_ADD_TO_LIKES, ACTION_REMOVE_FROM_LIKES, ALERT_TYPE_ERROR, ALERT_TYPE_SUCCESS } from "utils/constants.util"
 import styles from './videos.module.css'
 import { useState } from "react"
