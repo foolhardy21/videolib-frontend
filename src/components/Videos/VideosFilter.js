@@ -9,7 +9,7 @@ const VideosFilter = () => {
     const [categories, setCategories] = useState([])
     const [isVideosSorted, setIsVideosSorted] = useState(false)
     const { theme } = useTheme()
-    const { videosDispatch, getVideos, showVideosAlert } = useVideos()
+    const { videosState, videosDispatch, getVideos, showVideosAlert } = useVideos()
     const { filterState, filterDispatch, getCategories, isCategoryIncludedInFilter } = useFilter()
 
     useEffect(() => {
@@ -48,10 +48,17 @@ const VideosFilter = () => {
             if (videos === 404 || videos === 500) {
                 showVideosAlert('could not fetch the videos', ALERT_TYPE_ERROR)
             } else {
-                videosDispatch({ type: ACTION_INIT_VIDEOS, payload: videos })
+                if (filterState.length > 0) {
+                    videosDispatch({ type: ACTION_FILTER_VIDEOS, payload: { videos, filterState } })
+                } else {
+                    videosDispatch({ type: ACTION_INIT_VIDEOS, payload: videos })
+                }
             }
             setIsVideosSorted(false)
         } else {
+            if (filterState.length > 0) {
+                videosDispatch({ type: ACTION_FILTER_VIDEOS, payload: { videos: videosState.videos, filterState } })
+            }
             videosDispatch({ type: ACTION_SORT_VIDEOS_LATEST })
             setIsVideosSorted(true)
         }
