@@ -32,7 +32,8 @@ export const AuthProvider = ({ children }) => {
                 email,
                 password,
             })
-            window.localStorage.setItem('userToken', response.data.encodedToken)
+            window.localStorage.setItem('videoUserToken', response.data.encodedToken)
+            window.localStorage.setItem('videoUser', JSON.stringify(response.data.foundUser))
             setIsUserLoggedIn(true)
             return response.status
         } catch (e) {
@@ -66,7 +67,8 @@ export const AuthProvider = ({ children }) => {
         * this function logs out the user by removing the token from local storage.
     */
     function logoutUser() {
-        window.localStorage.removeItem('userToken')
+        window.localStorage.removeItem('videoUserToken')
+        window.localStorage.removeItem('videoUser')
         setIsUserLoggedIn(false)
     }
 
@@ -74,7 +76,7 @@ export const AuthProvider = ({ children }) => {
         * this getter function returns the token of logged in user 
         * @return {string} - the token stored in local storage of the browser
     */
-    const getUserToken = () => window.localStorage.getItem('userToken')
+    const getUserToken = () => window.localStorage.getItem('videoUserToken')
 
     return (
         <AuthContext.Provider

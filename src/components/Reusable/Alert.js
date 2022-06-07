@@ -4,7 +4,7 @@ import { Icon, Text } from './'
 const Alert = ({ classes, children, type }) => {
 
     return (
-        <div className={`flx flx-maj-start flx-min-center ${classes} ${type === ALERT_TYPE_ERROR ? 'bg-err' : 'bg-success'} alert-size-s pd-xs mg-top-s`}>
+        <div className={`flx flx-maj-start flx-min-center ${classes} ${type === ALERT_TYPE_ERROR ? 'bg-err' : 'bg-success'} alert-size-s pd-xs mg-top-s pos-fixed tr-1 z-index`}>
 
             <Icon classes='icon-secondary mg-right-s'>
                 {type === ALERT_TYPE_ERROR ? 'error' : 'check_circle'}

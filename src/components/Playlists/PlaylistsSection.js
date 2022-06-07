@@ -25,7 +25,6 @@ const PlaylistsSection = () => {
             {
                 playlists.length === 0 && <Text classes={`${getTextColor(theme)} txt-lg txt-cap mg-btm-md`}>no playlists</Text>
             }
-
             {
                 playlists?.map(playlist =>
 
@@ -51,12 +50,10 @@ const PlaylistsSection = () => {
 
                             </div>
 
-                            <div id={styles.sliderPlaylist} className='flx flx-min-center pd-btm-xs'>
-
+                            <div id={styles.sliderPlaylist} className='flx pd-btm-xs'>
                                 {
                                     playlist.videos?.map(video => <PlaylistVideoCard key={video._id} video={video} playlistId={playlist._id} />)
                                 }
-
                             </div>
 
                         </div>

@@ -4,7 +4,7 @@
 
 #gridVideos {
   gap: 1rem;
-  place-items: center;
+  align-items: stretch;
 }
 
 #containerVideo:hover {
@@ -13,4 +13,27 @@
 
 #cardVideo {
   width: 20rem;
+}
+
+.singleVideoPgContainer {
+  width: 100%;
+}
+
+.videoPlayer {
+  width: 100%;
+}
+
+.singleVideoPgContainer > aside {
+  width: 40%;
+}
+
+.singleVideoPgContainer > aside video {
+  width: 100%;
+}
+
+@media only screen and (max-width: 650px) {
+  .singleVideoPgContainer {
+    flex-direction: column;
+    align-items: center;
+  }
 }
