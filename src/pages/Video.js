@@ -62,10 +62,9 @@ const Video = () => {
         >
             <VideosHeader />
 
-            <div className={`${styles.singleVideoPgContainer} flx pd-xlg`}>
+            <div className={`${styles.singleVideoPgContainer} flx pd-left-md pd-right-md`}>
 
-
-                <Main classes='flx flx-column'>
+                <Main classes='flx flx-column mg-btm-md'>
 
                     {
                         message && <Alert type={type}>{message}</Alert>
@@ -87,13 +86,11 @@ const Video = () => {
 
                     </div>
 
-
                     <div className='flx flx-min-center flx-maj-stretch mg-top-xs'>
 
                         <Text classes={`txt-md txt-cap ${getTextColor(theme)} mg-left-xs`}>{`category - ${currentVideo?.category}`}</Text>
 
                         <div className="flx">
-
                             {
                                 isVideoLiked(currentVideo?._id) ?
                                     <Button onClick={handleVideoDislike} classes={`btn-txt txt-md ${getTextColor(theme)} mg-right-s`}>liked</Button> :
@@ -107,7 +104,8 @@ const Video = () => {
 
                 </Main>
 
-                <aside className={`mg-left-s`}>
+                <aside className={`mg-left-s mg-top-md`}>
+
                     <Text classes={`${getTextColor(theme)} txt-lg txt-ucase mg-btm-md`}>similar videos</Text>
                     {
                         similarVideos?.map(similarVideo =>

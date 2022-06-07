@@ -30,3 +30,10 @@
 .singleVideoPgContainer > aside video {
   width: 100%;
 }
+
+@media only screen and (max-width: 650px) {
+  .singleVideoPgContainer {
+    flex-direction: column;
+    align-items: center;
+  }
+}
