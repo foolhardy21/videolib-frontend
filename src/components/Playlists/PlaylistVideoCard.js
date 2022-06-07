@@ -1,5 +1,6 @@
 import { Card, Text, Button, Icon } from 'components/Reusable'
 import { usePlaylists, useTheme, useWatchlater } from 'contexts'
+import { Link } from 'react-router-dom'
 import { getTextColor, getBgColor, getIconColor } from 'utils'
 import { ACTION_REMOVE_FROM_WATCHLATER, ACTION_REMOVE_VIDEO_FROM_PLAYLIST, ALERT_TYPE_ERROR, ALERT_TYPE_SUCCESS } from 'utils/constants.util'
 import styles from './playlists.module.css'
@@ -37,11 +38,13 @@ const PlaylistVideoCard = ({ video: {
     }
 
     return (
-        <Card id={styles.containerVideo} classes='pd-xs pos-relative mg-right-xs'>
+        <Card id={styles.containerVideo} classes='flx flx-column flx-maj-stretch pd-xs pos-relative mg-right-xs'>
 
-            <video id={styles.cardVideo} controls controlsList='nodownload nofullscreen'>
-                <source src={url}></source>
-            </video>
+            <Link to={`/videos/${_id}`}>
+                <video id={styles.cardVideo}>
+                    <source src={url}></source>
+                </video>
+            </Link>
 
             <Text classes={`txt-md txt-cap txt-500 ${getTextColor(theme)} card-txtw-s mg-btm-xs`}>{title}</Text>
 

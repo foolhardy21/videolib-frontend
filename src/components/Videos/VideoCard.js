@@ -62,7 +62,7 @@ const VideoCard = ({ video, video: {
     }
 
     return (
-        <Card id={styles.containerVideo} classes='pd-xs pos-relative'>
+        <Card id={styles.containerVideo} classes='flx flx-column flx-maj-stretch pd-xs pos-relative'>
 
             <Button onClick={handleWatchlater} classes={`btn-solid pos-absolute tr-1 z-1 ${getSolidBtnBgColor(theme)} ${getSolidBtnTextColor(theme)} pd-xs txt-md txt-lcase`}>
                 {
