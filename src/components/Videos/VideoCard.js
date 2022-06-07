@@ -1,6 +1,6 @@
 import { Button, Card, Text } from "components/Reusable"
 import { getDateForVideoCard, getSolidBtnBgColor, getSolidBtnTextColor, getTextColor } from 'utils'
-import { useLikes, usePlaylists, useTheme, useVideos, useWatchlater } from "contexts"
+import { useAuth, useLikes, usePlaylists, useTheme, useVideos, useWatchlater } from "contexts"
 import { ACTION_ADD_TO_LIKES, ACTION_REMOVE_FROM_LIKES, ALERT_TYPE_ERROR, ALERT_TYPE_SUCCESS } from "utils/constants.util"
 import styles from './videos.module.css'
 import { useState } from "react"
@@ -21,25 +21,38 @@ const VideoCard = ({ video, video: {
     const { showVideosAlert, updateSelectedVideo } = useVideos()
     const { showPlaylistModal } = usePlaylists()
     const { addToWatchlater, watchlaterDispatch } = useWatchlater()
+    const { isUserLoggedIn } = useAuth()
 
     async function handleVideoLike() {
-        const addToLikesResponse = await addVideoToLikes(video)
-        if (addToLikesResponse === 409 || addToLikesResponse === 404 || addToLikesResponse === 500) {
-            showVideosAlert('could not like the video', ALERT_TYPE_ERROR)
+        if (isUserLoggedIn) {
+            const addToLikesResponse = await addVideoToLikes(video)
+            if (addToLikesResponse === 404) {
+                showVideosAlert('you are not logged in', ALERT_TYPE_ERROR)
+            } else if (addToLikesResponse === 500) {
+                showVideosAlert('could not like the video', ALERT_TYPE_ERROR)
+            } else {
+                showVideosAlert('video added to likes', ALERT_TYPE_SUCCESS)
+                likesDispatch({ type: ACTION_ADD_TO_LIKES, payload: video })
+            }
         } else {
-            showVideosAlert('video added to likes', ALERT_TYPE_SUCCESS)
-            likesDispatch({ type: ACTION_ADD_TO_LIKES, payload: video })
+            showVideosAlert('you are not logged in', ALERT_TYPE_ERROR)
         }
 
     }
 
     async function handleVideoDislike() {
-        const removeFromLikes = await removeVideoFromLikes(_id)
-        if (removeFromLikes === 404 || removeFromLikes === 500) {
-            showVideosAlert('could not dislike the video', ALERT_TYPE_ERROR)
+        if (isUserLoggedIn) {
+            const removeFromLikes = await removeVideoFromLikes(_id)
+            if (removeFromLikes === 404) {
+                showVideosAlert('you are not logged in', ALERT_TYPE_ERROR)
+            } else if (removeFromLikes === 500) {
+                showVideosAlert('could not like the video', ALERT_TYPE_ERROR)
+            } else {
+                showVideosAlert('video removed from likes', ALERT_TYPE_SUCCESS)
+                likesDispatch({ type: ACTION_REMOVE_FROM_LIKES, payload: _id })
+            }
         } else {
-            showVideosAlert('video removed from likes', ALERT_TYPE_SUCCESS)
-            likesDispatch({ type: ACTION_REMOVE_FROM_LIKES, payload: _id })
+            showVideosAlert('you are not logged in', ALERT_TYPE_ERROR)
         }
     }
 
@@ -49,15 +62,21 @@ const VideoCard = ({ video, video: {
     }
 
     async function handleWatchlater() {
-        const addToWatchlaterResponse = await addToWatchlater(video)
-        if (addToWatchlaterResponse === 409) {
-            showVideosAlert('video is already in watch later', 'success')
-        } else if (addToWatchlaterResponse === 404 || addToWatchlaterResponse === 500) {
-            showVideosAlert('could not add to watch later', 'error')
+        if (isUserLoggedIn) {
+            const addToWatchlaterResponse = await addToWatchlater(video)
+            if (addToWatchlaterResponse === 404) {
+                showVideosAlert('you are not logged in', ALERT_TYPE_ERROR)
+            } else if (addToWatchlaterResponse === 500) {
+                showVideosAlert('could not add to watch later', ALERT_TYPE_ERROR)
+            } else if (addToWatchlaterResponse === 409) {
+                showVideosAlert('already added to watch later', ALERT_TYPE_SUCCESS)
+            } else {
+                setIsVideoAddedToWatchLater(true)
+                showVideosAlert('video added to watch later', ALERT_TYPE_SUCCESS)
+                watchlaterDispatch({ type: 'ADD_TO_WATCHLATER', payload: video })
+            }
         } else {
-            setIsVideoAddedToWatchLater(true)
-            showVideosAlert('video added to watch later', 'success')
-            watchlaterDispatch({ type: 'ADD_TO_WATCHLATER', payload: video })
+            showVideosAlert('you are not logged in', ALERT_TYPE_ERROR)
         }
     }
 
